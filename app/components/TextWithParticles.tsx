@@ -186,10 +186,10 @@ import React, { useContext, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import localFont from "next/font/local";
-import { ColourfulText } from "./ColorFulText";
 import { useMenuContext } from "../context/MenuContext";
 import Lenis from "lenis";
 import 'lenis/dist/lenis.css';
+import { ColourfulText } from "./ColorfulText";
 
 const fk = localFont({
   src: "../../public/fonts/FKScreamerTrial-Bold-BF6571330a76e9b.otf",
