@@ -119,7 +119,7 @@
 
 import ease from "./Ease"; // Ensure `easings` is an exportable module
 
-const overlayMap = new WeakMap<SVGElement, ShapeOverlays>();
+
 
 export class ShapeOverlays {
   private path: NodeListOf<SVGPathElement>;
@@ -224,34 +224,3 @@ export class ShapeOverlays {
   }
 }
 
-export default function navmenu() {
-  const elmHamburger = document.querySelector(".hamburger") as HTMLElement;
-  const gNavItems = document.querySelectorAll(
-    ".global-menu__item"
-  ) as NodeListOf<HTMLElement>;
-  const elmOverlay = document.querySelector(".shape-overlays") as SVGElement;
-
-  // Store ShapeOverlays instance in WeakMap
-  if (!overlayMap.has(elmOverlay)) {
-    overlayMap.set(elmOverlay, new ShapeOverlays(elmOverlay));
-  }
-
-  const overlay = overlayMap.get(elmOverlay);
-
-  elmHamburger?.addEventListener("click", () => {
-    if (overlay?.isAnimating) return;
-
-    overlay?.toggle();
-    if (overlay?.isOpened) {
-      elmHamburger.classList.add("is-opened-navi");
-      for (const item of gNavItems) {
-        item.classList.add("is-opened");
-      }
-    } else {
-      elmHamburger.classList.remove("is-opened-navi");
-      for (const item of gNavItems) {
-        item.classList.remove("is-opened");
-      }
-    }
-  });
-}
