@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { MenuProvider } from "./context/MenuContext";
-import Transition from "./components/Transition";
 import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {

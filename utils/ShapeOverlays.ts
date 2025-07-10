@@ -1,7 +1,127 @@
+// import ease from "./Ease"; // Ensure `easings` is an exportable module
+
+// export class ShapeOverlays {
+//   private elm: SVGElement;
+//   private path: NodeListOf<SVGPathElement>;
+//   private numPoints = 85;
+//   private duration = 500; // milliseconds
+//   private delayPointsArray: number[] = [];
+//   private delayPointsMax = 300;
+//   private delayPerPath = 150;
+//   private timeStart: number;
+//   public isOpened = false;
+//   public isAnimating = false;
+
+//   constructor(elm: SVGElement) {
+//     this.elm = elm;
+//     this.path = elm?.querySelectorAll('path');
+//     this.numPoints = 85;
+//     this.duration = 500;
+//     this.delayPointsArray = [];
+//     this.delayPointsMax = 300;
+//     this.delayPerPath = 150;
+//     this.timeStart = Date.now();
+//     this.isOpened = false;
+//     this.isAnimating = false;
+//   }
+
+//   toggle() {
+//     this.isAnimating = true;
+//     for (var i = 0; i < this.numPoints; i++) {
+//       this.delayPointsArray[i] = Math.random() * this.delayPointsMax;
+//     }
+//     if (this.isOpened === false) {
+//       this.open();
+//     } else {
+//       this.close();
+//     }
+//   }
+
+//   open() {
+//     this.isOpened = true;
+//     this.elm?.classList.add('is-opened');
+//     this.timeStart = Date.now();
+//     this.renderLoop();
+//   }
+
+//   close() {
+//     this.isOpened = false;
+//     this.elm.classList.remove('is-opened');
+//     this.timeStart = Date.now();
+//     this.renderLoop();
+//   }
+
+//   private updatePath(time: number): string {
+//     const points = [];
+//     for (var i = 0; i < this.numPoints; i++) {
+//       points[i] = (1 - ease.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
+//     }
+
+//     let str = '';
+//     str += (this.isOpened) ? `M 0 0 H ${points[0]}` : `M ${points[0]} 0`;
+//     for (var i = 0; i < this.numPoints - 1; i++) {
+//       const p = (i + 1) / (this.numPoints - 1) * 100;
+//       const cp = p - (1 / (this.numPoints - 1) * 100) / 2;
+//       str += `C ${points[i]} ${cp} ${points[i + 1]} ${cp} ${points[i + 1]} ${p} `;
+//     }
+//     str += (this.isOpened) ? `H 100 V 0` : `H 0 V 0`;
+//     return str;
+//   }
+
+//   private render() {
+//     if (this.isOpened) {
+//       for (var i = 0; i < this.path.length; i++) {
+//         this.path[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * i)));
+//       }
+//     } else {
+//       for (var i = 0; i < this.path.length; i++) {
+//         this.path[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * (this.path.length - i - 1))));
+//       }
+//     }
+//   }
+
+//   private renderLoop() {
+//     this.render();
+//     if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (this.path.length - 1) + this.delayPointsMax) {
+//       requestAnimationFrame(() => {
+//         this.renderLoop();
+//       });
+//     }
+//     else {
+//       this.isAnimating = false;
+//     }
+//   }
+// }
+// export default function navmenu () {
+//   const elmHamburger = document.querySelector('.hamburger') as HTMLElement;
+//   const gNavItems = document.querySelectorAll('.global-menu__item') as NodeListOf<HTMLElement>;
+//   const elmOverlay = document.querySelector('.shape-overlays') as SVGElement;
+//   const overlay = new ShapeOverlays(elmOverlay);
+
+//   elmHamburger?.addEventListener('click', () => {
+//     if (overlay.isAnimating) return;
+
+//     overlay.toggle();
+//     if (overlay.isOpened) {
+//       elmHamburger.classList.add('is-opened-navi');
+//       for (let i = 0; i < gNavItems.length; i++) {
+//         gNavItems[i].classList.add('is-opened');
+//       }
+//     } else {
+//       elmHamburger.classList.remove('is-opened-navi');
+//       for (let i = 0; i < gNavItems.length; i++) {
+//         gNavItems[i].classList.remove('is-opened');
+//       }
+//     }
+//   });
+// };
+
+
 import ease from "./Ease"; // Ensure `easings` is an exportable module
 
+const overlayMap = new WeakMap<SVGElement, ShapeOverlays>();
+
 export class ShapeOverlays {
-  private elm: SVGElement;
   private path: NodeListOf<SVGPathElement>;
   private numPoints = 85;
   private duration = 500; // milliseconds
@@ -12,9 +132,8 @@ export class ShapeOverlays {
   public isOpened = false;
   public isAnimating = false;
 
-  constructor(elm: SVGElement) {
-    this.elm = elm;
-    this.path = elm?.querySelectorAll('path');
+  constructor(private elm: SVGElement) {
+    this.path = elm?.querySelectorAll("path");
     this.numPoints = 85;
     this.duration = 500;
     this.delayPointsArray = [];
@@ -27,91 +146,112 @@ export class ShapeOverlays {
 
   toggle() {
     this.isAnimating = true;
-    for (var i = 0; i < this.numPoints; i++) {
+    for (let i = 0; i < this.numPoints; i++) {
       this.delayPointsArray[i] = Math.random() * this.delayPointsMax;
     }
-    if (this.isOpened === false) {
+    if (!this.isOpened) {
       this.open();
     } else {
       this.close();
     }
   }
 
-  open() {
+  private open() {
     this.isOpened = true;
-    this.elm?.classList.add('is-opened');
+    this.elm?.classList.add("is-opened");
     this.timeStart = Date.now();
     this.renderLoop();
   }
 
-  close() {
+  private close() {
     this.isOpened = false;
-    this.elm.classList.remove('is-opened');
+    this.elm.classList.remove("is-opened");
     this.timeStart = Date.now();
     this.renderLoop();
   }
 
   private updatePath(time: number): string {
     const points = [];
-    for (var i = 0; i < this.numPoints; i++) {
-      points[i] = (1 - ease.cubicInOut(Math.min(Math.max(time - this.delayPointsArray[i], 0) / this.duration, 1))) * 100
+    for (let i = 0; i < this.numPoints; i++) {
+      points[i] =
+        (1 -
+          ease.cubicInOut(
+            Math.min(
+              Math.max(time - this.delayPointsArray[i], 0) / this.duration,
+              1
+            )
+          )) *
+        100;
     }
 
-    let str = '';
-    str += (this.isOpened) ? `M 0 0 H ${points[0]}` : `M ${points[0]} 0`;
-    for (var i = 0; i < this.numPoints - 1; i++) {
-      const p = (i + 1) / (this.numPoints - 1) * 100;
-      const cp = p - (1 / (this.numPoints - 1) * 100) / 2;
-      str += `C ${points[i]} ${cp} ${points[i + 1]} ${cp} ${points[i + 1]} ${p} `;
+    let str = "";
+    str += this.isOpened ? `M 0 0 H ${points[0]}` : `M ${points[0]} 0`;
+    for (let i = 0; i < this.numPoints - 1; i++) {
+      const p = ((i + 1) / (this.numPoints - 1)) * 100;
+      const cp = p - ((1 / (this.numPoints - 1)) * 100) / 2;
+      str += `C ${points[i]} ${cp} ${points[i + 1]} ${cp} ${
+        points[i + 1]
+      } ${p} `;
     }
-    str += (this.isOpened) ? `H 100 V 0` : `H 0 V 0`;
+    str += this.isOpened ? `H 100 V 0` : `H 0 V 0`;
     return str;
   }
 
   private render() {
-    if (this.isOpened) {
-      for (var i = 0; i < this.path.length; i++) {
-        this.path[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * i)));
-      }
-    } else {
-      for (var i = 0; i < this.path.length; i++) {
-        this.path[i].setAttribute('d', this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * (this.path.length - i - 1))));
-      }
+    const paths = this.isOpened ? this.path : Array.from(this.path).reverse();
+    for (let i = 0; i < paths.length; i++) {
+      paths[i].setAttribute(
+        "d",
+        this.updatePath(Date.now() - (this.timeStart + this.delayPerPath * i))
+      );
     }
   }
 
   private renderLoop() {
     this.render();
-    if (Date.now() - this.timeStart < this.duration + this.delayPerPath * (this.path.length - 1) + this.delayPointsMax) {
+    if (
+      Date.now() - this.timeStart <
+      this.duration +
+        this.delayPerPath * (this.path.length - 1) +
+        this.delayPointsMax
+    ) {
       requestAnimationFrame(() => {
         this.renderLoop();
       });
-    }
-    else {
+    } else {
       this.isAnimating = false;
     }
   }
 }
-export default function navmenu () {
-  const elmHamburger = document.querySelector('.hamburger') as HTMLElement;
-  const gNavItems = document.querySelectorAll('.global-menu__item') as NodeListOf<HTMLElement>;
-  const elmOverlay = document.querySelector('.shape-overlays') as SVGElement;
-  const overlay = new ShapeOverlays(elmOverlay);
 
-  elmHamburger?.addEventListener('click', () => {
-    if (overlay.isAnimating) return;
+export default function navmenu() {
+  const elmHamburger = document.querySelector(".hamburger") as HTMLElement;
+  const gNavItems = document.querySelectorAll(
+    ".global-menu__item"
+  ) as NodeListOf<HTMLElement>;
+  const elmOverlay = document.querySelector(".shape-overlays") as SVGElement;
 
-    overlay.toggle();
-    if (overlay.isOpened) {
-      elmHamburger.classList.add('is-opened-navi');
-      for (let i = 0; i < gNavItems.length; i++) {
-        gNavItems[i].classList.add('is-opened');
+  // Store ShapeOverlays instance in WeakMap
+  if (!overlayMap.has(elmOverlay)) {
+    overlayMap.set(elmOverlay, new ShapeOverlays(elmOverlay));
+  }
+
+  const overlay = overlayMap.get(elmOverlay);
+
+  elmHamburger?.addEventListener("click", () => {
+    if (overlay?.isAnimating) return;
+
+    overlay?.toggle();
+    if (overlay?.isOpened) {
+      elmHamburger.classList.add("is-opened-navi");
+      for (const item of gNavItems) {
+        item.classList.add("is-opened");
       }
     } else {
-      elmHamburger.classList.remove('is-opened-navi');
-      for (let i = 0; i < gNavItems.length; i++) {
-        gNavItems[i].classList.remove('is-opened');
+      elmHamburger.classList.remove("is-opened-navi");
+      for (const item of gNavItems) {
+        item.classList.remove("is-opened");
       }
     }
   });
-};
+}

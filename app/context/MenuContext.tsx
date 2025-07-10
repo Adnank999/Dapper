@@ -65,6 +65,8 @@ export const MenuProvider: React.FC<{ children: React.ReactNode }> = ({ children
         <path className="shape-overlays__path"></path>
         <path className="shape-overlays__path"></path>
       </svg>
+
+      
     </MenuContext.Provider>
   );
 };
