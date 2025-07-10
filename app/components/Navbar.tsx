@@ -37,7 +37,7 @@ const Navbar = () => {
         {/* Global Menu */}
         <div className="global-menu relative">
           <div className="global-menu__wrap">
-            <DistortedEffect />
+            {/* <DistortedEffect /> */}
           </div>
         </div>
       </div>
