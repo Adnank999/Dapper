@@ -52,7 +52,7 @@ body {
     Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background-color: rgb(6, 0, 16);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -290,7 +290,7 @@ a:focus {
   opacity: 1;
 }
 
-a {
+/* a {
   text-decoration: none;
   color: #5d93d8;
   color: var(--color-link);
@@ -310,7 +310,7 @@ a:focus {
   width: 0;
   height: 0;
   pointer-events: none;
-}
+} */
 
 /* .content {
 	  position: relative;

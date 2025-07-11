@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { MenuProvider } from "./context/MenuContext";
 import Navbar from "./components/Navbar";
+import CurvedNavbar from "./components/CurvedNavbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="demotransition-5 render">
         <MenuProvider>
-          <Navbar />
+          {/* <Navbar /> */}
+           <CurvedNavbar/>
           {children}
         </MenuProvider>
       </body>
