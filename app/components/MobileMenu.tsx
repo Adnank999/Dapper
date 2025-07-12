@@ -88,8 +88,7 @@ export default function MobileMenu() {
         micro: 0.2,
       },
       ease: {
-        main: "power2.out",
-        bounce: "back.out(1.2)",
+        ease: "power4.out",
       },
     }),
     []
@@ -101,7 +100,6 @@ export default function MobileMenu() {
 
     const container = menuContainerRef.current;
 
-    // Get all animated elements at once
     const searchBar = container.querySelector('[data-animate="search"]');
     const navHeader = container.querySelector('[data-animate="nav-header"]');
     const navItems = container.querySelectorAll('[data-animate="nav-item"]');
@@ -111,85 +109,73 @@ export default function MobileMenu() {
     tl.current = gsap.timeline({
       paused: true,
       defaults: {
-        force3D: true, // Enable hardware acceleration
+        force3D: true,
         transformOrigin: "center center",
       },
     });
 
-    // Set initial states with hardware acceleration
+    // Set initial states
     gsap.set(container, {
       x: "100%",
       opacity: 0,
-      force3D: true,
       willChange: "transform, opacity",
     });
 
-    gsap.set([searchBar, navHeader], {
-      y: -20,
-      opacity: 0,
-      force3D: true,
-    });
-
-    gsap.set(navItems, {
-      x: 30,
-      opacity: 0,
-      force3D: true,
-    });
-
-    gsap.set(footer, {
-      y: 20,
-      opacity: 0,
-      force3D: true,
-    });
+    gsap.set([searchBar, navHeader], { y: -10, opacity: 0 });
+    gsap.set(navItems, { y: 50, opacity: 0 }); // Added `y` for fade-in effect
+    gsap.set(footer, { y: 10, opacity: 0 });
 
     // Build optimized animation timeline
     tl.current
       .to(container, {
         x: "0%",
         opacity: 1,
-        duration: animationConfig.duration.main,
-        ease: animationConfig.ease.main,
+        duration: 0.3, // Faster duration
+        ease: "power3.out", // Slightly snappier ease
       })
       .to(
         [searchBar, navHeader],
         {
           y: 0,
           opacity: 1,
-          duration: animationConfig.duration.main * 0.8,
-          ease: animationConfig.ease.main,
-          stagger: 0.1,
+          duration: 0.2, // Reduced duration
+          ease: "power2.out",
+          stagger: 0.05, // Reduced stagger
         },
-        "-=0.3"
+        "-=0.2"
       )
       .to(
         navItems,
         {
-          x: 0,
-          opacity: 1,
-          duration: animationConfig.duration.main * 0.6,
-          ease: animationConfig.ease.main,
-          stagger: animationConfig.duration.stagger,
+          y: -20, // Smooth upward movement
+          opacity: 1, // Fade-in effect
+          duration: 0.4, // Slightly longer duration for smoother effect
+          ease: "power2.out", // Smooth easing
+          stagger: 0.1, // Staggered timing for each `navItem`
         },
-        "-=0.2"
+        "-=0.15"
       )
       .to(
         footer,
         {
           y: 0,
           opacity: 1,
-          duration: animationConfig.duration.main * 0.6,
-          ease: animationConfig.ease.main,
+          duration: 0.2, // Faster footer animation
+          ease: "power3.out",
         },
-        "-=0.3"
+        "-=0.2"
       );
 
-    // Cleanup function
     return () => {
       if (tl.current) {
         tl.current.kill();
+        tl.current = null;
       }
+      gsap.set([container, searchBar, navHeader, navItems, footer], {
+        clearProps: "all",
+      });
     };
-  }, [animationConfig]);
+  }, []);
 
   // Optimized animation control
   useEffect(() => {
@@ -399,11 +385,15 @@ export default function MobileMenu() {
               Navigation
             </h2>
 
-             <nav className="space-y-1">
+            <nav className="space-y-1">
               {navLinks.map((link, index) => {
-                const IconComponent = link.icon
+                const IconComponent = link.icon;
                 return (
-                  <div key={link.name} data-animate="nav-item" className="will-change-transform">
+                  <div
+                    key={link.name}
+                    data-animate="nav-item"
+                    className="will-change-transform"
+                  >
                     <a
                       href={link.href}
                       onClick={handleNavClick}
@@ -413,7 +403,10 @@ export default function MobileMenu() {
                       style={{ willChange: "transform" }}
                     >
                       <div className="flex-shrink-0 mt-1">
-                        <IconComponent className="text-gray-400 group-hover:text-white transition-colors" size={20} />
+                        <IconComponent
+                          className="text-gray-400 group-hover:text-white transition-colors"
+                          size={20}
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
@@ -426,23 +419,28 @@ export default function MobileMenu() {
                             </span>
                           )}
                         </div>
-                        <p className="text-gray-400 text-sm leading-relaxed">{link.description}</p>
+                        <p className="text-gray-400 text-sm leading-relaxed">
+                          {link.description}
+                        </p>
                       </div>
                     </a>
                   </div>
-                )
+                );
               })}
             </nav>
           </div>
         </div>
 
         {/* Footer with Social Links and Navigation */}
-          <div data-animate="footer" className="border-t border-gray-700/50 p-6 will-change-transform">
+        <div
+          data-animate="footer"
+          className="border-t border-gray-700/50 p-6 will-change-transform"
+        >
           <div className="flex items-center justify-between">
             {/* Social Links */}
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => {
-                const IconComponent = social.icon
+                const IconComponent = social.icon;
                 return (
                   <a
                     key={social.label}
@@ -455,7 +453,7 @@ export default function MobileMenu() {
                         duration: 0.2,
                         ease: "power2.out",
                         force3D: true,
-                      })
+                      });
                     }}
                     onMouseLeave={(e) => {
                       gsap.to(e.currentTarget, {
@@ -463,12 +461,12 @@ export default function MobileMenu() {
                         duration: 0.2,
                         ease: "power2.out",
                         force3D: true,
-                      })
+                      });
                     }}
                   >
                     <IconComponent size={20} />
                   </a>
-                )
+                );
               })}
             </div>
 
@@ -481,14 +479,14 @@ export default function MobileMenu() {
                     scale: 1.15,
                     duration: 0.2,
                     force3D: true,
-                  })
+                  });
                 }}
                 onMouseLeave={(e) => {
                   gsap.to(e.currentTarget, {
                     scale: 1,
                     duration: 0.2,
                     force3D: true,
-                  })
+                  });
                 }}
               >
                 <ChevronUp size={16} />
@@ -500,14 +498,14 @@ export default function MobileMenu() {
                     scale: 1.15,
                     duration: 0.2,
                     force3D: true,
-                  })
+                  });
                 }}
                 onMouseLeave={(e) => {
                   gsap.to(e.currentTarget, {
                     scale: 1,
                     duration: 0.2,
                     force3D: true,
-                  })
+                  });
                 }}
               >
                 <ChevronDown size={16} />
