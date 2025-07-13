@@ -21,15 +21,12 @@ export default function Home() {
       <div className="overflow-x-hidden overflow-y-hidden w-full h-full">
         <NavHeroContainer />
 
-        <div className=" flex flex-col ">
-          <TextWithParticles />
-        </div>
+        <TextWithParticles />
 
+        <GlowingEffectDemo/>
         <GradientSection />
-        {/* <GlowingEffectDemo/> */}
 
         <Scene />
-       
       </div>
     </>
   );

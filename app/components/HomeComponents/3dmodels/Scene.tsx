@@ -88,7 +88,7 @@ const Scene = () => {
         scrollTrigger: {
           trigger: scrollContainerRef.current,
               start: "top 30%", // Adjust this value to ensure proper timing
-          end: "top 1%",
+          end: "top 5%",
           scrub: true, // Smoothly sync with the scroll
           markers: true, // Debug markers (optional)
           onEnter: () => {
@@ -190,7 +190,7 @@ console.log("animationCompleted",animationCompleted)
       {showScrollReveal && (
         <div
           ref={scrollRevealRef}
-          className="px-24 lg:px-0 w-96 h-screen absolute top-12 left-0 lg:right-24"
+          className="px-24 lg:px-0 w-96 h-screen absolute top-12 left-0 lg:left-auto lg:right-24"
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}
@@ -208,7 +208,7 @@ console.log("animationCompleted",animationCompleted)
       {animationCompleted && (
         <div
           ref={scrollRevealRef}
-          className="w-96 px-12 lg:px-0 h-screen absolute -bottom-10 left-0 lg:right-24"
+          className="w-96 px-12 lg:px-0 h-screen absolute -bottom-10 left-0 lg:left-auto lg:right-24"
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}

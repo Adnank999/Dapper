@@ -93,9 +93,9 @@ const GradientSection = () => {
     <div
       className="flex flex-col justify-center items-center h-screen"
       style={{
-        background: `linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%),
-        linear-gradient(0deg, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 0) 40%),
-        radial-gradient(circle at 20% 70%, #25008C 0%, #170024 65%)`,
+        background: `linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(6, 0, 16, 0) 30%),
+        linear-gradient(0deg, rgba(6, 0, 16, 0.9) 4%, rgba(6, 0, 16, 0) 50%),
+        radial-gradient(circle at 50% 70%, #25008C 0%, #170024 65%)`,
       }}
     >
       <div className="flex flex-col items-center leading-none">
