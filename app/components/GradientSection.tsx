@@ -57,7 +57,7 @@ const GradientSection = () => {
           start: "top 75%", // Adjusted to trigger earlier
           end: "top 30%",
           scrub: true, // Synchronize the animation with the scroll
-          markers: true, // Optional: turn this off for production
+          // markers: true, // Optional: turn this off for production
           onComplete: () => {
             if (isCool) {
               // Add bounce effect for "Cool"
@@ -91,7 +91,7 @@ const GradientSection = () => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center h-screen mb-52"
+      className="flex flex-col justify-center items-center h-screen"
       style={{
         background: `linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 30%),
         linear-gradient(0deg, rgba(0, 0, 0, 1) 4%, rgba(0, 0, 0, 0) 40%),

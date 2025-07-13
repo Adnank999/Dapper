@@ -10,12 +10,15 @@ import Transition from "./components/Transition";
 import GradientSection from "./components/GradientSection";
 import ShuffleText from "./components/ShuffleText";
 import CurvedNavbar from "./components/CurvedNavbar";
+import { GlowingEffect } from "./components/HomeComponents/glowing-effect";
+import { GlowingEffectDemo } from "./components/HomeComponents/glowing-effectDemo";
+import Scene from "./components/HomeComponents/3dmodels/Scene";
+import ScrollReveal from "./components/HomeComponents/ScrollReveal";
 
 export default function Home() {
   return (
     <>
-      <div className="overflow-x-hidden overflow-y-hidden w-full relative">
-       
+      <div className="overflow-x-hidden overflow-y-hidden w-full h-full">
         <NavHeroContainer />
 
         <div className=" flex flex-col ">
@@ -23,9 +26,20 @@ export default function Home() {
         </div>
 
         <GradientSection />
+        {/* <GlowingEffectDemo/> */}
+
+        <Scene />
+        {/* <div className="w-96 h-screen ">
+        <ScrollReveal
         
-        <div className="h-screen bg-black"></div>
-         
+          baseOpacity={0}
+          enableBlur={true}
+          baseRotation={0}
+          blurStrength={10}
+        >
+          With Great Power Comes Great Responsibility
+        </ScrollReveal>
+      </div> */}
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { Providers } from "./providers";
 import { MenuProvider } from "./context/MenuContext";
 import Navbar from "./components/Navbar";
 import CurvedNavbar from "./components/CurvedNavbar";
+import SmoothScrollingWrapper from "@/utils/SmoothScrollingWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,11 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="demotransition-5 render">
-        <MenuProvider>
-          {/* <Navbar /> */}
-           <CurvedNavbar/>
-          {children}
-        </MenuProvider>
+        <SmoothScrollingWrapper>
+          <MenuProvider>
+            {/* <Navbar /> */}
+            <CurvedNavbar />
+            {children}
+          </MenuProvider>
+        </SmoothScrollingWrapper>
       </body>
     </html>
   );
