@@ -10,6 +10,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useLenis } from "lenis/react";
 import ScrollReveal from "../ScrollReveal";
+import useIsMobile from "@/hooks/useIsMobile";
 useGLTF.preload("/model/spiderman_2099.glb");
 
 const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: boolean;scrollProgress: React.MutableRefObject<number>;setAnimationCompleted: any; }) => {
@@ -24,18 +25,21 @@ const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: bool
 
   const scroll = useScroll();
   const { camera } = useThree();
+  const isMobile = useIsMobile();
   const prevPosition = useRef(camera.position.clone());
 
  const initialCameraPosition = {
-    x: -4.782809400330284,
+    x: -6.782809400330284,
     y: 0.3973643603409034,
     z: 1.4024392340644003,
   };
    const targetCameraPosition = {
     x: -2.095299586023116,
-    y: -0.10848200250957298,
+    y: 0.16848200250957298,
     z: 2.8664879130829286,
   };
+
+  const position: [number, number, number] = isMobile ? [0, -1, 0] : [-1, -1, 0]
 
 
 
@@ -105,8 +109,9 @@ const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: bool
   return (
     <>
       {/* Postprocessing EffectComposer */}
-    {/* position={[5, -1.2, -2]} */}
-      <group ref={group} position={[-1, -1, 0]}>
+    {/* position={[-1, -1, 0]} */}
+    {/* mobile position={[0, -1, 0]} */}
+      <group ref={group} position={position}>
         <primitive object={scene} />
       </group>
 

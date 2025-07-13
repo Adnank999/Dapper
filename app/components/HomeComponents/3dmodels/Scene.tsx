@@ -9,6 +9,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollReveal from "../ScrollReveal";
 import { extend } from "@react-three/fiber";
+import useIsMobile from "@/hooks/useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,7 +27,8 @@ const Scene = () => {
   const [showScrollReveal, setShowScrollReveal] = useState(false);
   const [animationCompleted,setAnimationCompleted] = useState(false)
   const scrollProgress = useRef(0);
-
+  const isMobile = useIsMobile();
+  console.log('is mobile',isMobile)
   useEffect(() => {
     if (!lenis) return;
     // if (!scrollRevealRef.current) return;
@@ -85,8 +87,8 @@ const Scene = () => {
         ease: "power2.out", // Smooth easing
         scrollTrigger: {
           trigger: scrollContainerRef.current,
-              start: "top 80%", // Adjust this value to ensure proper timing
-          end: "top 10%",
+              start: "top 30%", // Adjust this value to ensure proper timing
+          end: "top 1%",
           scrub: true, // Smoothly sync with the scroll
           markers: true, // Debug markers (optional)
           onEnter: () => {
@@ -146,9 +148,10 @@ console.log("animationCompleted",animationCompleted)
         ref={canvasRef}
         camera={{
           position: [
-            -4.782809400330284, 0.3973643603409034, 1.4024392340644003,
+            -6.782809400330284, 0.3973643603409034, 1.4024392340644003,
           ],
-          fov: 38,
+          // fov: 35,
+          fov: isMobile ? 45 : 35,
         }}
         gl={{ antialias: true }}
         dpr={[1, 1.5]}
@@ -187,7 +190,7 @@ console.log("animationCompleted",animationCompleted)
       {showScrollReveal && (
         <div
           ref={scrollRevealRef}
-          className="w-96 h-screen absolute top-24 right-24"
+          className="px-24 lg:px-0 w-96 h-screen absolute top-12 left-0 lg:right-24"
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}
@@ -197,7 +200,7 @@ console.log("animationCompleted",animationCompleted)
             blurStrength={10}
             textClassName="text-white"
           >
-            With Great Power Comes Great Responsibility Web Developement is that power.
+            With Great Power Comes Great Responsibility.
           </ScrollReveal>
         </div>
       )}
@@ -205,7 +208,7 @@ console.log("animationCompleted",animationCompleted)
       {animationCompleted && (
         <div
           ref={scrollRevealRef}
-          className="w-96 h-screen absolute bottom-0 right-24"
+          className="w-96 px-12 lg:px-0 h-screen absolute -bottom-10 left-0 lg:right-24"
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}

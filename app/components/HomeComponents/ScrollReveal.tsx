@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useMemo, ReactNode, RefObject } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useIsMobile from "@/hooks/useIsMobile";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,6 +34,8 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   wordAnimationEnd = "bottom bottom",
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
+  const isMobile = useIsMobile();
+  const scrubValue = isMobile ? 1.5 : 0.5;
 
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : "";
@@ -45,6 +48,8 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       );
     });
   }, [children]);
+
+  
 
   useEffect(() => {
     const el = containerRef.current;
@@ -105,7 +110,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
             scroller,
             start: "top bottom-=20%",
             end: wordAnimationEnd,
-            scrub: true,
+            scrub: scrubValue,
           },
         }
       );

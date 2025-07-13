@@ -29,17 +29,7 @@ export default function Home() {
         {/* <GlowingEffectDemo/> */}
 
         <Scene />
-        {/* <div className="w-96 h-screen ">
-        <ScrollReveal
-        
-          baseOpacity={0}
-          enableBlur={true}
-          baseRotation={0}
-          blurStrength={10}
-        >
-          With Great Power Comes Great Responsibility
-        </ScrollReveal>
-      </div> */}
+       
       </div>
     </>
   );
