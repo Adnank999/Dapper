@@ -98,7 +98,7 @@ const GradientSection = () => {
         radial-gradient(circle at 50% 70%, #25008C 0%, #170024 65%)`,
       }}
     >
-      <div className="flex flex-col items-center leading-none">
+      <div className="font-myFontMedium flex flex-col items-center leading-none">
         <div className="popup text-[153px] font-extrabold text-center tracking-wider text-white">
           Build
         </div>

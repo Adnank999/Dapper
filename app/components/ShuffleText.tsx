@@ -120,7 +120,7 @@ const ShuffleText: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute top-0 min-h-screen">
+    <div className="absolute top-0 min-h-screen font-cs font-xs">
       <pre className="ascii text-[8px] sm:text-xs md:text-sm lg:text-base leading-none whitespace-pre-wrap max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl mx-auto text-center">
         {`              .'   .*'   \`*.   \`. ; / .'    .*'\`-.
             .'   .'         \\    \\ : /   .*'      \`-.
@@ -176,7 +176,7 @@ const ShuffleText: React.FC = () => {
                                                       \`.  \\     /
                                                         \`-.\  .'`}
       </pre>
-      <div className="bio" ref={textRef}>
+      <div className="bio mt-24" ref={textRef}>
         <dt>Name</dt>
         <dd>Adnan Hossain Khan</dd>
         <dt>Profession</dt>

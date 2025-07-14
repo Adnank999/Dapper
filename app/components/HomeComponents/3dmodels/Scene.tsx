@@ -190,7 +190,7 @@ console.log("animationCompleted",animationCompleted)
       {showScrollReveal && (
         <div
           ref={scrollRevealRef}
-          className="px-24 lg:px-0 w-96 h-screen absolute top-12 left-0 lg:left-auto lg:right-24"
+          className="px-24 lg:px-0 w-96 h-screen absolute top-12 left-0 lg:left-auto lg:right-24 "
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}
@@ -198,7 +198,7 @@ console.log("animationCompleted",animationCompleted)
             enableBlur={true}
             baseRotation={0}
             blurStrength={10}
-            textClassName="text-white"
+            textClassName="text-white font-ppEditRegular"
           >
             With Great Power Comes Great Responsibility.
           </ScrollReveal>
@@ -216,6 +216,7 @@ console.log("animationCompleted",animationCompleted)
             enableBlur={true}
             baseRotation={0}
             blurStrength={10}
+            textClassName="font-mustang"
            
           >
             With Great Power Comes Great Responsibility

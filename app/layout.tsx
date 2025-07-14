@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="demotransition-5 render">
+      <body className="demotransition-5">
         <SmoothScrollingWrapper>
           <MenuProvider>
             {/* <Navbar /> */}

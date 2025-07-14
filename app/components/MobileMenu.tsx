@@ -385,7 +385,7 @@ export default function MobileMenu() {
               Navigation
             </h2>
 
-            <nav className="space-y-1">
+            <nav className="space-y-1 ">
               {navLinks.map((link, index) => {
                 const IconComponent = link.icon;
                 return (
@@ -410,7 +410,7 @@ export default function MobileMenu() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="text-white font-medium text-lg group-hover:text-blue-400 transition-colors">
+                          <h3 className="font-myFontBold tracking-wide text-4xl text-white font-medium group-hover:text-blue-400 transition-colors">
                             {link.name}
                           </h3>
                           {link.badge && (

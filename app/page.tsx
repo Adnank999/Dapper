@@ -14,6 +14,7 @@ import { GlowingEffect } from "./components/HomeComponents/glowing-effect";
 import { GlowingEffectDemo } from "./components/HomeComponents/glowing-effectDemo";
 import Scene from "./components/HomeComponents/3dmodels/Scene";
 import ScrollReveal from "./components/HomeComponents/ScrollReveal";
+import TransitionButton from "./components/HomeComponents/TransitionButton";
 
 export default function Home() {
   return (
@@ -27,6 +28,11 @@ export default function Home() {
         <GradientSection />
 
         <Scene />
+
+        {/* <div className="h-screen flex flex-col justify-center items-center">
+           <TransitionButton/>
+        </div> */}
+       
       </div>
     </>
   );
