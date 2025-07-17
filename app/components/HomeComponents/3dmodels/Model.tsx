@@ -13,7 +13,18 @@ import ScrollReveal from "../ScrollReveal";
 import useIsMobile from "@/hooks/useIsMobile";
 useGLTF.preload("/model/spiderman_2099.glb");
 
-const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: boolean;scrollProgress: React.MutableRefObject<number>;setAnimationCompleted: any; }) => {
+const Model = ({
+  visible,
+  scrollProgress,
+  animationCompleted,
+  setAnimationCompleted
+}: {
+  visible: boolean;
+  scrollProgress: React.MutableRefObject<number>;
+  animationCompleted: boolean;
+  setAnimationCompleted: any;
+
+}) => {
   const group = useRef<Group>(null);
   const { nodes, materials, animations, scene } = useGLTF(
     "/model/spiderman_2099.glb"
@@ -22,27 +33,25 @@ const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: bool
   // console.log("materials", materials);
   const { actions, clips } = useAnimations(animations, scene);
 
-
   const scroll = useScroll();
   const { camera } = useThree();
   const isMobile = useIsMobile();
   const prevPosition = useRef(camera.position.clone());
 
- const initialCameraPosition = {
+  const initialCameraPosition = {
     x: -6.782809400330284,
     y: 0.3973643603409034,
     z: 1.4024392340644003,
   };
-   const targetCameraPosition = {
+  const targetCameraPosition = {
     x: -2.095299586023116,
     y: 0.16848200250957298,
     z: 2.8664879130829286,
   };
 
-  const position: [number, number, number] = isMobile ? [0, -1, 0] : [-1, -1, 0]
-
-
-
+  const position: [number, number, number] = isMobile
+    ? [0, -1, 0]
+    : [-1, -1, 0];
 
   //   console.log("actions", actions);
   //   console.log("scroll", scroll);
@@ -63,19 +72,18 @@ const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: bool
   }, []);
 
   /* 1,8,10,14 animations are cool */
-  
 
   useFrame(() => {
     // console.log("scrollProgress",scrollProgress)
-   
-     const progress = scrollProgress.current;
-    
-      if (!prevPosition.current.equals(camera.position)) {
-      console.log("Camera Position Changed:", camera.position);
+
+    const progress = scrollProgress.current;
+
+    if (!prevPosition.current.equals(camera.position)) {
+      // console.log("Camera Position Changed:", camera.position);
       prevPosition.current.copy(camera.position); // Update the previous position
     }
 
-     camera.position.x =
+    camera.position.x =
       initialCameraPosition.x +
       (targetCameraPosition.x - initialCameraPosition.x) * progress;
 
@@ -90,7 +98,6 @@ const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: bool
     camera.lookAt(0, 0, 0); // Optional: Keep focus centered
     camera.updateProjectionMatrix();
 
-  
     const action = actions[Object.keys(actions)[14]];
     if (action) {
       const clip = action.getClip();
@@ -98,24 +105,24 @@ const Model = ({ visible,scrollProgress,setAnimationCompleted }: { visible: bool
     }
 
     // Trigger ScrollReveal when animation is complete
-    if (progress >= 1 ) {
-      setAnimationCompleted(true); 
+    if (progress >= 1 && !animationCompleted) {
+      setAnimationCompleted(true);
     }
-   
   });
-
-
 
   return (
     <>
       {/* Postprocessing EffectComposer */}
-    {/* position={[-1, -1, 0]} */}
-    {/* mobile position={[0, -1, 0]} */}
+      {/* position={[-1, -1, 0]} */}
+      {/* mobile position={[0, -1, 0]} */}
+    
       <group ref={group} position={position}>
         <primitive object={scene} />
       </group>
 
-     
+  
+      
+      
     </>
   );
 };

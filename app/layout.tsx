@@ -23,7 +23,9 @@ export default function RootLayout({
           <MenuProvider>
             {/* <Navbar /> */}
             <CurvedNavbar />
-            {children}
+            
+                {children}
+             
           </MenuProvider>
         </SmoothScrollingWrapper>
       </body>

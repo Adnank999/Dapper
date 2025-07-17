@@ -28,7 +28,7 @@ const TransitionButton: React.FC = () => {
     <div>
       <button
         onClick={handleClick}
-        className="cursor-pointer px-4 py-2 bg-blue-500 text-white rounded"
+        className="cursor-pointer px-4 py-2 bg-blue-500 text-white rounded-sm"
       >
         {showText ? 'Hide Text' : 'Show Text'}
       </button>

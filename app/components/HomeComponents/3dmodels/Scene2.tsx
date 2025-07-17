@@ -24,19 +24,14 @@ const Scene = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const lenis = useLenis();
   const [isVisible, setIsVisible] = useState(false);
-  const [showRevealAfterDelay, setShowRevealAfterDelay] = useState(false);
-  console.log("isVisible", isVisible);
   const [showScrollReveal, setShowScrollReveal] = useState(false);
   const [animationCompleted, setAnimationCompleted] = useState(false);
-
   const scrollProgress = useRef(0);
   const isMobile = useIsMobile();
-  let timeoutId: NodeJS.Timeout;
-  // console.log("is mobile", isMobile);
-
+  console.log("is mobile", isMobile);
   useEffect(() => {
-    if (!lenis || !canvasRef.current || !scrollContainerRef.current) return;
-
+    if (!lenis) return;
+    // if (!scrollRevealRef.current) return;
     lenis.on("scroll", ScrollTrigger.update);
 
     ScrollTrigger.scrollerProxy(document.body, {
@@ -56,61 +51,52 @@ const Scene = () => {
 
     ScrollTrigger.defaults({ scroller: document.body });
 
-    // 💡 Master Timeline with all behavior
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: scrollContainerRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-        markers: true,
-        onEnter: () => {
-          setIsVisible(true);
-        },
-        // onLeave: () => {
-        //   setIsVisible(false);
-        // },
-        onEnterBack: () => setIsVisible(true), // ✅ Back into range from below
-        // onLeaveBack: () => setIsVisible(false),
-        onUpdate: (self) => {
-          scrollProgress.current = self.progress;
-        },
-      },
-
-      onComplete: () => {
-        setShowScrollReveal(true);
-      },
-    });
-
-    tl.fromTo(
+    // Fade-in animation for the scrollContainerRef
+    gsap.fromTo(
       canvasRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.3, ease: "power2.out" } // Fade in
-    )
-      .to(canvasRef.current, { opacity: 1, duration: 0.4 }) // Hold
-      .to({}, { duration: 0.3 }); // ⏳ Buffer scroll zone before fade-out
-    // .to(canvasRef.current, {
-    //     opacity: 0,
-    //     duration: 0.3,
-    //     ease: "power2.inOut",
-    //     // 🧠 No delay, keep it scroll-linked
-    //   });
+      { opacity: 0 }, // Start with opacity 0
+      {
+        opacity: 1, // Fade to opacity 1
+        duration: 1.5, // Duration of the fade-in
+        ease: "power2.out", // Smooth easing
+        scrollTrigger: {
+          trigger: scrollContainerRef.current,
+          start: "top 30%", // Adjust this value to ensure proper timing
+          end: "top 5%",
+          scrub: true, // Smoothly sync with the scroll
+          markers: true, // Debug markers (optional)
+          onEnter: () => {
+            setIsVisible(true);
+          },
+          onLeave: () => {
+            setIsVisible(false);
+          },
+        },
+        onComplete: () => {
+          // Show ScrollReveal after Canvas animation completes
+          setShowScrollReveal(true);
+        },
+      }
+    );
 
-    // tl.to(canvasRef.current, {
-    //   opacity: 0.5,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    //   delay: 5,
-    // });
-
-    tl.to(canvasRef.current, {
-      opacity: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-      delay: 10
+    ScrollTrigger.create({
+      trigger: scrollContainerRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+      markers: true,
+      onEnter: () => {
+        setIsVisible(true);
+      },
+      onLeave: () => {
+        setIsVisible(false);
+      },
+      onUpdate: (self) => {
+        scrollProgress.current = self.progress;
+      },
     });
 
-    // ScrollTrigger.refresh();
+    ScrollTrigger.refresh();
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -118,16 +104,14 @@ const Scene = () => {
     };
   }, [lenis]);
 
-  // console.log("animationCompleted", animationCompleted);
-
+  console.log("animationCompleted", animationCompleted);
   return (
     <div
       ref={scrollContainerRef}
       style={{
         position: "relative",
-        height: "300vh",
+        height: "200vh",
         width: "100vw",
-        overflow: "hidden",
         // opacity: 0,
       }}
     >
@@ -144,9 +128,9 @@ const Scene = () => {
         dpr={[1, 1.5]}
         style={{
           position: "fixed",
-          top: 0,
-          left: 0,
-
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
           width: "100vw",
           height: "100vh",
           zIndex: 0,
@@ -162,7 +146,6 @@ const Scene = () => {
             enableRotate={true}
             // enableZoom={true}
           /> */}
-
         <Suspense fallback={<Loader />}>
           <ScrollControls
             // pages={5}
@@ -174,7 +157,6 @@ const Scene = () => {
             <Model
               visible={isVisible}
               scrollProgress={scrollProgress}
-              animationCompleted={animationCompleted}
               setAnimationCompleted={setAnimationCompleted}
             />
           </ScrollControls>
@@ -185,10 +167,10 @@ const Scene = () => {
         </EffectComposer>
       </Canvas>
 
-      {isVisible && (
+      {showScrollReveal && (
         <div
           ref={scrollRevealRef}
-          className="flex items-center justify-center px-24 lg:px-0 w-96 h-screen absolute top-40 left-0 lg:left-auto lg:right-24 "
+          className="px-24 lg:px-0 w-96 h-screen absolute top-12 left-0 lg:left-auto lg:right-24 "
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}
@@ -203,10 +185,10 @@ const Scene = () => {
         </div>
       )}
 
-      {showScrollReveal && (
+      {animationCompleted && (
         <div
           ref={scrollRevealRef}
-          className="flex items-center justify-center w-96 px-12 lg:px-0 h-screen absolute -bottom-10 left-0 lg:left-auto lg:right-24"
+          className="w-96 px-12 lg:px-0 h-screen absolute -bottom-10 left-0 lg:left-auto lg:right-24"
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}

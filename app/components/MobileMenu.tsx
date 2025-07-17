@@ -327,7 +327,7 @@ export default function MobileMenu() {
         <button
           ref={hamburgerRef}
           onClick={handleToggleMenu}
-          className="p-2 rounded-md backdrop-blur bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors will-change-transform"
+          className="p-2 rounded-md backdrop-blur-sm bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors will-change-transform"
           aria-label="Toggle menu"
           style={{ willChange: "transform" }}
         >
@@ -361,14 +361,14 @@ export default function MobileMenu() {
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-gray-800/50 border border-gray-600/50 rounded-lg pl-10 pr-16 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 will-change-transform"
+              className="w-full bg-gray-800/50 border border-gray-600/50 rounded-lg pl-10 pr-16 py-3 text-white placeholder-gray-400 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 will-change-transform"
               onFocus={handleSearchFocus}
               onBlur={handleSearchBlur}
               style={{ willChange: "transform" }}
             />
             <button
               onClick={handleSearchClear}
-              className="search-clear absolute right-3 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-gray-700/50 text-gray-300 text-xs rounded border border-gray-600/50 hover:bg-gray-600/50 transition-colors will-change-transform"
+              className="search-clear absolute right-3 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-gray-700/50 text-gray-300 text-xs rounded-sm border border-gray-600/50 hover:bg-gray-600/50 transition-colors will-change-transform"
             >
               ESC
             </button>
@@ -402,7 +402,7 @@ export default function MobileMenu() {
                       onMouseLeave={handleMouseLeave}
                       style={{ willChange: "transform" }}
                     >
-                      <div className="flex-shrink-0 mt-1">
+                      <div className="shrink-0 mt-1">
                         <IconComponent
                           className="text-gray-400 group-hover:text-white transition-colors"
                           size={20}
@@ -410,7 +410,7 @@ export default function MobileMenu() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-myFontBold tracking-wide text-4xl text-white font-medium group-hover:text-blue-400 transition-colors">
+                          <h3 className="font-my-font-bold tracking-wide text-4xl text-white font-medium group-hover:text-blue-400 transition-colors">
                             {link.name}
                           </h3>
                           {link.badge && (

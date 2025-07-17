@@ -1,7 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+
+
+
+@custom-variant dark (&:is(.dark *));
 
 @font-face {
   font-family: "MyFontRegular";
@@ -34,108 +36,171 @@
 @font-face {
   font-family: "ElectricKickNormal";
   src: url("/fonts/electrIc kIckS.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "Hijo";
   src: url("/fonts/Hijo Puta Peligroso.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "StarTrekNormal";
   src: url("/fonts/Star Trek_future.ttf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Akoni";
   src: url("/fonts/AKONY.otf") format("opentype");
-  font-weight: 700; 
+  font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Antonellie";
   src: url("/fonts/Antonellie Callygraphy Demo.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
-
 
 @font-face {
   font-family: "Clyra";
   src: url("/fonts/Clyra.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Argentine";
   src: url("/fonts/fonnts.com-Argentine.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Gyst";
   src: url("/fonts/fonnts.com-Gyst_Variable_Light.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Mustang";
   src: url("/fonts/Mustang.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Xen";
   src: url("/fonts/Xen Galaxy.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "CS";
   src: url("/fonts/csgaylemono-regular-1.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "Cogin";
   src: url("/fonts/cogin.otf") format("opentype");
-  font-weight: 600; 
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "PpEditItalic";
-  src: url("/fonts/PPEditorialNew-Italic-BF644b214fb0c0a.otf") format("opentype");
-  font-weight: 600; 
+  src: url("/fonts/PPEditorialNew-Italic-BF644b214fb0c0a.otf")
+    format("opentype");
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "PpEditRegular";
-  src: url("/fonts/PPEditorialNew-Regular-BF644b214ff145f.otf") format("opentype");
-  font-weight: 500; 
+  src: url("/fonts/PPEditorialNew-Regular-BF644b214ff145f.otf")
+    format("opentype");
+  font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "PpEditUltraBold";
-  src: url("/fonts/PPEditorialNew-Ultrabold-BF644b21500840c.otf") format("opentype");
-  font-weight: 600; 
+  src: url("/fonts/PPEditorialNew-Ultrabold-BF644b21500840c.otf")
+    format("opentype");
+  font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: "PpEditUltraThin";
-  src: url("/fonts/PPEditorialNew-Ultralight-BF644b21500d0c0.otf") format("opentype");
-  font-weight: 400 !important; 
+  src: url("/fonts/PPEditorialNew-Ultralight-BF644b21500d0c0.otf")
+    format("opentype");
+  font-weight: 400 !important;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Stranger";
+  src: url("/fonts/Stranger Things Outlined.ttf") format("opentype");
+  font-weight: 700 !important;
+  font-style: normal;
+}
+
+/* *{
+  box-sizing: border-box;
+} */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-my-font-regular: MyFontRegular, sans-serif;
+  --font-my-font-medium: MyFontMedium, sans-serif;
+  --font-my-font-bold: MyFontBold, sans-serif;
+  --font-electric-it: ElectricKickIt, sans-serif;
+  --font-electric-normal: ElectricKickNormal, sans-serif;
+  --font-hijo: Hijo, sans-serif;
+  --font-star: StarTrekNormal, sans-serif;
+  --font-akoni: Akoni, sans-serif;
+  --font-antonellie: Antonellie, sans-serif;
+  --font-clyra: Clyra, sans-serif;
+  --font-argentine: Argentine, sans-serif;
+  --font-gyst: Gyst, sans-serif;
+  --font-mustang: Mustang, sans-serif;
+  --font-xen: Xen, sans-serif;
+  --font-cs: CS, mono;
+  --font-cogin: Cogin, sans-serif;
+  --font-pp-edit-italic: PpEditItalic, sans-serif;
+  --font-pp-edit-regular: PpEditRegular, sans-serif;
+  --font-pp-edit-ultra-bold: PpEditUltraBold, sans-serif;
+  --font-pp-edit-ultra-thin: PpEditUltraThin, sans-serif;
+  --font-stranger: Stranger, sans-serif;
+
+  --text-large: 2.25rem;
+
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+
 
 html {
   scroll-behavior: smooth;
@@ -171,10 +236,10 @@ body {
 h1,
 h2,
 h3 {
-  font-family: "MyFontBold", sans-serif;
-  font-weight: 700;
+  font-family: "PpEditRegular", sans-serif;
+  font-weight: 400;
+  
 }
-
 
 strong {
   font-family: "MyFontMedium", sans-serif;
@@ -182,53 +247,6 @@ strong {
 }
 
 
-.demo-5 {
-  --color-text: #5f5f5f;
-  --color-bg: #0c0c0c;
-  --color-link: #f3f3f3;
-  --color-link-hover: #da154b;
-  --color-menu: #fff;
-  --color-menu-hover: #da154b;
-  --color-deco: #da154b;
-  /* --font-menu: rigatoni, serif; */
-  --ttransfrom-menu: uppercase;
-  /* --font-size-menu: 3vw; */
-  /* --font-weight-menu: 400; */
-  --thickness-deco: 1px;
-}
-
-.hideSvg {
-  position: absolute;
-  overflow: hidden;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-}
-
-a {
-  text-decoration: none;
-  color: var(--color-link);
-  outline: none;
-}
-
-a:hover,
-a:focus {
-  color: var(--color-link-hover);
-  outline: none;
-}
-
-/* .menu {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	align-items: start;
-  } */
-
-
-
-/* DEMO CSS TRANSITIONS STYLES; */
-
-/* Color schemes */
 
 .demotransition-5 {
   --color-text: #da154b;
@@ -237,58 +255,7 @@ a:focus {
   --color-link-hover: #da154b;
   --color-info: #fff;
   --color-main-bg: #000;
-  --path-fill-1: #da154b;
-  --path-fill-2: #1b1a19;
-  --color-title: inherit;
-  /* --font-family-title: 'Playfair Display', serif;
-	  --font-size-title: 6vmax; */
-  --font-weight-title: 700;
-  --color-menu: #ffffff;
-  --color-menu-hover: #da154b;
-  /* --font-family-menu: var(--font-family-title);
-	  --font-size-menu: 3.5vmax;
-	  --font-weight-menu: 400; */
-  --button-bg: #fff;
-  --button-circle: #da154b;
-  --button-line: #2d2c2b;
-}
 
-
-
-
-
-.content {
-  position: relative;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0 auto;
-  overflow: hidden;
-  width: 100%;
-}
-
-.content--fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: grid;
-  align-content: space-between;
-  width: 100%;
-  max-width: none;
-  min-height: 0;
-  height: 100vh;
-  padding: 1.5em;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto auto 4em;
-  grid-template-areas:
-    "header ..."
-    "... ..."
-    "github demos";
-}
-
-.content--fixed a {
-  pointer-events: auto;
 }
 
 
@@ -307,3 +274,24 @@ a:focus {
   display: inline-block;
 }
 
+/* .container-neon {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+} */
+
+
+/* .neon {
+  
+  font-size: 4vw;
+  line-height: 4vw;
+  color: transparent;
+  -webkit-text-stroke: 0.05vw #fa1c16; 
+  text-shadow: 0 0 1vw #eb2549;
+
+} */
+
+.text-shadow-red {
+  text-shadow: 5px 5px 25px #eb4667 !important;
+}
+/* #e82b54 */
