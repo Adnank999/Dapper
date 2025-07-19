@@ -5,6 +5,8 @@ import { MenuProvider } from "./context/MenuContext";
 import Navbar from "./components/Navbar";
 import CurvedNavbar from "./components/CurvedNavbar";
 import SmoothScrollingWrapper from "@/utils/SmoothScrollingWrapper";
+import SvgIcon from "./components/aboutComponents/SvgIcon";
+import LayoutWrapper from "./components/LayoutWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,14 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="demotransition-5">
+      <body className="demotransition-5 ">
         <SmoothScrollingWrapper>
           <MenuProvider>
+            <LayoutWrapper>
+              <CurvedNavbar />
+
+              {children}
+            </LayoutWrapper>
             {/* <Navbar /> */}
-            <CurvedNavbar />
-            
-                {children}
-             
           </MenuProvider>
         </SmoothScrollingWrapper>
       </body>
