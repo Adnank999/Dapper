@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+
 import { MenuProvider } from "./context/MenuContext";
 import Navbar from "./components/Navbar";
 import CurvedNavbar from "./components/CurvedNavbar";
@@ -7,6 +7,8 @@ import SmoothScrollingWrapper from "@/utils/SmoothScrollingWrapper";
 import SvgIcon from "./components/aboutComponents/SvgIcon";
 import LayoutWrapper from "./components/LayoutWrapper";
 import Head from "next/head";
+
+import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Create Next App",

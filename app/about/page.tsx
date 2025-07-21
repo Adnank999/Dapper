@@ -8,10 +8,11 @@ import { TimelineDemo } from "../components/aboutComponents/TimelineDemo";
 import LoginButton from "../components/LoginLogoutButton";
 import ShuffleText from "../components/ShuffleText";
 import UserGreetText from "../components/UserGreetText";
+import UserInfo from "../components/UserInfo";
 
 export default function About() {
   return (
-    <section >
+    <section className="mt-52 bg-black">
       {/* <div className="relative z-10 bg-background">
         <RainingLetters />
         </div>
@@ -24,8 +25,9 @@ export default function About() {
         <ContributionsData/>
       </div> */}
 
-      {/* <UserGreetText/>
-      <LoginButton/> */}
+      {/* <UserGreetText/> */}
+      <UserInfo/>
+      <LoginButton/>
       
      
       {/* <TimelineDemo/> */}
