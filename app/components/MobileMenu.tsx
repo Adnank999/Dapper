@@ -410,7 +410,7 @@ export default function MobileMenu() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-my-font-bold tracking-wide text-4xl text-white font-medium group-hover:text-blue-400 transition-colors">
+                          <h3 className="!font-my-font-bold uppercase tracking-wider text-4xl text-white font-medium group-hover:text-blue-400 transition-colors">
                             {link.name}
                           </h3>
                           {link.badge && (

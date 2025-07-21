@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Providers } from "./providers";
 import { MenuProvider } from "./context/MenuContext";
 import Navbar from "./components/Navbar";
 import CurvedNavbar from "./components/CurvedNavbar";
 import SmoothScrollingWrapper from "@/utils/SmoothScrollingWrapper";
 import SvgIcon from "./components/aboutComponents/SvgIcon";
 import LayoutWrapper from "./components/LayoutWrapper";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,14 +20,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="demotransition-5 ">
+      <Head>
+        <link
+          rel="preload"
+          href="/fonts/FKScreamerTrial-Bold-BF6571330a76e9b.otf"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </Head>
+      <body className="bg-red-600">
         <SmoothScrollingWrapper>
           <MenuProvider>
-            <LayoutWrapper>
-              <CurvedNavbar />
+            {/* <LayoutWrapper> */}
+            <CurvedNavbar />
 
-              {children}
-            </LayoutWrapper>
+            {children}
+            {/* </LayoutWrapper> */}
             {/* <Navbar /> */}
           </MenuProvider>
         </SmoothScrollingWrapper>

@@ -198,7 +198,7 @@ const Scene = () => {
             enableBlur={true}
             baseRotation={0}
             blurStrength={10}
-            textClassName="text-white font-pp-edit-regular"
+            textClassName="text-white"
           >
             With Great Power Comes Great Responsibility.
           </ScrollReveal>

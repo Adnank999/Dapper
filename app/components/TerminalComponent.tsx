@@ -55,7 +55,7 @@ interface TerminalComponentProps {
 }
 
 const TerminalComponent: React.FC<TerminalComponentProps> = ({ textRef }) => (
-  <div className=" mt-10 w-[80%]">
+  <div className=" mt-10 ml-6 w-[80%]">
     <Terminal lines={termLines}/>
   </div>
 );

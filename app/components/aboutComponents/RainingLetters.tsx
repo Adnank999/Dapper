@@ -95,16 +95,17 @@ const ScrambledTitle: React.FC = () => {
       setMounted(true)
     }
   }, [])
-
+"The best websites aren’t built with code. They’re built with empathy."
   useEffect(() => {
     if (mounted && scramblerRef.current) {
       const phrases = [
-        'Zuhair,',
-        'It\'s RAINING',
-        'with\' letters',
-        'and alphabets',
-        'dont FORGET to bring',
-        'your umbrella today'
+        
+        'The Best Technologies',
+        'aren\’t built with code.' ,
+        'They’re built with',
+        'Empathy and Soul',
+        'Adnan,'
+       
       ]
       
       let counter = 0
@@ -124,10 +125,10 @@ const ScrambledTitle: React.FC = () => {
   return (
     <h1 
       ref={elementRef}
-      className="text-white text-6xl font-bold tracking-wider justify-center"
-      style={{ fontFamily: 'monospace' }}
+      className="text-white !font-clyra text-center text-8xl  font-bold tracking-wider justify-center"
+      // style={{ fontFamily: 'monospace' }}
     >
-      RAINING LETTERS
+      ZaxzzzzzazzzzzZZZ
     </h1>
   )
 }
@@ -194,7 +195,7 @@ const RainingLetters: React.FC = () => {
     animationFrameId = requestAnimationFrame(updatePositions)
     return () => cancelAnimationFrame(animationFrameId)
   }, [])
-
+  
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden">
       {/* Title */}

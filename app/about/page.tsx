@@ -1,12 +1,34 @@
+
+import ContributionsData from "../components/aboutComponents/ContributionData";
+import { ContributionGraph } from "../components/aboutComponents/ContributionGraph";
+import RainingLetters from "../components/aboutComponents/RainingLetters";
+import TechnicalStack from "../components/aboutComponents/TechnicalStack";
+import { Timeline } from "../components/aboutComponents/Timeline";
+import { TimelineDemo } from "../components/aboutComponents/TimelineDemo";
+import LoginButton from "../components/LoginLogoutButton";
 import ShuffleText from "../components/ShuffleText";
-
-
+import UserGreetText from "../components/UserGreetText";
 
 export default function About() {
   return (
-    <div className="h-[200vh]">
-      {/* <ShuffleText /> */}
+    <section >
+      {/* <div className="relative z-10 bg-background">
+        <RainingLetters />
+        </div>
+      <div className="mx-auto max-w-6xl h-[100vh] mb-24 relative">
+        <ShuffleText />
+      </div>
+
+      <div className="relative z-10 bg-background">
+        <TechnicalStack/>
+        <ContributionsData/>
+      </div> */}
+
+      {/* <UserGreetText/>
+      <LoginButton/> */}
       
-    </div>
+     
+      {/* <TimelineDemo/> */}
+    </section>
   );
 }

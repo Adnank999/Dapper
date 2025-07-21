@@ -2,8 +2,6 @@ import Image from "next/image";
 import SplashCursor from "./components/SplashCursor";
 import TextWithParticles from "./components/TextWithParticles";
 
-import { Button } from "@heroui/react";
-
 import NavHeroContainer from "./components/NavHeroContainer";
 import Transition from "./components/Transition";
 import GradientSection from "./components/GradientSection";
@@ -28,9 +26,9 @@ export default function Home() {
         <div className="min-h-screen flex items-center justify-center">
           <div className="max-w-4xl w-full mx-auto flex flex-col items-center justify-center">
             <div className="w-full">
-              <NavHeroContainer />
+              {/* <NavHeroContainer /> */}
 
-              <TextWithParticles />
+              {/* <TextWithParticles /> */}
 
               <div className="max-w-4xl mx-auto">
                 <GlowingEffectDemo />

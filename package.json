@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroui/react": "^2.6.14",
+    "@octokit/graphql": "^9.0.1",
     "@react-three/drei": "^10.5.0",
     "@react-three/fiber": "^9.2.0",
     "@react-three/postprocessing": "^3.0.4",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.52.0",
+    "@tabler/icons-react": "^3.34.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/splitting": "^1.0.6",
     "clsx": "^2.1.1",
@@ -38,8 +41,9 @@
     "@types/react-burger-menu": "^2.8.7",
     "@types/react-dom": "^19",
     "@types/webfontloader": "^1.6.38",
-    "postcss": "^8",
+    "postcss": "^8.5.6",
     "tailwindcss": "^4.1.11",
+    "tw-animate-css": "^1.3.5",
     "typescript": "^5"
   }
 }
