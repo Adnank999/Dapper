@@ -132,9 +132,9 @@ export const CurvedNavbar = () => {
         </ul>
       </nav>
 
-      {/* <div className="absolute top-5 left-0 md:right-5 lg:right-10">
+      <div className="absolute top-5 right-0">
          <LoginButton/>
-      </div> */}
+      </div>
      
       <MobileMenu />
     </div>

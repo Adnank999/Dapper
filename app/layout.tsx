@@ -12,6 +12,7 @@ import "./globals.css";
 import { headers } from "next/headers";
 import { NextRequest } from "next/server";
 import { config } from "process";
+import { UserProvider } from "./context/UserContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -40,9 +41,11 @@ export default function RootLayout({
         <SmoothScrollingWrapper>
           <MenuProvider>
             {/* <LayoutWrapper> */}
-           
+           <UserProvider>
+             {children}
+           </UserProvider>
 
-            {children}
+           
             {/* </LayoutWrapper> */}
             {/* <Navbar /> */}
           </MenuProvider>
