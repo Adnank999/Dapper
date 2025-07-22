@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
+import config from "@/config";
 import { createClient } from "@/utils/supabase/server";
 
 export async function login(formData: FormData) {
@@ -66,9 +66,11 @@ export async function signout() {
 
 export async function signInWithGoogle() {
   const supabase = await createClient();
+  const redirectUrl = `${config.domainName}/api/auth/callback`;
   const { data, error } = await supabase?.auth.signInWithOAuth({
     provider: "google",
     options: {
+      redirectTo: redirectUrl,
       queryParams: {
         access_type: "offline",
         prompt: "consent",
@@ -76,11 +78,16 @@ export async function signInWithGoogle() {
     },
   });
 
+
+
   if (error) {
     console.log(error);
     redirect("/error");
   }
 
+
   
-  redirect(data.url);
+  if (data.url) {
+    redirect(data.url); // use the redirect API for your server framework
+  }
 }

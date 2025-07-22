@@ -1,4 +1,5 @@
 
+import { getUser } from "@/lib/user";
 import ContributionsData from "../components/aboutComponents/ContributionData";
 import { ContributionGraph } from "../components/aboutComponents/ContributionGraph";
 import RainingLetters from "../components/aboutComponents/RainingLetters";
@@ -10,9 +11,10 @@ import ShuffleText from "../components/ShuffleText";
 import UserGreetText from "../components/UserGreetText";
 import UserInfo from "../components/UserInfo";
 
-export default function About() {
+export default async  function About() {
+
   return (
-    <section className="mt-52 bg-black">
+    <section className="mt-52 text-black bg-white">
       {/* <div className="relative z-10 bg-background">
         <RainingLetters />
         </div>
@@ -25,8 +27,8 @@ export default function About() {
         <ContributionsData/>
       </div> */}
 
-      {/* <UserGreetText/> */}
-      <UserInfo/>
+      <UserGreetText/>
+      {/* <UserInfo/> */}
       <LoginButton/>
       
      
