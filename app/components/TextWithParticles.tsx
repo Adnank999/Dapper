@@ -28,149 +28,7 @@ const TextWithParticles = () => {
   let scrollDirection: "up" | "down" = "down";
   let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
 
-  // useEffect(() => {
-  //   // Initialize a new Lenis instance for smooth scrolling
-  //   if (!lenis) return;
 
-  //   // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-  //   lenis.on("scroll", ScrollTrigger.update);
-
-  //   // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-  //   gsap.ticker.lagSmoothing(0);
-
-  //   const scrollHandler = () => {
-  //     const currentY = window.scrollY;
-  //     scrollDirection = currentY > lastScrollY ? "down" : "up";
-  //     lastScrollY = currentY;
-  //   };
-
-  //   window.addEventListener("scroll", scrollHandler);
-
-  //   const containerElement = containerRef.current!;
-  //   const animationContainer = animationContainerRef.current!;
-  //   const colourfulText = colourfulTextRef.current!;
-
-  //   const nextText = nextTextRef.current!;
-
-  //   gsap.set(nextText, {
-  //     opacity: 0,
-  //     y: 50,
-  //     display: "none",
-  //   });
-
-  //   gsap.to(animationContainer, {
-  //     opacity: isMenuOpen ? 0 : 1,
-  //     duration: 1,
-  //     display: isMenuOpen ? "block" : "hidden",
-  //     ease: "power2.out",
-  //   });
-
-  //   if (containerElement?.querySelector(".text-container")) {
-  //     return () => window.removeEventListener("scroll", scrollHandler);
-  //   }
-
-  //   const textContainer = document.createElement("div");
-  //   textContainer.className = `text-container ${fk.className}`;
-  //   textContainer.style.cssText = `
-  //     font-size: 6rem;
-  //     text-align: center;
-  //     position: relative;
-  //     display: inline-block;
-  //     white-space: nowrap;
-  //   `;
-
-  //   Array.from(text).forEach((char) => {
-  //     const span = document.createElement("span");
-  //     span.innerText = char;
-  //     span.style.opacity = "1";
-  //     textContainer.appendChild(span);
-  //   });
-
-  //   containerElement.appendChild(textContainer);
-
-  //   const spans = textContainer?.querySelectorAll("span");
-
-  //   // Cleanup function
-
-  //   const mainTimeline = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: containerElement,
-  //       start: "top top",
-  //       end: "+=40%", // Extend the scroll distance to accommodate both animations
-  //       scrub: true,
-  //       pin: true, // Pin the container during the animation
-  //       pinSpacing: true,
-  //     },
-  //   });
-
-  //   // First phase: Animate the initial "Hi, I am" text
-  //   mainTimeline.to(spans, {
-  //     x: 50,
-  //     opacity: 0,
-  //     duration: 1,
-  //     stagger: 0.1,
-  //     ease: "power2.out",
-  //     onUpdate: () => {
-  //       spans.forEach((char, index) => {
-  //         if (!spanMap.get(char)) {
-  //           spanMap.set(char, true); // Mark as processed
-  //         }
-  //       });
-  //     },
-  //   });
-
-  //   mainTimeline.to(colourfulText, {
-  //     opacity: 1,
-  //     y: 0,
-  //     duration: 1,
-  //     ease: "power2.out",
-  //   });
-
-  //   mainTimeline.to(
-  //     colourfulText,
-  //     {
-  //       opacity: 0,
-  //       y: -50,
-  //       duration: 1,
-  //       ease: "power2.out",
-  //       onStart: () => {
-  //         // Make sure colourfulText is visible at the start of this animation
-  //         gsap.set(colourfulText, { visibility: "visible" });
-  //       },
-  //       onComplete: () => {
-  //         // When forward animation completes
-  //         if (scrollDirection === "down") {
-  //           gsap.set(colourfulText, { visibility: "hidden" });
-  //         }
-  //         gsap.set(nextText, { display: "block" });
-  //       },
-  //       onReverseComplete: () => {
-  //         // When reverse animation completes
-  //         gsap.set(colourfulText, { visibility: "visible", opacity: 1, y: 0 });
-  //       },
-  //     },
-  //     ">"
-  //   );
-
-  //   // Third phase: Animate the next text component to appear
-  //   mainTimeline.to(
-  //     nextText,
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       duration: 1,
-  //       ease: "power2.out",
-  //     },
-  //     ">"
-  //   );
-
-  //   return () => {
-  //     window.removeEventListener("scroll", scrollHandler);
-  //     containerElement.removeChild(textContainer);
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  //     lenis.off("scroll", ScrollTrigger.update);
-  //   };
-  // }, [isMenuOpen, lenis]);
 
 
 
@@ -204,7 +62,7 @@ useEffect(() => {
   let textContainer = containerElement.querySelector(".text-container");
   if (!textContainer) {
     textContainer = document.createElement("div");
-    textContainer.className = `text-container ${fk.className}`;
+    textContainer.className = `text-container ${fk.className} text-highlight`;
     textContainer.style.cssText = `
       font-size: 6rem;
       text-align: center;

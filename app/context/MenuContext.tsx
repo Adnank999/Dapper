@@ -83,6 +83,8 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
+import CurvedNavbar from '../components/CurvedNavbar';
+import { usePathname } from 'next/navigation';
 
 // Context Types
 export type MenuContextType = {
@@ -94,9 +96,12 @@ const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
 export const MenuProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const pathname = usePathname();
+  const isAuthPage = pathname.startsWith('/auth')
+  
   return (
     <MenuContext.Provider value={{ isMenuOpen, setIsMenuOpen }}>
+       {!isAuthPage && <CurvedNavbar />}
       {children}
     </MenuContext.Provider>
   );

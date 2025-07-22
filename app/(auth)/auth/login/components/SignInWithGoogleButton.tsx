@@ -8,8 +8,7 @@ const SignInWithGoogleButton = () => {
   return (
     <Button
       type="button"
-      variant="outline"
-      className="w-full"
+      className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300"
       onClick={() => {
         signInWithGoogle();
       }}

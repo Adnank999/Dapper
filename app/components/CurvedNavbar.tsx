@@ -9,6 +9,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import LoginButton from "./LoginLogoutButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,26 +108,14 @@ export const CurvedNavbar = () => {
   };
 
   return (
-    <>
+    <div className="relative">
       {/* Desktop Navbar */}
+      
       <nav
         ref={navbarRef}
         className="max-w-fit z-1000 cursor-pointer mt-10 hidden md:flex fixed top-0 left-1/2 !transform !-translate-x-1/2 backdrop-blur-md bg-white/10 border border-white/20 shadow-lg px-8 py-1 rounded-full transition-all duration-300"
       >
-        {/* <ul className="flex justify-center items-center gap-8 text-white  font-normal text-xl">
-          {navLinks.map(({ name, href }) => (
-            <Link
-              key={name}
-              href={href}
-              className="relative font-my-font-bold  tracking-wide text-lg rounded-full px-5 py-1 transition duration-300 hover:border-b hover:border-b-blue-400 hover:shadow-[0_4px_10px_2px_rgba(59,130,246,0.5)]"
-            >
-              {name}
-              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px hover:bg-linear-to-r from-transparent via-blue-500 to-transparent  h-px" />
-            </Link>
-          ))}
-        </ul> */}
-
-          <ul className="flex justify-center items-center gap-8 text-white font-normal text-xl">
+        <ul className="flex justify-center items-center gap-8 text-white font-normal text-xl">
           {navLinks.map(({ name, href }) => (
             <li
               key={name}
@@ -136,17 +125,19 @@ export const CurvedNavbar = () => {
                 handleNavigationTransition(href); // Trigger page transition
               }}
             >
-              <Link href={href}>
-                {name}
-              </Link>
+              <Link href={href}>{name}</Link>
               <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px hover:bg-linear-to-r from-transparent via-blue-500 to-transparent h-px" />
             </li>
           ))}
         </ul>
       </nav>
 
+      {/* <div className="absolute top-5 left-0 md:right-5 lg:right-10">
+         <LoginButton/>
+      </div> */}
+     
       <MobileMenu />
-    </>
+    </div>
   );
 };
 

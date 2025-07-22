@@ -9,13 +9,13 @@ import { TimelineDemo } from "../components/aboutComponents/TimelineDemo";
 import LoginButton from "../components/LoginLogoutButton";
 import ShuffleText from "../components/ShuffleText";
 import UserGreetText from "../components/UserGreetText";
-import UserInfo from "../components/UserInfo";
+
 
 export default async  function About() {
 
   return (
-    <section className="mt-52 text-black bg-white">
-      {/* <div className="relative z-10 bg-background">
+    <section >
+      <div className="relative z-10 bg-background">
         <RainingLetters />
         </div>
       <div className="mx-auto max-w-6xl h-[100vh] mb-24 relative">
@@ -24,12 +24,12 @@ export default async  function About() {
 
       <div className="relative z-10 bg-background">
         <TechnicalStack/>
-        <ContributionsData/>
-      </div> */}
+        {/* <ContributionsData/> */}
+      </div>
 
-      <UserGreetText/>
-      {/* <UserInfo/> */}
-      <LoginButton/>
+      {/* <UserGreetText/> */}
+   
+   
       
      
       {/* <TimelineDemo/> */}

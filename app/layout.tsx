@@ -8,7 +8,10 @@ import SvgIcon from "./components/aboutComponents/SvgIcon";
 import LayoutWrapper from "./components/LayoutWrapper";
 import Head from "next/head";
 
-import "./globals.css"
+import "./globals.css";
+import { headers } from "next/headers";
+import { NextRequest } from "next/server";
+import { config } from "process";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +20,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <Head>
@@ -35,7 +40,7 @@ export default function RootLayout({
         <SmoothScrollingWrapper>
           <MenuProvider>
             {/* <LayoutWrapper> */}
-            <CurvedNavbar />
+           
 
             {children}
             {/* </LayoutWrapper> */}

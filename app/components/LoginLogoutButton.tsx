@@ -34,7 +34,7 @@ const LoginButton = () => {
   }
   return (
     <Button
-      variant="outline"
+       className="border border-gray-300 text-white hover:bg-gray-100 hover:text-black focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-md px-4 py-2"
       onClick={() => {
         router.push("auth/login");
       }}

@@ -4,7 +4,7 @@ import { SignUpForm } from './components/SignUpForm'
 const page = () => {
   return (
     
-       <div className='h-svh flex items-center'>
+       <div className='w-full flex flex-col justify-center items-center'>
             <SignUpForm/>
           </div>
    
