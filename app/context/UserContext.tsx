@@ -7,7 +7,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 interface UserContextType {
   user: User | null;
   userRole: string | null;
-  // pgRole: string | undefined;
+  pgRole: string | undefined;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -45,7 +45,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   return (
-    <UserContext.Provider value={{ user, userRole }}>
+    <UserContext.Provider value={{ user, userRole,pgRole }}>
       {children}
     </UserContext.Provider>
   );

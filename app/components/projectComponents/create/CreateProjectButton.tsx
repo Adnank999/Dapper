@@ -4,11 +4,14 @@ import Link from "next/link";
 import React from "react";
 
 const CreateProjectButton = () => {
-  const { user, userRole } = useUser();
+  const { user, userRole,pgRole} = useUser();
 
   const isAdmin = userRole === "admin";
+  const isPgAdmin = pgRole === "custom_pg_admin";
 
-  if (!isAdmin) {
+
+
+  if (!isAdmin && !isPgAdmin) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center p-4 bg-background">
         <div className="text-white">
