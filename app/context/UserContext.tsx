@@ -1,33 +1,43 @@
-'use client';
+"use client";
 import { getUser } from "@/lib/user";
-import { createClient } from "@/utils/supabase/client";
 
 import { User } from "@supabase/supabase-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-
 interface UserContextType {
   user: User | null;
   userRole: string | null;
+  // pgRole: string | undefined;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [pgRole, setPgRole] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
 
+  // let runCount = 0;
+ 
+
   useEffect(() => {
+    // runCount++;
+    // console.log(`[UserProvider] useEffect run count: ${runCount}`);
+
     const fetchUser = async () => {
-      const { user, role } = await getUser();
+      const { user, role, error } = await getUser();
+
       setUser(user);
+
       setUserRole(role);
+      setPgRole(user?.role);
       setLoading(false);
     };
 
     fetchUser();
-
   }, []);
 
   if (loading) {

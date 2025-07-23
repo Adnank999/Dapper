@@ -6,6 +6,7 @@ import { User } from "@supabase/supabase-js";
 interface GetUserResponse {
   user: User | null;
   role: string | null;
+  error: any;
 }
 
 export const getUser = async (): Promise<GetUserResponse> => {
@@ -14,14 +15,19 @@ export const getUser = async (): Promise<GetUserResponse> => {
     data: { user },
     error,
   } = await supabase.auth.getUser();
- 
+
   let userRole = null;
+
+  if (!user) {
+  console.log("No user found");
+  
+}
   if (user) {
-    // Fetch user role
+    console.log("User ID:", user.id);
     const { data: roles, error } = await supabase
       .from("user_roles")
       .select("role_id")
-      .eq("profile_id", user.id);
+      .eq("profile_id", user.id)
 
     console.log("User Roles:", roles, "Error:", error);
 
@@ -43,5 +49,6 @@ export const getUser = async (): Promise<GetUserResponse> => {
     }
   }
 
-  return { user, role: userRole };
+  return { user, role: userRole, error };
 };
+
