@@ -23,7 +23,7 @@ export const getUser = async (): Promise<GetUserResponse> => {
   
 }
   if (user) {
-    console.log("User ID:", user.id);
+    console.log("User ID:", user);
     const { data: roles, error } = await supabase
       .from("user_roles")
       .select("role_id")
@@ -40,6 +40,8 @@ export const getUser = async (): Promise<GetUserResponse> => {
         .from("roles")
         .select("name")
         .eq("id", roleId);
+
+      console.log("role data",roleData)
 
       if (error) {
         console.error("Error fetching role name:", error);

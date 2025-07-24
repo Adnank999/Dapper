@@ -7,7 +7,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 interface UserContextType {
   user: User | null;
   userRole: string | null;
-  pgRole: string | undefined;
+ 
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -17,7 +17,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
-  const [pgRole, setPgRole] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
 
   // let runCount = 0;
@@ -33,7 +32,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       setUser(user);
 
       setUserRole(role);
-      setPgRole(user?.role);
+     
       setLoading(false);
     };
 
@@ -45,7 +44,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   return (
-    <UserContext.Provider value={{ user, userRole,pgRole }}>
+    <UserContext.Provider value={{ user, userRole }}>
       {children}
     </UserContext.Provider>
   );

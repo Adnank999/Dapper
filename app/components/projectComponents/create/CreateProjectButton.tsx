@@ -4,22 +4,33 @@ import Link from "next/link";
 import React from "react";
 
 const CreateProjectButton = () => {
-  const { user, userRole,pgRole} = useUser();
+  const { user, userRole } = useUser();
 
   const isAdmin = userRole === "admin";
-  const isPgAdmin = pgRole === "custom_pg_admin";
+
+
+  console.log("User Role:", userRole);
+
+  // if (userRole === null) {
+  //   return (
+  //     <div className="w-full min-h-screen flex items-center justify-center p-4 bg-background">
+  //       <div className="text-white">Not authorized</div>
+  //     </div>
+  //   );
+  // }
 
 
 
-  if (!isAdmin && !isPgAdmin) {
-    return (
-      <div className="w-full min-h-screen flex items-center justify-center p-4 bg-background">
-        <div className="text-white">
-          You do not have permission to create a project.
-        </div>
-      </div>
-    );
-  }
+  // User exists but doesn't have correct permission
+  // if (!isAdmin) {
+  //   return (
+  //     <div className="w-full min-h-screen flex items-center justify-center p-4 bg-background">
+  //       <div className="text-white">
+  //         You do not have permission to create a project.
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <Link href="/projects/create">

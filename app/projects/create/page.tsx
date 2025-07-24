@@ -3,7 +3,7 @@ import React from "react";
 
 export default async function projects() {
   return (
-    <section>
+    <section className="mt-24 mx-auto max-w-4xl">
       <CreateProject />
     </section>
   );
