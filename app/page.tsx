@@ -1,3 +1,5 @@
+'use cache'
+
 import Image from "next/image";
 import SplashCursor from "./components/SplashCursor";
 import TextWithParticles from "./components/TextWithParticles";

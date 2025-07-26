@@ -7,14 +7,15 @@ import ImageUpload from "./ImageUpload";
 import { Description } from "@radix-ui/react-dialog";
 import DescriptionModal from "../DescriptionModal";
 import ImageUploaderUppy from "./ImageUploader/ImageUploaderUppy";
-
+import { MultiSelectCombobox, Option } from "../../ui/MultiSelectComboBox";
+import { techOptions } from "../TechName";
 const CreateProject = () => {
   const [formData, setFormData] = useState<{
     title: string;
     description: string;
     seo_title: string;
     seo_description: string;
-    tech_name: string;
+    tech_name: string[];
     bullet_point: string[];
     image_url: string[]; // Array of image URLs
   }>({
@@ -22,14 +23,13 @@ const CreateProject = () => {
     description: "",
     seo_title: "",
     seo_description: "",
-    tech_name: "", // Changed to string
+    tech_name: [],
     bullet_point: [""],
     image_url: [],
   });
   const [modalType, setModalType] = useState<"description" | "seo" | null>(
     null
   );
-
 
   console.log("form data", formData);
 
@@ -63,7 +63,6 @@ const CreateProject = () => {
     console.log(formData);
     const response = await createProject(formData); // Ensure createProject handles the formData correctly
     console.log(response);
- 
   };
 
   const handleUploaded = (urls: string[]) => {
@@ -76,8 +75,8 @@ const CreateProject = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-6 bg-background text-white">
-      <div className="w-full max-w-5xl bg-white/5 backdrop-blur-lg border border-white/20 shadow-2xl rounded-2xl p-8">
+    <div className="w-full min-h-screen grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-background text-white">
+      <div className="w-full bg-white/5 backdrop-blur-lg border border-white/20 shadow-2xl rounded-2xl p-8">
         <h2 className="text-3xl font-bold text-center mb-2">
           Create Your Project
         </h2>
@@ -165,25 +164,35 @@ const CreateProject = () => {
           </div>
 
           {/* Row 3: Tech Name + Image Upload */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-4 items-end">
             <div>
               <label className="block mb-1 text-sm font-medium">
                 Tech Name
               </label>
-              <input
+              {/* <input
                 type="text"
                 name="tech_name"
                 value={formData.tech_name}
                 onChange={handleChange}
                 className="w-full h-10 px-3 bg-white/10 border border-white/30 rounded-lg placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400 transition"
                 placeholder="Enter tech name"
+              /> */}
+              <MultiSelectCombobox
+                options={techOptions}
+                selected={techOptions.filter((opt) =>
+                  formData.tech_name.includes(opt.value)
+                )}
+                onChange={(selectedOptions) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    tech_name: selectedOptions.map((opt) => opt.value), 
+                  }))
+                }
               />
             </div>
-            <div className="max-w-4xl mx-auto mt-10">
-              {/* <ImageUploader onUploaded={handleUploaded} /> */}
-              <ImageUploaderUppy onUploaded={handleUploaded} />
-            </div>
           </div>
+
+          
 
           {/* Row 4: Bullet Points */}
           <div>
@@ -249,6 +258,10 @@ const CreateProject = () => {
           </button>
         </form>
       </div>
+
+      <div className="w-full gap-4">
+            <ImageUploaderUppy onUploaded={handleUploaded} />
+          </div>
     </div>
   );
 };

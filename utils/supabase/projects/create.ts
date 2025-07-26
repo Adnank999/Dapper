@@ -35,17 +35,7 @@ export async function createProject(formData: any) {
 //   // Get the project ID of the newly created project
   const projectId = projectData[0].id;
 
-  // Insert images into the project_images table
-  // if (data.image_url) {
-  //   const { error: imageError } = await supabase
-  //     .from('project_images')
-  //     .insert([{ project_id: projectId, image_url: data.image_url }]);
-
-  //   if (imageError) {
-  //     console.error('Error inserting image:', imageError);
-  //     throw new Error('Failed to insert image');
-  //   }
-  // }
+  
 
   const imageInsertPromises = formData.image_url.map(async (imagePair: { original: string; thumbnail: string }) => {
       const { error: imageError } = await supabase

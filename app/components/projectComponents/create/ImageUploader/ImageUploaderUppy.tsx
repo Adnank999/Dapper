@@ -131,7 +131,7 @@ interface ImageUploadProps {
 }
 
 const ImageUploaderUppy = ({ onUploaded }: ImageUploadProps) => {
-  const uppyRef = useRef<Uppy.Uppy | null>(null);
+  const uppyRef = useRef<Uppy | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   const folderName = "projects";
@@ -236,7 +236,7 @@ const ImageUploaderUppy = ({ onUploaded }: ImageUploadProps) => {
     setIsReady(true);
 
     return () => {
-      uppy.close();
+      uppy.destroy();
     };
   }, []);
 

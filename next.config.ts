@@ -11,4 +11,7 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental:{
+    useCache: true
+  }
 };
