@@ -4,21 +4,34 @@ import React, { useState } from "react";
 import { createProject } from "@/utils/supabase/projects/create";
 import { useUser } from "@/app/context/UserContext";
 import ImageUpload from "./ImageUpload";
-import RichTextModal from "./RichTextModal";
+import { Description } from "@radix-ui/react-dialog";
+import DescriptionModal from "../DescriptionModal";
+import ImageUploaderUppy from "./ImageUploader/ImageUploaderUppy";
 
 const CreateProject = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string;
+    description: string;
+    seo_title: string;
+    seo_description: string;
+    tech_name: string;
+    bullet_point: string[];
+    image_url: string[]; // Array of image URLs
+  }>({
     title: "",
     description: "",
     seo_title: "",
     seo_description: "",
     tech_name: "", // Changed to string
     bullet_point: [""],
-    image_url: "",
+    image_url: [],
   });
   const [modalType, setModalType] = useState<"description" | "seo" | null>(
     null
   );
+
+
+  console.log("form data", formData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +63,16 @@ const CreateProject = () => {
     console.log(formData);
     const response = await createProject(formData); // Ensure createProject handles the formData correctly
     console.log(response);
+ 
+  };
+
+  const handleUploaded = (urls: string[]) => {
+    console.log("Uploaded Image URLs:", urls);
+    // Update the formData with the uploaded image URLs
+    setFormData((prev) => ({
+      ...prev,
+      image_url: [...prev.image_url, ...urls],
+    }));
   };
 
   return (
@@ -62,7 +85,7 @@ const CreateProject = () => {
           Fill in the details below
         </p>
 
-        <form onSubmit={handleSubmit} className="grid gap-6">
+        <form onSubmit={handleSubmit} className="grid gap-6 w-full ">
           {/* Row 1: Title + SEO Title */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -156,12 +179,9 @@ const CreateProject = () => {
                 placeholder="Enter tech name"
               />
             </div>
-            <div>
-              <ImageUpload
-                setImageUrl={(url) =>
-                  setFormData((prev) => ({ ...prev, image_url: url }))
-                }
-              />
+            <div className="max-w-4xl mx-auto mt-10">
+              {/* <ImageUploader onUploaded={handleUploaded} /> */}
+              <ImageUploaderUppy onUploaded={handleUploaded} />
             </div>
           </div>
 
@@ -201,7 +221,7 @@ const CreateProject = () => {
             </div>
           </div>
 
-          <RichTextModal
+          <DescriptionModal
             title={
               modalType === "description"
                 ? "Edit Description"
@@ -209,19 +229,15 @@ const CreateProject = () => {
             }
             open={modalType !== null}
             onClose={() => setModalType(null)}
-            initialValue={
-              modalType === "description"
-                ? formData.description
-                : formData.seo_description
-            }
-            onSave={(value) =>
+            onSave={(value) => {
               setFormData((prev) => ({
                 ...prev,
                 [modalType === "description"
                   ? "description"
                   : "seo_description"]: value,
-              }))
-            }
+              }));
+              setModalType(null);
+            }}
           />
 
           {/* Submit */}

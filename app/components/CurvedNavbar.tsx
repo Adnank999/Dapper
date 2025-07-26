@@ -108,7 +108,7 @@ export const CurvedNavbar = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-[50]">
       {/* Desktop Navbar */}
       
       <nav

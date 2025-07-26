@@ -36,16 +36,36 @@ export async function createProject(formData: any) {
   const projectId = projectData[0].id;
 
   // Insert images into the project_images table
-  if (data.image_url) {
-    const { error: imageError } = await supabase
-      .from('project_images')
-      .insert([{ project_id: projectId, image_url: data.image_url }]);
+  // if (data.image_url) {
+  //   const { error: imageError } = await supabase
+  //     .from('project_images')
+  //     .insert([{ project_id: projectId, image_url: data.image_url }]);
 
-    if (imageError) {
-      console.error('Error inserting image:', imageError);
-      throw new Error('Failed to insert image');
-    }
-  }
+  //   if (imageError) {
+  //     console.error('Error inserting image:', imageError);
+  //     throw new Error('Failed to insert image');
+  //   }
+  // }
+
+  const imageInsertPromises = formData.image_url.map(async (imagePair: { original: string; thumbnail: string }) => {
+      const { error: imageError } = await supabase
+        .from('project_images')
+        .insert([
+          {
+            project_id: projectId, // Use the project_id from above
+            image_url: imagePair.original,
+            thumbnail_url: imagePair.thumbnail
+          },
+        ]);
+
+      if (imageError) {
+        console.error('Error inserting image URL:', imageError);
+      }
+    });
+
+  await Promise.all(imageInsertPromises);
+
+  console.log('Project created and images uploaded successfully');
 
   // Insert bullet points into the project_bullet_points table
   if (data.bullet_point.length > 0) {
