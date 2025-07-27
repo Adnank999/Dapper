@@ -118,25 +118,25 @@ export const CurvedNavbar = () => {
         {/* Centered Navbar */}
         <nav
           ref={navbarRef}
-          className="max-w-fit cursor-pointer backdrop-blur-md bg-white/10 border border-white/20 shadow-lg px-8 py-1 rounded-full transition-all duration-300 mx-auto"
+          className="navViewTransition max-w-fit cursor-pointer backdrop-blur-md bg-white/10 border border-white/20 shadow-lg px-8 py-1 rounded-full transition-all duration-300 mx-auto"
         >
           <ul className="flex justify-center items-center gap-8 text-white font-normal text-xl">
             {navLinks.map(({ name, href }) => (
               <li
                 key={name}
-                className="relative font-my-font-bold tracking-wide text-lg rounded-full px-5 py-1 transition duration-300 hover:border-b hover:border-b-blue-400 hover:shadow-[0_4px_10px_2px_rgba(59,130,246,0.5)]"
+                className=" relative font-my-font-bold tracking-wide text-lg rounded-full px-5 py-1 transition duration-300 hover:border-b hover:border-b-blue-400 hover:shadow-[0_4px_10px_2px_rgba(59,130,246,0.5)]"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavigationTransition(href);
                 }}
               >
-                <Link
+                {/* <Link
                   href={href}
                   prefetch={active ? null : false}
                   onMouseEnter={() => setActive(true)}
-                >
+                > */}
                   {name}
-                </Link>
+                {/* </Link> */}
                 <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px hover:bg-linear-to-r from-transparent via-blue-500 to-transparent h-px" />
               </li>
             ))}

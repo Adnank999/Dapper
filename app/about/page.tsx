@@ -1,4 +1,4 @@
-
+'use cache'
 import { getUser } from "@/lib/user";
 import ContributionsData from "../components/aboutComponents/ContributionData";
 import { ContributionGraph } from "../components/aboutComponents/ContributionGraph";

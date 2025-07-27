@@ -13,5 +13,15 @@ module.exports = {
   },
   experimental:{
     useCache: true
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com', 
+       
+      },
+      
+    ],
+  },
 };

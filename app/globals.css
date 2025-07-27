@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @font-face {
   font-family: "MyFontRegular";
   src: url("/fonts/FKScreamerTrial-Regular-BF6571330a60d38.otf")
@@ -154,6 +153,9 @@
   --color-foreground: var(--foreground);
   --color-bg: rgb(6, 0, 16);
   --color-highlight: #da154b;
+  --luxury-a0: oklch(0% 0 none);
+  --luxury-a10: oklch(25.2% 0 none);
+  --luxury-a20: oklch(32.1% 0 none);
   --font-my-font-regular: MyFontRegular, sans-serif;
   --font-my-font-medium: MyFontMedium, sans-serif;
   --font-my-font-bold: MyFontBold, sans-serif;
@@ -195,6 +197,18 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+}
+
+@layer utilities {
+  .luxury-gradient {
+    background: linear-gradient(
+      45deg,
+      var(--luxury-a0),
+      var(--luxury-a10),
+      var(--luxury-a20)
+    );
+  }
+
 }
 
 /* Define animations for the view transition */
@@ -262,40 +276,65 @@
 /* ========== Filter Blur Zoom Animation */
 
 @keyframes blur-out {
-    from {
-        filter: blur(0px);
-        transform: scale(1);
-        opacity: 1;
-    }
+  from {
+    filter: blur(0px);
+    transform: scale(1);
+    opacity: 1;
+  }
 
-    to {
-        filter: blur(50px);
-        transform: scale(1.2);
-        opacity: 0;
-    }
+  to {
+    filter: blur(50px);
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }
 
 @keyframes blur-in {
-    from {
-        filter: blur(50px);
-        transform: scale(1.2);
-        opacity: 0;
-    }
+  from {
+    filter: blur(50px);
+    transform: scale(1.2);
+    opacity: 0;
+  }
 
-    to {
-        filter: blur(0px);
-        transform: scale(1);
-        opacity: 1;
-    }
+  to {
+    filter: blur(0px);
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-::view-transition-old(root) {
-    animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-out;
+.navViewTransition {
+  view-transition-name: navViewTransition;
 }
 
-::view-transition-new(root) {
-    animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-in;
+::view-transition-old(navViewTransition) {
+  animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-out;
 }
+
+::view-transition-new(navViewTransition) {
+  animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-in;
+}
+/* Apply a transition name to the element */
+/* Apply a transition name to the box */
+.box {
+  view-transition-name: box;
+}
+
+
+/* Old state transition (fade out and scale down) */
+::view-transition-old(box) {
+  animation: fade-out 0.3s ease-in-out forwards;
+}
+
+/* New state transition (fade in and scale up) */
+::view-transition-new(box) {
+   animation: fade-in 0.3s ease-in-out forwards;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
 
 html {
   scroll-behavior: smooth;
@@ -747,6 +786,3 @@ svg .svg-elem-32 {
 svg.active .svg-elem-32 {
   fill: rgb(15, 25, 27);
 }
-
-
-
