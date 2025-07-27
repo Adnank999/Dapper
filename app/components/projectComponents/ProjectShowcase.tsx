@@ -7,6 +7,7 @@ import { AllProjects } from "@/types/projects/AllProject";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { useTransitionRouter } from "next-view-transitions";
 
 interface ProjectShowcaseProps {
   getAllProjects: AllProjects;
@@ -16,11 +17,22 @@ export default function ProjectShowcase({
   getAllProjects,
 }: ProjectShowcaseProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useTransitionRouter();
 
-  const handleImageNavigationTransition = (url: string) => {
+  // const handleImageNavigationTransition = (url: string) => {
+  //   if (!document.startViewTransition) {
+  //     // router.push(url);
+  //     return;
+  //   }
+
+  //   document.startViewTransition(() => {
+  //     router.push(url);
+  //   });
+  // };
+
+  const handleImageNavigationTransition = (url) => {
     if (!document.startViewTransition) {
-      router.push(url);
+      // router.push(url); // Fallback if View Transition is not supported
       return;
     }
 
@@ -67,36 +79,42 @@ export default function ProjectShowcase({
         return (
           <div
             key={id || index}
+            id="from"
             className="grid lg:grid-cols-2 gap-8 items-start"
           >
             {/* Image Card */}
 
-            <Card
+            <Link
+              id="thumbnail-image"
+              href={`${pathname}/${id}`}
               onClick={(e) => {
                 e.preventDefault();
-               handleImageNavigationTransition(`${pathname}/${id}`);
+                handleImageNavigationTransition(`${pathname}/${id}`);
               }}
-              className="relative overflow-hidden bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 p-8 text-white min-h-[350px] flex justify-center items-center"
+              passHref
             >
-              <div className="relative z-10 space-y-6 text-center">
-                <div className="relative mt-8 flex justify-center">
-                  <div className="box w-fit rounded-lg overflow-hidden shadow-2xl ">
-                    <Image
-                      src={
-                        project_images && project_images.length > 0
-                          ? project_images[0].thumbnail_url
-                          : "/placeholder.svg"
-                      }
-                      alt={title || "Project mockup"}
-                      width={300}
-                      height={300}
-                      className="h-auto object-cover"
-                    />
+              <Card className="relative overflow-hidden bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 p-8 text-white min-h-[350px] flex justify-center items-center">
+                <div className="relative z-10 space-y-6 text-center">
+                  <div className="relative mt-8 flex justify-center">
+                    <div className="w-fit rounded-lg overflow-hidden shadow-2xl ">
+                      <Image
+                        
+                        src={
+                          project_images && project_images.length > 0
+                            ? project_images[0].thumbnail_url
+                            : "/placeholder.svg"
+                        }
+                        alt={title || "Project mockup"}
+                        width={300}
+                        height={300}
+                        className="h-auto object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-600/90 via-pink-600/90 to-purple-800/90" />
-            </Card>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/90 via-pink-600/90 to-purple-800/90" />
+              </Card>
+            </Link>
 
             {/* Project Details */}
             <div className="space-y-8 text-white">

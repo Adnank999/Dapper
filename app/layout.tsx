@@ -13,6 +13,7 @@ import { headers } from "next/headers";
 import { NextRequest } from "next/server";
 import { config } from "process";
 import { UserProvider } from "./context/UserContext";
+import { ViewTransitions } from 'next-view-transitions'
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,36 +22,35 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en">
-      <Head>
-        <link
-          rel="preload"
-          href="/fonts/FKScreamerTrial-Bold-BF6571330a76e9b.otf"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </Head>
-      <body className="bg-red-600">
-        <SmoothScrollingWrapper>
-          <MenuProvider>
-            {/* <LayoutWrapper> */}
-           <UserProvider>
-             {children}
-           </UserProvider>
+     <ViewTransitions>
+       <html lang="en">
+        <Head>
+          <link
+            rel="preload"
+            href="/fonts/FKScreamerTrial-Bold-BF6571330a76e9b.otf"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        </Head>
+        <body className="bg-red-600">
+          <SmoothScrollingWrapper>
+            <MenuProvider>
+              {/* <LayoutWrapper> */}
+              <UserProvider>{children}</UserProvider>
 
-           
-            {/* </LayoutWrapper> */}
-            {/* <Navbar /> */}
-          </MenuProvider>
-        </SmoothScrollingWrapper>
-      </body>
-    </html>
+              {/* </LayoutWrapper> */}
+              {/* <Navbar /> */}
+            </MenuProvider>
+          </SmoothScrollingWrapper>
+        </body>
+      </html>
+     </ViewTransitions>
+     
+   
   );
 }

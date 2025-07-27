@@ -23,40 +23,42 @@ import LayoutWrapper from "./components/LayoutWrapper";
 export default async function Home() {
 
   return (
-    <>
-      <div className="overflow-x-hidden overflow-y-hidden">
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="max-w-4xl w-full mx-auto flex flex-col items-center justify-center">
-            <div className="w-full">
-              <NavHeroContainer />
+    // <>
+    //   <div className="overflow-x-hidden overflow-y-hidden">
+    //     <div className="min-h-screen flex items-center justify-center">
+    //       <div className="max-w-4xl w-full mx-auto flex flex-col items-center justify-center">
+    //         <div className="w-full">
+    //           <NavHeroContainer />
 
-              <TextWithParticles />
+    //           <TextWithParticles />
 
-              <div className="max-w-4xl mx-auto">
-                <GlowingEffectDemo />
-              </div>
-            </div>
-          </div>
-        </div>
+    //           <div className="max-w-4xl mx-auto">
+    //             <GlowingEffectDemo />
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
 
-        <GradientSection />
+    //     <GradientSection />
 
-        <Scene />
+    //     <Scene />
 
-        {/* <div className="p-4 h-screen">
+    //     {/* <div className="p-4 h-screen">
          
-          <TransitionButton>
-            Sound Ethics champions the rights and interests of artists at every
-            turn. Our core mission is to ensure that the creative copyright of
-            artists is respected and protected as artificial intelligence
-            becomes more integrated into the music industry.
-          </TransitionButton>
-        </div> */}
+    //       <TransitionButton>
+    //         Sound Ethics champions the rights and interests of artists at every
+    //         turn. Our core mission is to ensure that the creative copyright of
+    //         artists is respected and protected as artificial intelligence
+    //         becomes more integrated into the music industry.
+    //       </TransitionButton>
+    //     </div> */}
 
-        {/* <div className="min-h-screen">
-          <RainingLetters/>
-        </div> */}
-      </div>
-    </>
+    //     {/* <div className="min-h-screen">
+    //       <RainingLetters/>
+    //     </div> */}
+    //   </div>
+    // </>
+
+    <></>
   );
 }

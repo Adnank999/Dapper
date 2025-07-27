@@ -283,7 +283,7 @@
   }
 
   to {
-    filter: blur(50px);
+    filter: blur(20px);
     transform: scale(1.2);
     opacity: 0;
   }
@@ -303,9 +303,9 @@
   }
 }
 
-.navViewTransition {
+/* .navViewTransition {
   view-transition-name: navViewTransition;
-}
+} 
 
 ::view-transition-old(navViewTransition) {
   animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-out;
@@ -313,27 +313,73 @@
 
 ::view-transition-new(navViewTransition) {
   animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-in;
+} */
+
+/* #navLinks {
+  view-transition-name: navViewTransition;
+} 
+
+::view-transition-old(navViewTransition) {
+  animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-out;
 }
-/* Apply a transition name to the element */
-/* Apply a transition name to the box */
-.box {
-  view-transition-name: box;
+
+::view-transition-new(navViewTransition) {
+  animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-in;
+} */
+
+
+::view-transition-old(root) {
+  animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-in;
 }
 
 
-/* Old state transition (fade out and scale down) */
-::view-transition-old(box) {
-  animation: fade-out 0.3s ease-in-out forwards;
-}
-
-/* New state transition (fade in and scale up) */
-::view-transition-new(box) {
-   animation: fade-in 0.3s ease-in-out forwards;
-}
 
 @view-transition {
     navigation: auto;
 }
+
+
+/* Set the view transition names on the images */
+
+
+ ::view-transition-group(*) {
+    animation-duration: 0.5s;
+} 
+
+#thumbnail-image,#original-image {
+   
+   view-transition-name: picture;
+}
+
+::view-transition-old(picture),
+::view-transition-new(picture) {
+    animation: none;
+    animation-duration: 0s !important;
+    mix-blend-mode: normal;
+    height: 100%;
+    overflow: clip;
+    border-radius: 2rem;
+} 
+
+
+#to::view-transition-new(picture) {
+    object-fit: cover;
+}
+
+#from::view-transition-new(picture) {
+    object-fit: contain;
+}
+
+#from::view-transition-old(picture) {
+    object-fit: cover;
+}
+
+
+
 
 
 html {

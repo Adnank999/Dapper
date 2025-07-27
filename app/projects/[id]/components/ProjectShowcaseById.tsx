@@ -9,15 +9,15 @@ const ProjectShowcaseById = ({ projectDetails }) => {
  
 
   return (
-    <div>
+    <div id="to">
       {/* Check if the image_url exists before rendering */}
       {projectImage ? (
         <Image
-        
+          id="original-image"
           src={projectImage}
           alt={projectDetails.title || "Project Image"}
-          width={600} // Customize the width
-          height={400} // Customize the height
+          width={1000} // Customize the width
+          height={600} // Customize the height
          
         />
       ) : (

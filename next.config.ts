@@ -12,7 +12,7 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   experimental:{
-    useCache: true
+    useCache: true,
   },
   images: {
     remotePatterns: [
