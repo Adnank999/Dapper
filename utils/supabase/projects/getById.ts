@@ -16,6 +16,7 @@ export async function getById (projectId) {
           tech_name
         ),
         project_images (
+          id,
           project_id,
           image_url,
           thumbnail_url

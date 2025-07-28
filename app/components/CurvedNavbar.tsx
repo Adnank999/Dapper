@@ -130,7 +130,7 @@ export const CurvedNavbar = () => {
                 className=" relative font-my-font-bold tracking-wide text-lg rounded-full px-5 py-1 transition duration-300 hover:border-b hover:border-b-blue-400 hover:shadow-[0_4px_10px_2px_rgba(59,130,246,0.5)]"
               >
                 <Link
-                  // id="navLinks"
+                  id="navLinks"
                   href={href}
                   // prefetch={active ? null : false}
                   // onMouseEnter={() => setActive(true)}

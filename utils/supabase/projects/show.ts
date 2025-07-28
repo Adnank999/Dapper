@@ -17,6 +17,7 @@ export async function getAllProjects() {
           tech_name
         ),
         project_images (
+          
           project_id,
           image_url,
           thumbnail_url
