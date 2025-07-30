@@ -12,7 +12,8 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   experimental:{
-    useCache: true,
+    useCache:true,
+    dynamicIso: true,
   },
   images: {
     remotePatterns: [

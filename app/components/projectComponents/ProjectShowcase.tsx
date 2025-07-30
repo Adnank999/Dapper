@@ -19,16 +19,6 @@ export default function ProjectShowcase({
   const pathname = usePathname();
   const router = useTransitionRouter();
 
-  // const handleImageNavigationTransition = (url: string) => {
-  //   if (!document.startViewTransition) {
-  //     // router.push(url);
-  //     return;
-  //   }
-
-  //   document.startViewTransition(() => {
-  //     router.push(url);
-  //   });
-  // };
 
   const handleImageNavigationTransition = (url) => {
     if (!document.startViewTransition) {
@@ -93,7 +83,7 @@ export default function ProjectShowcase({
               }}
               passHref
             >
-              <Card className="relative overflow-hidden bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 p-8 text-white min-h-[350px] flex justify-center items-center">
+              <Card  className="relative overflow-hidden p-8 text-white min-h-[350px] flex justify-center items-center">
                 <div className="relative z-10 space-y-6 text-center">
                   <div className="relative mt-8 flex justify-center">
                     <div className="w-fit rounded-lg overflow-hidden shadow-2xl ">
@@ -112,7 +102,7 @@ export default function ProjectShowcase({
                     </div>
                   </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/90 via-pink-600/90 to-purple-800/90" />
+                <div  className="absolute inset-0 bg-gradient-to-br from-purple-600/90 via-pink-600/90 to-purple-800/90" />
               </Card>
             </Link>
 

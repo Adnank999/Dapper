@@ -25,8 +25,7 @@ export const CurvedNavbar = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenuContext();
   const router = useRouter();
   const navbarRef = useRef<HTMLElement | null>(null);
-  const scrollYRef = useRef(0); // For manual scroll tracking
-  const [active, setActive] = useState(false);
+
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
@@ -38,40 +37,11 @@ export const CurvedNavbar = () => {
     const navbar = navbarRef.current;
     if (!navbar) return;
 
-    // gsap.set(navbar, { y: 0, opacity: 1 });
 
-    // const onScroll = () => {
-    //   const currentScroll = window.scrollY;
-
-    //   if (currentScroll > lastScroll.current) {
-    //     // Scroll Down
-    //     gsap.to(navbar, {
-    //       y: -100,
-    //       opacity: 0,
-    //       duration: 0.4,
-    //       ease: "power2.out",
-    //     });
-    //   } else if (currentScroll < lastScroll.current ) {
-    //     // Scroll Up
-    //     gsap.to(navbar, {
-    //       y: 0,
-    //       opacity: 1,
-    //       duration: 0.4,
-    //       ease: "power2.out",
-    //     });
-    //   }
-
-    //   lastScroll.current = currentScroll;
-    // };
 
     const onScroll = () => {
       const currentScroll = window.scrollY;
-      // console.log(
-      //   "Current Scroll:",
-      //   currentScroll,
-      //   "Last Scroll:",
-      //   lastScroll.current
-      // );
+      
 
       if (currentScroll > lastScroll.current) {
         // Scroll Down
@@ -99,7 +69,7 @@ export const CurvedNavbar = () => {
   }, []);
 
   const pathname = usePathname();
-  console.log({ pathname });
+ 
   const handleNavigationTransition = (url: string) => {
     if (!document.startViewTransition) {
       router.push("/");
@@ -139,6 +109,7 @@ export const CurvedNavbar = () => {
                     handleNavigationTransition(href);
                   }}
                   passHref
+                  prefetch={true}
                 >
                   {name}
                 </Link>

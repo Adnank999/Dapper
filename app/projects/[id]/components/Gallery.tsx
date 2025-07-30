@@ -109,7 +109,7 @@ export default function Gallery({ projectDetails }: Props) {
     setTimeout(handleResizeFlip, 0);
   }
   return (
-    <div>
+    <>
       <fieldset id="gallery" className="hub">
         {projectImages.map((img, index) => (
           <div
@@ -117,6 +117,7 @@ export default function Gallery({ projectDetails }: Props) {
             style={{ viewTransitionName: `gallery-item-${index + 1}` }}
           >
             <input
+              
               type="radio"
               id={img.id}
               name="gallery"
@@ -126,12 +127,12 @@ export default function Gallery({ projectDetails }: Props) {
               onClick={handleRadioClick}
             />
 
-            <img src={img.image_url} alt={img.label || "Project image"} />
+            <img className="w-full object-contain" src={img.image_url} alt={img.label || "Project image"} />
 
             <label htmlFor={img.id}>{img.label || `Image ${index + 1}`}</label>
           </div>
         ))}
       </fieldset>
-    </div>
+    </>
   );
 }

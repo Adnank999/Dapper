@@ -1,24 +1,27 @@
-"use server";
-
-
+'use server'
 import { getById } from "@/utils/supabase/projects/getById";
 import ProjectShowcaseById from "./components/ProjectShowcaseById";
 import Gallery from "./components/Gallery";
-
+import { Suspense } from "react";
 
 export default async function project({ params }) {
-
   const projectId = params.id;
 
-  const projectDetails = await getById(projectId)
+  return (
+    <section id="to" className="w-full mt-24 mx-auto max-w-5xl">
+      {/* <ProjectShowcaseById projectDetails={projectDetails}/> */}
+      <div id="original-image" className="gallery-body">
+        <Suspense fallback={<>loading...</>}>
+          <ProjectWrapper projectId={projectId} />
+        </Suspense>
+      </div>
+    </section>
+  );
+}
 
-  console.log("projectDetails",projectDetails)
+async function ProjectWrapper({ projectId }: any) {
 
-  return <section className="w-full mt-24 mx-auto max-w-5xl">
-    {/* <ProjectShowcaseById projectDetails={projectDetails}/> */}
-    <div id="original-image" className="gallery-body">
-       <Gallery projectDetails={projectDetails}/>
-    </div>
-   
-  </section>;
+  const projectDetails = await getById(projectId);
+
+  return <Gallery projectDetails={projectDetails} />;
 }

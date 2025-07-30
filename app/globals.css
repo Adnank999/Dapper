@@ -347,14 +347,17 @@
     height: 100%;
     overflow: clip;
     /* border-radius: 2rem; */
-} 
+}
+
 
 #to::view-transition-new(picture) {
     object-fit: cover;
+
 }
 
 #from::view-transition-new(picture) {
     object-fit: contain;
+    
 }
 
 #from::view-transition-old(picture) {
@@ -378,6 +381,9 @@ fieldset {
 
 img {
   max-width: 100%;
+  height: auto;
+  object-fit: contain;
+
 }
 
 .hub {
@@ -404,6 +410,7 @@ img {
 .hub > * > * {
   grid-area: 1/1;
 }
+
 
 .hub > * > label {
   opacity: 0;

@@ -90,20 +90,8 @@ const Scene = () => {
       { opacity: 1, duration: 0.3, ease: "power2.out" } // Fade in
     )
       .to(canvasRef.current, { opacity: 1, duration: 0.4 }) // Hold
-      .to({}, { duration: 0.3 }); // ⏳ Buffer scroll zone before fade-out
-    // .to(canvasRef.current, {
-    //     opacity: 0,
-    //     duration: 0.3,
-    //     ease: "power2.inOut",
-    //     // 🧠 No delay, keep it scroll-linked
-    //   });
+      .to({}, { duration: 0.3 }); 
 
-    // tl.to(canvasRef.current, {
-    //   opacity: 0.5,
-    //   duration: 0.3,
-    //   ease: "power2.inOut",
-    //   delay: 5,
-    // });
 
     tl.to(canvasRef.current, {
       opacity: 0,
@@ -228,3 +216,6 @@ const Scene = () => {
 };
 
 export default Scene;
+
+
+
