@@ -1,3 +1,4 @@
+'use cache'
 import Image from "next/image";
 import SplashCursor from "./components/SplashCursor";
 import TextWithParticles from "./components/TextWithParticles";
@@ -16,13 +17,15 @@ import RainingLetters from "./components/aboutComponents/RainingLetters";
 import SvgIcon from "./components/aboutComponents/SvgIcon";
 import Preloader from "./components/Preloader";
 import LayoutWrapper from "./components/LayoutWrapper";
+import GradientModelWrapper from "./components/HomeComponents/GradientModelWrapper";
 
-export default function Home() {
+// export const revalidate = 60;
+// export const dynamic = 'force-static';
+export default async function Home() {
+
   return (
     <>
-      
       <div className="overflow-x-hidden overflow-y-hidden">
-        
         <div className="min-h-screen flex items-center justify-center">
           <div className="max-w-4xl w-full mx-auto flex flex-col items-center justify-center">
             <div className="w-full">
@@ -37,9 +40,7 @@ export default function Home() {
           </div>
         </div>
 
-        <GradientSection />
-
-        <Scene />
+        <GradientModelWrapper/>
 
         {/* <div className="p-4 h-screen">
          
@@ -51,10 +52,10 @@ export default function Home() {
           </TransitionButton>
         </div> */}
 
-        {/* <div className="min-h-screen">
-          <RainingLetters/>
-        </div> */}
+     
       </div>
     </>
+
+   
   );
 }

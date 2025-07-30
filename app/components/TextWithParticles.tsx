@@ -24,7 +24,6 @@ const TextWithParticles = () => {
   const nextTextRef = useRef<HTMLDivElement | null>(null);
   const { isMenuOpen } = useMenuContext();
   const lenis = useLenis();
-  const spanMap = new WeakMap<Element, boolean>();
   let scrollDirection: "up" | "down" = "down";
   let lastScrollY = typeof window !== "undefined" ? window.scrollY : 0;
 
@@ -209,3 +208,8 @@ useEffect(() => {
 };
 
 export default TextWithParticles;
+
+
+
+
+

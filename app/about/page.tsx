@@ -1,4 +1,4 @@
-
+'use cache'
 import { getUser } from "@/lib/user";
 import ContributionsData from "../components/aboutComponents/ContributionData";
 import { ContributionGraph } from "../components/aboutComponents/ContributionGraph";
@@ -15,9 +15,9 @@ export default async  function About() {
 
   return (
     <section >
-      <div className="relative z-10 bg-background">
+      {/* <div className="relative z-10 bg-background">
         <RainingLetters />
-        </div>
+        </div> */}
       <div className="mx-auto max-w-6xl h-[100vh] mb-24 relative">
         <ShuffleText />
       </div>
