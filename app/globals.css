@@ -366,7 +366,7 @@
 
 /* picture animation end */
 
-.gallery-body{
+/* .gallery-body{
   display: grid;
   place-content: center;
   min-height: 100dvh;
@@ -430,7 +430,7 @@ img {
     animation-duration: 0.5s;
     animation-timing-function: var(--ease-5);
   }
-}
+} */
 
 
 

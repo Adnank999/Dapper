@@ -121,6 +121,7 @@ const Scene = () => {
         // opacity: 0,
       }}
     >
+      
       <Canvas
         ref={canvasRef}
         camera={{

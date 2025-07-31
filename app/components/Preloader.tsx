@@ -60,7 +60,7 @@ const Preloader = () => {
          <SvgIcon className={`${isActive ? 'active' : ''} ml-30 `} />
       
      
-      <div className="loading-text ml-20 lg:ml-24 text-5xl md:text-6xl lg:text-8xl font-akoni">Loading...</div>
+      {/* <div className="loading-text ml-20 lg:ml-24 text-5xl md:text-6xl lg:text-8xl font-akoni">Loading...</div> */}
     </div>
   );
 };

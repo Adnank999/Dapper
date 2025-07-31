@@ -33,8 +33,8 @@ export default function RootLayout({
             rel="preload"
             href="/fonts/FKScreamerTrial-Bold-BF6571330a76e9b.otf"
             as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
+            type="font/otf"
+            
           />
         </Head>
         <body className="bg-red-600">

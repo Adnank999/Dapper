@@ -5,26 +5,32 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import GradientSection from '../GradientSection';
 import dynamic from 'next/dynamic';
 
-// Lazy-load the 3D Scene (optional)
-const Scene = dynamic(() => import('./3dmodels/Scene'), { ssr: false });
+const Scene = dynamic(() => import('./3dmodels/Scene'), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 z-10 flex items-center justify-center text-white">Loading 3D...</div>,
+});
 
 gsap.registerPlugin(ScrollTrigger);
 
 const GradientModelWrapper = () => {
   const gradientRef = useRef<HTMLDivElement>(null);
-  const [showScene, setShowScene] = useState(false);
+  const sceneWrapperRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!gradientRef.current) return;
+    if (!gradientRef.current || !sceneWrapperRef.current) return;
 
     const trigger = ScrollTrigger.create({
       trigger: gradientRef.current,
-      start: 'top end', // triggers when top of section hits center of viewport
-      onEnter: () => setShowScene(true),
-      once: true, // Only trigger once
+      start: 'top center',
+      onEnter: () => {
+        setVisible(true);
+        gsap.to(sceneWrapperRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out' });
+      },
+      once: true,
     });
 
-    return () => trigger.kill(); // Clean up
+    return () => trigger.kill();
   }, []);
 
   return (
@@ -33,7 +39,17 @@ const GradientModelWrapper = () => {
         <GradientSection />
       </div>
 
-      {showScene && <Scene />}
+      {/* Always mount Scene early but hidden */}
+      <div
+        ref={sceneWrapperRef}
+        style={{
+          opacity: 0,
+          pointerEvents: visible ? 'auto' : 'none',
+          transition: 'opacity 0.5s ease-in-out',
+        }}
+      >
+        <Scene />
+      </div>
     </div>
   );
 };
