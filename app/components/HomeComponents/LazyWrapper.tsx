@@ -1,76 +1,69 @@
-'use client';
+"use client";
 
-import React, { Suspense, lazy, useState, useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-
+import React, { Suspense, lazy, useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import { Skeleton } from "@/components/ui/skeleton";
 interface LazyWrapperProps {
-  delay?: number;
   className?: string;
   componentName?: string;
   importFunction: () => Promise<{ default: React.ComponentType<any> }>;
   rootMargin?: string;
   initialDelay?: number;
+  minScrollY?: number;
 }
 
 const LazyWrapper: React.FC<LazyWrapperProps> = ({
-  delay = 0,
-  className = '',
-  componentName = 'Component',
+  className = "",
+  componentName = "Component",
   importFunction,
-  rootMargin = '10px',
+  rootMargin = "0px",
   initialDelay = 0,
+  minScrollY = 0,
 }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [canTrigger, setCanTrigger] = useState(initialDelay === 0);
-  const [LazyComponent, setLazyComponent] = useState<React.ComponentType | null>(null);
+  const [LazyComponent, setLazyComponent] =
+    useState<React.ComponentType | null>(null);
+  const [scrollY, setScrollY] = useState(0);
 
   const { ref, inView } = useInView({
     triggerOnce: true,
     rootMargin,
-    threshold: 0.1,
+    threshold: 0,
   });
 
-  // Handle initial delay
   useEffect(() => {
-    if (initialDelay > 0) {
-      const timer = setTimeout(() => {
-        setCanTrigger(true);
-      }, initialDelay);
-      return () => clearTimeout(timer);
-    }
-  }, [initialDelay]);
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  // Trigger loading when in view and can trigger
   useEffect(() => {
-    if (inView && canTrigger && !shouldLoad) {
-      if (delay > 0) {
-        setTimeout(() => {
-          setShouldLoad(true);
-          // Create lazy component
+    if (inView && canTrigger && !shouldLoad && scrollY >= minScrollY) {
+      console.log(`${componentName} is in view, scrollY = ${scrollY}`);
+
+      const loadComponent = () => {
+        if (!LazyComponent) {
           const Component = lazy(importFunction);
-          setLazyComponent(Component);
-        }, delay);
-      } else {
+          setLazyComponent(() => Component); // memoize
+        }
         setShouldLoad(true);
-        const Component = lazy(importFunction);
-        setLazyComponent(Component);
-      }
+      };
+
+      loadComponent();
     }
-  }, [inView, canTrigger, shouldLoad, delay, importFunction]);
+  }, [inView, canTrigger, shouldLoad, importFunction, componentName, scrollY]);
 
   const getSkeletonLoader = () => {
     switch (componentName) {
-      case 'Navigation':
-        return <div className="h-16 bg-gray-200 animate-pulse rounded-lg" />;
-      case 'TextWithParticles':
-        return (
-          <div className="space-y-6 py-8 animate-pulse">
-            <div className="h-16 bg-gray-200 rounded-lg w-4/5 mx-auto" />
-            <div className="h-12 bg-gray-200 rounded-lg w-3/5 mx-auto" />
-          </div>
-        );
-      case 'GlowingEffect':
-        return <div className="h-64 bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse rounded-lg" />;
+      case "Navigation":
+        return <Skeleton className="h-[20px] w-[100px] " />;
+      case "TextWithParticles":
+        return <Skeleton className="h-[20px] w-[100px] !bg-red-500" />;
+      case "GlowingEffect":
+        return <Skeleton className="h-[20px] w-[100px] !bg-red-500" />;
       default:
         return <div className="h-32 bg-gray-200 animate-pulse rounded-lg" />;
     }
@@ -79,8 +72,8 @@ const LazyWrapper: React.FC<LazyWrapperProps> = ({
   return (
     <div ref={ref} className={className}>
       {shouldLoad && LazyComponent ? (
-        <Suspense fallback={getSkeletonLoader()}>
-          <div className="animate-fade-in-up">
+        <Suspense fallback={<>loading.....</>}>
+          <div>
             <LazyComponent />
           </div>
         </Suspense>

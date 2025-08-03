@@ -15,4 +15,4 @@ const NavHeroContainer = () => {
   );
 };
 
-export default NavHeroContainer;
+export default  React.memo(NavHeroContainer);

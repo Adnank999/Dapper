@@ -116,9 +116,9 @@ const Model = ({
       {/* position={[-1, -1, 0]} */}
       {/* mobile position={[0, -1, 0]} */}
     
-      <group ref={group} position={position}>
+      {visible && <group ref={group} position={position}>
         <primitive object={scene} />
-      </group>
+      </group>}
 
   
       

@@ -40,7 +40,7 @@ export function ColourfulText({ text }: { text: string }) {
           start: "top top", // Animation starts when 80% of the viewport height is reached
           end: "botom 80%", // Animation ends when 20% of the viewport height is reached
           scrub: true, // Smooth fading effect
-          markers: true
+          // markers: true
         },
       });
     }

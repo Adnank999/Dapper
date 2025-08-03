@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 
 import { MenuProvider } from "./context/MenuContext";
-import Navbar from "./components/Navbar";
-import CurvedNavbar from "./components/CurvedNavbar";
+
 import SmoothScrollingWrapper from "@/utils/SmoothScrollingWrapper";
 import SvgIcon from "./components/aboutComponents/SvgIcon";
 import LayoutWrapper from "./components/LayoutWrapper";
 import Head from "next/head";
 
 import "./globals.css";
-import { headers } from "next/headers";
-import { NextRequest } from "next/server";
-import { config } from "process";
+
 import { UserProvider } from "./context/UserContext";
-import { ViewTransitions } from 'next-view-transitions'
+import { ViewTransitions } from "next-view-transitions";
+import ChatBubble from "./components/ChatBubble";
+import { Toaster } from "sonner";
+import ChatWrapper from "./components/ChatWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,22 +26,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-     <ViewTransitions>
-       <html lang="en">
+    <ViewTransitions>
+      <html lang="en">
         <Head>
           <link
             rel="preload"
             href="/fonts/FKScreamerTrial-Bold-BF6571330a76e9b.otf"
             as="font"
             type="font/otf"
-            
           />
         </Head>
         <body className="bg-red-600">
           <SmoothScrollingWrapper>
             <MenuProvider>
               {/* <LayoutWrapper> */}
-              <UserProvider>{children}</UserProvider>
+              <UserProvider>
+                {children}
+                <ChatWrapper/>
+                <Toaster position="top-right" />
+              </UserProvider>
 
               {/* </LayoutWrapper> */}
               {/* <Navbar /> */}
@@ -49,8 +52,6 @@ export default function RootLayout({
           </SmoothScrollingWrapper>
         </body>
       </html>
-     </ViewTransitions>
-     
-   
+    </ViewTransitions>
   );
 }

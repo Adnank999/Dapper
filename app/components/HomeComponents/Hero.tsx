@@ -1,37 +1,46 @@
-'use client'; 
+"use client";
 
-import dynamic from 'next/dynamic';
-import LazyWrapper from './LazyWrapper'; 
+import dynamic from "next/dynamic";
+import LazyWrapper from "./LazyWrapper";
 
-
+// const Scene = dynamic(() => import("./3dmodels/Scene"), { ssr: false });
 
 export default function Hero() {
-  console.log("hero rendering")
   return (
-    <div className="w-full space-y-16"> {/* Increased spacing */}
-      
-      <LazyWrapper 
-        delay={0}
+    <div className="w-full">
+      <LazyWrapper
         componentName="Navigation"
-        importFunction={() => import('../NavHeroContainer')}
+        importFunction={() => import("../NavHeroContainer")}
         rootMargin="0px"
       />
 
-      <LazyWrapper 
-        delay={200}
+      <LazyWrapper
         componentName="TextWithParticles"
-        importFunction={() => import('../TextWithParticles')}
-        rootMargin="0px" // Must be 200px INTO the viewport
+        importFunction={() => import("../HomeComponents/Intro")}
+        rootMargin="0px"
       />
 
-      <LazyWrapper 
-        delay={500}
-        componentName="GlowingEffect"
-        className="max-w-4xl mx-auto"
-        importFunction={() => import('./glowing-effectDemo').then(mod => ({ default: mod.GlowingEffectDemo }))}
-        rootMargin="-320px" 
+      <LazyWrapper
+        componentName="GlowingEffectDemo"
+        className="max-w-4xl mx-auto mt-52"
+        importFunction={() => import("./glowing-effectDemo")}
+        minScrollY={200}
+      />
+
+      <LazyWrapper
+        componentName="Gradient"
+        className=""
+        importFunction={() => import("./GradientModelWrapper")}
+        minScrollY={220}
+      />
+
+      <LazyWrapper
+        componentName="Scene"
+        className=""
+        importFunction={() => import("./3dmodels/Scene")}
+        rootMargin="200px 0px"
+        minScrollY={230}
       />
     </div>
   );
 }
-

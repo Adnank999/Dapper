@@ -1,56 +1,69 @@
 "use client";
 import React from "react";
-import Image from "next/image"; // Make sure you're using Next.js Image component
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const ProjectShowcaseById = ({ projectDetails }) => {
- const projectImage = projectDetails.project_images[0]?.image_url;
+  const projectImages = projectDetails.project_images || [];
 
   return (
-    <div id="to" >
-      {/* Main image section */}
-      
-          {projectImage ? (
-        <Image
-          id="original-image"
-          src={projectImage}
-          alt={projectDetails.title || "Project Image"}
-          width={1000} // Customize the width
-          height={600} // Customize the height
-         
-        />
-      ) : (
-        <p>No project image available</p> // Fallback if no image is found
-      )}
-   
+    <div id="to">
+      {projectImages.length > 0 ? (
+        <Carousel className="w-full max-w-4xl mx-auto">
+          <CarouselContent className="-ml-1">
+            {projectImages.map((imageObj, index) => (
+              <CarouselItem key={index} className="pl-1">
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex items-center h-[80vh] justify-center p-0 relative">
+                      <div className="relative w-full h-full">
+                        {" "}
+                        {/* ✅ Container for fill */}
+                        <Image
+                          id={index === 0 ? "original-image" : undefined}
+                          src={imageObj.image_url}
+                          alt={`${projectDetails.title || "Project"} - Image ${
+                            index + 1
+                          }`}
+                          fill
+                          className="object-cover rounded-lg" // ✅ object-cover with fill
+                        />
+                      </div>
+                    </CardContent>
 
-      {/* Gallery section */}
-      {/* <div
-        className="gallery"
-        style={{
-          width: "40%",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          gap: "16px",
-        }}
-      >
-        {projectImages &&
-          projectImages.length > 1 &&
-          projectImages.slice(1).map((image, index) => (
-            <div key={index} style={{ position: "relative", width: "100%" }}>
-              <Image
-                src={image?.image_url}
-                alt={projectDetails.title || "Project Image"}
-                layout="responsive"
-                width={300}
-                height={200}
-                objectFit="cover"
-              />
-            </div>
-          ))}
-      </div> */}
+                    {/* <CardContent className="flex items-center h-[80vh] justify-center p-0 relative">
+                      <div className="relative w-full h-full">
+                        <Image
+                          id={index === 0 ? "original-image" : undefined}
+                          src={imageObj.image_url}
+                          alt={`${projectDetails.title || "Project"} - Image ${
+                            index + 1
+                          }`}
+                          fill
+                          className="object-contain rounded-lg" // ✅ Shows entire image, may have empty space
+                        />
+                      </div>
+                    </CardContent> */}
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      ) : (
+        <p>No project images available</p>
+      )}
     </div>
   );
 };
 
 export default ProjectShowcaseById;
-

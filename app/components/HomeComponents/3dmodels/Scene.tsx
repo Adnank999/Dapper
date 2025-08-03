@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Loader = () => {
   const { progress } = useProgress();
-  return <Html center>{progress.toFixed(1)} % loaded</Html>;
+  return <Html center className="hidden">{progress.toFixed(1)} % loaded</Html>;
 };
 
 const Scene = () => {
@@ -24,7 +24,7 @@ const Scene = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const lenis = useLenis();
   const [isVisible, setIsVisible] = useState(false);
-  const [showRevealAfterDelay, setShowRevealAfterDelay] = useState(false);
+  
   console.log("isVisible", isVisible);
   const [showScrollReveal, setShowScrollReveal] = useState(false);
   const [animationCompleted, setAnimationCompleted] = useState(false);
@@ -63,7 +63,7 @@ const Scene = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: true,
-        markers: true,
+        // markers: true,
         onEnter: () => {
           setIsVisible(true);
         },
@@ -120,18 +120,27 @@ const Scene = () => {
         overflow: "hidden",
         // opacity: 0,
       }}
+      // className="bg-red-200"
     >
       
       <Canvas
         ref={canvasRef}
+        frameloop="demand"
+        gl={{ 
+          powerPreference: "high-performance",
+          alpha: false,
+          stencil: false,
+          antialias: true
+        }}
+
         camera={{
           position: [
-            -6.782809400330284, 0.3973643603409034, 1.4024392340644003,
+            -6.782809400330284, 2.3973643603409034, 1.4024392340644003,
           ],
           // fov: 35,
           fov: isMobile ? 45 : 35,
         }}
-        gl={{ antialias: true }}
+        
         dpr={[1, 1.5]}
         style={{
           position: "fixed",
