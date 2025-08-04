@@ -410,6 +410,8 @@ export default function AdminChatInterface() {
   // console.log("offline", offlineUsers);
   // console.log(" totalSubscribedUsers", totalSubscribedUsers);
 
+
+
   const { allUsers, onlineUsersCount, updatePresence } = useUserPresence({
     user,
     userRole,
@@ -418,6 +420,7 @@ export default function AdminChatInterface() {
     observerMode: true, // NEW: Enable observer mode for admin
   });
 
+  // console.log("all users in userPresence",allUsers)
   // Load conversations on mount
   useEffect(() => {
     loadConversations();
@@ -587,250 +590,8 @@ export default function AdminChatInterface() {
   );
   // Rest of your JSX remains the same, just add ConnectionStatus somewhere in your header
   return (
-    // <div className="flex h-[1000px] bg-transparent rounded-lg shadow-lg overflow-hidden mb-52">
-    //   {/* Conversations List */}
-    //   <div className="w-1/3 border-r border-gray-200">
-    //     <div className="p-4 border-b border-gray-200">
-    //       <div className="flex items-center justify-between">
-    //         <div>
-    //           <h2 className="text-lg font-semibold text-white">
-    //             Chat Conversations
-    //           </h2>
-    //           <p className="text-sm text-white">
-    //             Manage customer support chats
-    //           </p>
-    //         </div>
-    //         <ConnectionStatus />
-    //         Online Users: {onlineUsersCount}
-    //       </div>
-    //     </div>
 
-    //     {/* Rest of your conversations list JSX remains the same */}
-    //     <ScrollArea className="h-[calc(600px-80px)]">
-    //       {loadingConversations ? (
-    //         <div className="flex items-center justify-center h-32">
-    //           <Loader2 className="h-6 w-6 animate-spin text-white" />
-    //         </div>
-    //       ) : conversations.length === 0 ? (
-    //         <div className="p-4 text-center text-white">
-    //           <MessageSquare className="h-8 w-8 mx-auto mb-2 text-white" />
-    //           <p>No conversations yet</p>
-    //         </div>
-    //       ) : (
-    //         <div className="space-y-1">
-    //           {conversations.map((conversation) => {
-    //             // Check if this user is online
-    //             const userPresence = onlineUsers.find(
-    //               (user) => user.userId === conversation.user_id
-    //             );
-    //             const isUserOnline = !!userPresence;
-
-    //             return (
-    //               <div
-    //                 key={conversation.id}
-    //                 onClick={() => handleConversationSelect(conversation)}
-    //                 className={`p-4 cursor-pointer hover:bg-slate-800 transition-colors ${
-    //                   selectedConversation?.id === conversation.id
-    //                     ? "bg-slate-800 border-r-2 border-blue-500"
-    //                     : ""
-    //                 }`}
-    //               >
-    //                 <div className="flex items-start space-x-3">
-    //                   <div className="flex-1 min-w-0">
-    //                     <div className="flex items-center justify-between">
-    //                       <div className="flex items-center gap-2">
-    //                         <p className="text-sm font-medium text-white truncate">
-    //                           {conversation.user?.full_name ||
-    //                             conversation.user?.email}
-    //                         </p>
-    //                         {/* Online/Offline Status Indicator */}
-    //                         <div
-    //                           className={`w-2 h-2 rounded-full flex-shrink-0 ${
-    //                             isUserOnline ? "bg-green-400" : "bg-red-400"
-    //                           }`}
-    //                           title={isUserOnline ? "Online" : "Offline"}
-    //                         />
-    //                       </div>
-    //                       {conversation.unread_count &&
-    //                         conversation.unread_count > 0 && (
-    //                           <Badge variant="destructive" className="text-xs">
-    //                             {conversation.unread_count}
-    //                           </Badge>
-    //                         )}
-    //                     </div>
-
-    //                     <div className="flex items-center gap-2">
-    //                       <p className="text-xs text-white truncate">
-    //                         {conversation.user?.email}
-    //                       </p>
-    //                       {/* Optional: Show status text */}
-    //                       {isUserOnline && (
-    //                         <span className="text-xs text-green-400">
-    //                           • Online
-    //                         </span>
-    //                       )}
-    //                     </div>
-
-    //                     {conversation.last_message && (
-    //                       <>
-    //                         <p className="text-sm text-white truncate mt-1">
-    //                           {conversation.last_message.content}
-    //                         </p>
-    //                         <div className="flex items-center mt-1 text-xs text-white">
-    //                           <Clock className="h-3 w-3 mr-1" />
-    //                           {formatLastMessageTime(
-    //                             conversation.last_message.created_at
-    //                           )}
-    //                         </div>
-    //                       </>
-    //                     )}
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             );
-    //           })}
-    //         </div>
-    //       )}
-    //     </ScrollArea>
-    //   </div>
-
-    //   {/* Messages Area */}
-    //   <div className="flex-1 flex flex-col">
-    //     {selectedConversation ? (
-    //       <>
-    //         {/* Chat Header */}
-    //         <div className="p-4 border-b border-gray-200 bg-transparent">
-    //           <div className="flex items-center space-x-3">
-    //             <Avatar className="h-8 w-8">
-    //               <AvatarImage
-    //                 src={selectedConversation.user?.avatar_url || undefined}
-    //               />
-    //               <AvatarFallback>
-    //                 <User className="h-4 w-4" />
-    //               </AvatarFallback>
-    //             </Avatar>
-    //             <div>
-    //               <h3 className="text-sm font-medium text-gray-900">
-    //                 {selectedConversation.user?.full_name ||
-    //                   selectedConversation.user?.email}
-    //               </h3>
-    //               <p className="text-xs text-gray-500">
-    //                 {selectedConversation.user?.email}
-    //               </p>
-    //             </div>
-    //           </div>
-    //         </div>
-
-    //         {/* Messages */}
-    //         <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
-    //           {loadingMessages ? (
-    //             <div className="flex items-center justify-center h-32">
-    //               <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
-    //             </div>
-    //           ) : (
-    //             <div className="space-y-4">
-    //               {messages.map((message) => (
-    //                 <div
-    //                   key={message.id}
-    //                   className={`flex ${
-    //                     message.message_type === "admin"
-    //                       ? "justify-end"
-    //                       : "justify-start"
-    //                   }`}
-    //                 >
-    //                   <div
-    //                     className={`max-w-xs px-3 py-2 rounded-lg ${
-    //                       message.message_type === "admin"
-    //                         ? "bg-blue-600 text-white"
-    //                         : "bg-gray-100 text-gray-900"
-    //                     }`}
-    //                   >
-    //                     <p className="text-sm">{message.content}</p>
-    //                     <p className="text-xs opacity-70 mt-1">
-    //                       {formatMessageTime(message.created_at)}
-    //                     </p>
-    //                   </div>
-
-    //                   {/* Read confirmation for admin messages by user */}
-    //                   {renderReadConfirmation(message)}
-    //                 </div>
-    //               ))}
-    //             </div>
-    //           )}
-    //         </ScrollArea>
-
-    //         {/* Reply Input */}
-    //         <div className="p-4 border-t border-gray-200">
-    //           <div className="flex space-x-2">
-    //             <Input
-    //               value={inputValue}
-    //               onChange={(e) => setInputValue(e.target.value)}
-    //               onKeyPress={handleKeyPress}
-    //               placeholder="Type your reply..."
-    //               className="flex-1"
-    //               disabled={loading}
-    //             />
-    //             <Button
-    //               onClick={handleSendReply}
-    //               size="icon"
-    //               disabled={loading || !inputValue.trim()}
-    //             >
-    //               {loading ? (
-    //                 <Loader2 className="h-4 w-4 animate-spin" />
-    //               ) : (
-    //                 <Send className="h-4 w-4" />
-    //               )}
-    //             </Button>
-    //           </div>
-    //         </div>
-    //       </>
-    //     ) : (
-    //       <div className="flex-1 flex items-center justify-center text-gray-500">
-    //         <div className="text-center">
-    //           <MessageSquare className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-    //           <p>Select a conversation to start chatting</p>
-    //         </div>
-    //       </div>
-    //     )}
-    //   </div>
-
-    //      {Object.entries(allUsers).map(([userId, userData]) => (
-    //         <div key={userId} className="user-card">
-    //           <div className="user-info">
-    //             <img
-    //               src={userData.avatar_url || "/default-avatar.png"}
-    //               alt={userData.full_name}
-    //               className="avatar"
-    //             />
-    //             <div>
-    //               <h4>{userData.full_name}</h4>
-
-    //             </div>
-    //           </div>
-
-    //           <div className="activity-info">
-    //             <div className={`status ${userData.status}`}>
-    //               {userData.status}
-    //             </div>
-
-    //             {userData.isTyping && (
-    //               <div className="typing-indicator">✏️ Typing...</div>
-    //             )}
-
-    //             <div className="last-activity">
-    //               Last active:{" "}
-    //               {new Date(userData.lastActivity).toLocaleTimeString()}
-    //             </div>
-
-    //             <div className="joined-at">
-    //               Joined: {new Date(userData.joinedAt).toLocaleTimeString()}
-    //             </div>
-    //           </div>
-    //         </div>
-    //       ))}
-    // </div>
-
-    <div className="flex h-[1000px] bg-transparent rounded-lg shadow-lg overflow-hidden mb-52">
+    <div className="flex h-full bg-transparent rounded-lg shadow-lg overflow-hidden mb-52">
       {/* Conversations List */}
       <div className="w-1/3 border-r border-gray-200">
         <div className="p-4 border-b border-gray-200">
@@ -1158,7 +919,7 @@ export default function AdminChatInterface() {
             </div>
 
             {/* Messages - Same as before */}
-            <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
+            <ScrollArea className="flex-1 p-4" ref={scrollAreaRef} data-lenis-prevent>
               {loadingMessages ? (
                 <div className="flex items-center justify-center h-32">
                   <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
@@ -1321,3 +1082,5 @@ export default function AdminChatInterface() {
     </div>
   );
 }
+
+

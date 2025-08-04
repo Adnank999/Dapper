@@ -1,132 +1,9 @@
-// // hooks/useUserPresence.ts (Enhanced version)
-// import { useEffect, useRef } from "react";
-// import { createClient } from "@/utils/supabase/client";
-// import type { RealtimeChannel, User } from "@supabase/supabase-js";
 
-// interface UseUserPresenceProps {
-//   user: User;
-//   userRole?: string | null;
-//   isAdmin: boolean;
-//   enabled?: boolean;
-//   conversationId?: string; // Add conversation context
-//   isTyping?: boolean; // Track typing status
-//   lastActivity?: number; // Track last activity
-// }
-
-// export const useUserPresence = ({ 
-//   user, 
-//   userRole,
-//   enabled = true, 
-//   conversationId,
-//   isTyping = false,
-//   lastActivity
-// }: UseUserPresenceProps) => {
-//   const channelRef = useRef<RealtimeChannel | null>(null);
-//   const supabase = useRef(createClient()).current;
-
-//   useEffect(() => {
-//     if (!user?.id || !enabled) {
-//       console.log('[UserPresence] User presence disabled or no user');
-//       return;
-//     }
-
-//     // Clean up existing channel
-//     if (channelRef.current) {
-//       console.log('[UserPresence] Cleaning up existing presence channel');
-//       supabase.removeChannel(channelRef.current);
-//       channelRef.current = null;
-//     }
-
-//     console.log(`[UserPresence] User ${user.email} joining admin-users-channel`);
-
-//     // Join the same channel that admin is monitoring
-//     const presenceChannel = supabase
-//       .channel("admin-users-channel", {
-//         config: {
-//           presence: {
-//             key: user.id,
-//           },
-//         },
-//       })
-//       .on('presence', { event: 'sync' }, () => {
-//         console.log('[UserPresence] Presence synced for user:', user.email);
-//       });
-
-//     // Subscribe and track presence
-//     presenceChannel.subscribe(async (status) => {
-//       console.log(`[UserPresence] ${user.email} subscription status:`, status);
-      
-//       if (status === 'SUBSCRIBED') {
-//         try {
-//           await presenceChannel.track({
-//             userId: user.id,
-//             email: user.email,
-//             full_name: user.full_name || user.email,
-//             avatar_url: user.avatar_url,
-//             role: user.role || 'user',
-//             joinedAt: Date.now(),
-//             isAdmin: false,
-//             // Enhanced chat context
-//             conversationId: conversationId || null,
-//             isTyping: isTyping,
-//             lastActivity: lastActivity || Date.now(),
-//             status: 'active', // active, away, busy
-//           });
-          
-//           console.log(`[UserPresence] ${user.email} presence tracked successfully`);
-//         } catch (error) {
-//           console.error(`[UserPresence] Error tracking presence for ${user.email}:`, error);
-//         }
-//       }
-//     });
-
-//     channelRef.current = presenceChannel;
-
-//     // Cleanup
-//     return () => {
-//       console.log(`[UserPresence] Cleaning up presence for ${user.email}`);
-//       if (channelRef.current) {
-//         supabase.removeChannel(channelRef.current);
-//         channelRef.current = null;
-//       }
-//     };
-//   }, [user?.id, user?.email, enabled, conversationId, isTyping, lastActivity]);
-
-//   // Return a function to update presence data
-//   const updatePresence = async (updates: Partial<{
-//     isTyping: boolean;
-//     lastActivity: number;
-//     status: 'active' | 'away' | 'busy';
-//   }>) => {
-//     if (channelRef.current) {
-//       try {
-//         await channelRef.current.track({
-//           userId: user.id,
-//           email: user.email,
-//           full_name: user.full_name || user.email,
-//           avatar_url: user.avatar_url,
-//           role: user.role || 'user',
-//           joinedAt: Date.now(),
-//           isAdmin: false,
-//           conversationId: conversationId || null,
-//           lastActivity: Date.now(),
-//           ...updates,
-//         });
-//       } catch (error) {
-//         console.error('[UserPresence] Error updating presence:', error);
-//       }
-//     }
-//   };
-
-//   return { updatePresence };
-// };
-
-
-
-// hooks/useUserPresence.ts (Enhanced with admin observer capabilities)
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import type { RealtimeChannel, User } from "@supabase/supabase-js";
+
+
 
 interface UseUserPresenceProps {
   user: User | null;
@@ -172,19 +49,19 @@ export const useUserPresence = ({
 
   useEffect(() => {
     if (!user?.id || !enabled) {
-      console.log('[UserPresence] User presence disabled or no user');
+      // console.log('[UserPresence] User presence disabled or no user');
       return;
     }
 
     // Clean up existing channel
     if (channelRef.current) {
-      console.log('[UserPresence] Cleaning up existing presence channel');
+      // console.log('[UserPresence] Cleaning up existing presence channel');
       supabase.removeChannel(channelRef.current);
       channelRef.current = null;
     }
 
     const userType = observerMode ? 'Admin Observer' : 'User';
-    console.log(`[UserPresence] ${userType} ${user.email} joining admin-users-channel`);
+    // console.log(`[UserPresence] ${userType} ${user.email} joining admin-users-channel`);
 
     // Join the same channel that admin is monitoring
     const presenceChannel = supabase
@@ -196,7 +73,7 @@ export const useUserPresence = ({
         },
       })
       .on('presence', { event: 'sync' }, () => {
-        console.log('[UserPresence] Presence synced for user:', user.email);
+        // console.log('[UserPresence] Presence synced for user:', user.email);
         
         // NEW: If in observer mode (admin), collect all user data
         if (observerMode) {
@@ -227,11 +104,11 @@ export const useUserPresence = ({
           
           setAllUsers(users);
           setOnlineUsersCount(count);
-          console.log(`[UserPresence] Admin observing ${count} users:`, users);
+          // console.log(`[UserPresence] Admin observing ${count} users:`, users);
         }
       })
       .on('presence', { event: 'join' }, ({ key, newPresences }) => {
-        console.log(`[UserPresence] User joined - Key: ${key}`, newPresences);
+        // console.log(`[UserPresence] User joined - Key: ${key}`, newPresences);
         
         // NEW: Update admin view when users join
         if (observerMode && !key.startsWith('admin-')) {
@@ -257,7 +134,7 @@ export const useUserPresence = ({
         }
       })
       .on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
-        console.log(`[UserPresence] User left - Key: ${key}`, leftPresences);
+        // console.log(`[UserPresence] User left - Key: ${key}`, leftPresences);
         
         // NEW: Update admin view when users leave
         if (observerMode && !key.startsWith('admin-')) {
@@ -272,7 +149,7 @@ export const useUserPresence = ({
 
     // Subscribe and track presence
     presenceChannel.subscribe(async (status) => {
-      console.log(`[UserPresence] ${user.email} subscription status:`, status);
+      // console.log(`[UserPresence] ${user.email} subscription status:`, status);
       
       if (status === 'SUBSCRIBED') {
         try {
@@ -292,7 +169,7 @@ export const useUserPresence = ({
             observerMode: observerMode, // Flag to identify observers
           });
           
-          console.log(`[UserPresence] ${user.email} presence tracked successfully`);
+          // console.log(`[UserPresence] ${user.email} presence tracked successfully`);
         } catch (error) {
           console.error(`[UserPresence] Error tracking presence for ${user.email}:`, error);
         }
@@ -303,7 +180,7 @@ export const useUserPresence = ({
 
     // Cleanup
     return () => {
-      console.log(`[UserPresence] Cleaning up presence for ${user.email}`);
+      // console.log(`[UserPresence] Cleaning up presence for ${user.email}`);
       if (channelRef.current) {
         supabase.removeChannel(channelRef.current);
         channelRef.current = null;
@@ -347,3 +224,7 @@ export const useUserPresence = ({
     isObserving: observerMode
   };
 };
+
+
+
+
