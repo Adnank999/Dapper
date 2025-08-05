@@ -1,186 +1,3 @@
-// import { useState, useEffect, useCallback } from 'react';
-// import { createClient } from '@/utils/supabase/client';
-// import { toast } from 'sonner';
-// import {
-//   getAllConversationsAction,
-//   getConversationMessagesAction,
-//   sendAdminReplyAction,
-//   markAdminMessagesAsReadAction,
-//   type ConversationWithUser,
-//   type AdminMessage,
-// } from '@/utils/supabase/chats/admin-chat';
-// import { useUser } from '@/app/context/UserContext';
-// import { getAllUsersInitiatedConversations } from '@/lib/getAllUsers';
-
-// export const useAdminChat = () => {
-//   const { user, userRole } = useUser();
-//   const [conversations, setConversations] = useState<ConversationWithUser[]>([]);
-//   const [selectedConversation, setSelectedConversation] = useState<ConversationWithUser | null>(null);
-//   const [messages, setMessages] = useState<AdminMessage[]>([]);
-//   const [newMessage, setNewMessage] = useState('');
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [isSending, setIsSending] = useState(false);
-//   const [onlineUsers, setOnlineUsers] = useState<Set<string>>(new Set());
-//   const supabase = createClient();
-
-//   // Load all conversations
-//   const loadConversations = useCallback(async () => {
-//     if (!user || userRole !== 'admin') return;
-
-//     setIsLoading(true);
-//     try {
-//       const result = await getAllConversationsAction(user, userRole);
-//       if (result.error) {
-//         toast.error(result.error);
-//         return;
-//       }
-
-//       setConversations(result.data || []);
-//     } catch (error) {
-//       toast.error('Failed to load conversations');
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   }, [user, userRole]);
-
-//   // Load messages for selected conversation
-//   const loadMessages = useCallback(async (conversationId: string) => {
-//     if (!user || userRole !== 'admin') return;
-
-//     try {
-//       const result = await getConversationMessagesAction(conversationId, user, userRole);
-//       if (result.error) {
-//         toast.error(result.error);
-//         return;
-//       }
-
-//       setMessages(result.data || []);
-
-//       // Mark messages as read
-//       await markAdminMessagesAsReadAction(conversationId, user, userRole);
-//     } catch (error) {
-//       toast.error('Failed to load messages');
-//     }
-//   }, [user, userRole]);
-
-//   // Send admin reply
-//   const handleSendReply = useCallback(async () => {
-//     if (!newMessage.trim() || !selectedConversation || !user || isSending) return;
-
-//     setIsSending(true);
-//     try {
-//       const result = await sendAdminReplyAction(
-//         selectedConversation.id,
-//         newMessage.trim(),
-//         user,
-//         userRole
-//       );
-
-//       if (result.error) {
-//         toast.error(result.error);
-//         return;
-//       }
-
-//       setNewMessage('');
-//     } catch (error) {
-//       toast.error('Failed to send reply');
-//     } finally {
-//       setIsSending(false);
-//     }
-//   }, [newMessage, selectedConversation, user, userRole, isSending]);
-
-//   // Select conversation
-//   const selectConversation = useCallback((conversation: ConversationWithUser) => {
-//     setSelectedConversation(conversation);
-//     loadMessages(conversation.id);
-//   }, [loadMessages]);
-
-//   // Real-time subscriptions
-//   useEffect(() => {
-//     if (!user || userRole !== 'admin') return;
-
-//     // Subscribe to new conversations and messages
-//     const channel = supabase
-//       .channel('admin-channel')
-//       .on(
-//         'postgres_changes',
-//         {
-//           event: '*',
-//           schema: 'public',
-//           table: 'chat_conversations',
-//         },
-//         () => {
-//           loadConversations();
-//         }
-//       )
-//       .on(
-//         'postgres_changes',
-//         {
-//           event: '*',
-//           schema: 'public',
-//           table: 'messages',
-//         },
-//         (payload) => {
-//           if (payload.eventType === 'INSERT') {
-//             const newMessage = payload.new as AdminMessage;
-
-//             // Update messages if it's for selected conversation
-//             if (selectedConversation && newMessage.conversation_id === selectedConversation.id) {
-//               setMessages(prev => [...prev, newMessage]);
-//             }
-
-//             // Refresh conversations to update unread counts
-//             loadConversations();
-//           }
-
-//           if (payload.eventType === 'UPDATE') {
-//             const updatedMessage = payload.new as AdminMessage;
-//             setMessages(prev =>
-//               prev.map(msg =>
-//                 msg.id === updatedMessage.id ? updatedMessage : msg
-//               )
-//             );
-//           }
-//         }
-//       )
-//       .subscribe();
-
-//     // Track online users presence
-//     const presenceChannel = supabase
-//       .channel('online-users')
-//       .on('presence', { event: 'sync' }, () => {
-//         const state = presenceChannel.presenceState();
-//         const users = new Set(Object.keys(state));
-//         setOnlineUsers(users);
-//       })
-//       .subscribe();
-
-//     return () => {
-//       supabase.removeChannel(channel);
-//       supabase.removeChannel(presenceChannel);
-//     };
-//   }, [user, userRole, selectedConversation, loadConversations]);
-
-//   // Initial load
-//   useEffect(() => {
-//     loadConversations();
-//   }, [loadConversations]);
-
-//   return {
-//     conversations,
-//     selectedConversation,
-//     messages,
-//     newMessage,
-//     setNewMessage,
-//     isLoading,
-//     isSending,
-//     onlineUsers,
-//     handleSendReply,
-//     selectConversation,
-//     loadConversations,
-//   };
-// };
-
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { toast } from "sonner";
@@ -197,8 +14,11 @@ import { getAllUsersInitiatedConversations } from "@/lib/getAllUsers";
 
 export const useAdminChat = () => {
   const { user, userRole } = useUser();
-  const [conversations, setConversations] = useState<ConversationWithUser[]>([]);
-  const [selectedConversation, setSelectedConversation] = useState<ConversationWithUser | null>(null);
+  const [conversations, setConversations] = useState<ConversationWithUser[]>(
+    []
+  );
+  const [selectedConversation, setSelectedConversation] =
+    useState<ConversationWithUser | null>(null);
   const [messages, setMessages] = useState<AdminMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -206,12 +26,12 @@ export const useAdminChat = () => {
   const [onlineUsers, setOnlineUsers] = useState<Set<string>>(new Set());
   const [conversationUsers, setConversationUsers] = useState<any[]>([]);
   const [adminOnlineStatus, setAdminOnlineStatus] = useState(false);
-  
+
   // Use refs to store current values for real-time subscriptions
   const conversationUsersRef = useRef<any[]>([]);
   const selectedConversationRef = useRef<ConversationWithUser | null>(null);
   const conversationsRef = useRef<ConversationWithUser[]>([]);
-  
+
   const supabaseRef = useRef(createClient());
 
   // Update refs when state changes
@@ -231,12 +51,12 @@ export const useAdminChat = () => {
   const loadConversationUsers = useCallback(async () => {
     try {
       const response = await getAllUsersInitiatedConversations();
-      
+
       if (response.error) {
         console.error("Error loading conversation users:", response.error);
         return;
       }
-      
+
       setConversationUsers(response.users);
     } catch (error) {
       console.error("Failed to load conversation users:", error);
@@ -264,6 +84,32 @@ export const useAdminChat = () => {
   }, [user, userRole]);
 
   // Load messages for selected conversation
+  // const loadMessages = useCallback(
+  //   async (conversationId: string) => {
+  //     if (!user || userRole !== "admin") return;
+
+  //     try {
+  //       const result = await getConversationMessagesAction(
+  //         conversationId,
+  //         user,
+  //         userRole
+  //       );
+  //       if (result.error) {
+  //         toast.error(result.error);
+  //         return;
+  //       }
+
+  //       setMessages(result.data || []);
+
+  //       // Mark messages as read
+  //       await markAdminMessagesAsReadAction(conversationId, user, userRole);
+  //     } catch (error) {
+  //       toast.error("Failed to load messages");
+  //     }
+  //   },
+  //   [user, userRole]
+  // );
+
   const loadMessages = useCallback(
     async (conversationId: string) => {
       if (!user || userRole !== "admin") return;
@@ -279,10 +125,17 @@ export const useAdminChat = () => {
           return;
         }
 
-        setMessages(result.data || []);
+        const messages = result.data || [];
 
-        // Mark messages as read
-        await markAdminMessagesAsReadAction(conversationId, user, userRole);
+        // Optimistically mark all user messages as read locally
+        const updatedMessages = messages.map((msg) =>
+          msg.message_type === "user" ? { ...msg, is_read: true } : msg
+        );
+
+        setMessages(updatedMessages);
+
+        // Also update on the backend
+        // await markAdminMessagesAsReadAction(conversationId, user, userRole);
       } catch (error) {
         toast.error("Failed to load messages");
       }
@@ -382,63 +235,91 @@ export const useAdminChat = () => {
         },
         (payload) => {
           console.log("Message change detected:", payload);
-          
+
           if (payload.eventType === "INSERT") {
             const newMessage = payload.new as AdminMessage;
             console.log("New message:", newMessage);
 
             // Show toast notification for new user messages
-            if (newMessage.message_type === 'user') {
+            if (newMessage.message_type === "user") {
               console.log("Processing user message for toast...");
-              
+
               // Use ref values to get current state
               const currentUsers = conversationUsersRef.current;
-              const currentSelectedConversation = selectedConversationRef.current;
+              const currentSelectedConversation =
+                selectedConversationRef.current;
               const currentConversations = conversationsRef.current;
-              
+
               console.log("Current users:", currentUsers);
-              console.log("Current selected conversation:", currentSelectedConversation);
-              
-              const messageUser = currentUsers.find(user => user.id === newMessage.sender_id);
+              console.log(
+                "Current selected conversation:",
+                currentSelectedConversation
+              );
+
+              const messageUser = currentUsers.find(
+                (user) => user.id === newMessage.sender_id
+              );
               console.log("Message user found:", messageUser);
-              
-              const userName = messageUser?.full_name || 
-                              messageUser?.email || 
-                              `User ${newMessage.sender_id?.slice(0, 8)}...`;
-              
-              const isCurrentConversation = currentSelectedConversation?.id === newMessage.conversation_id;
+
+              const userName =
+                messageUser?.full_name ||
+                messageUser?.email ||
+                `User ${newMessage.sender_id?.slice(0, 8)}...`;
+
+              const isCurrentConversation =
+                currentSelectedConversation?.id === newMessage.conversation_id;
               console.log("Is current conversation:", isCurrentConversation);
-              
+
               if (!isCurrentConversation) {
                 console.log("Showing toast notification...");
-                toast.info(
-                  `💬 New message from ${userName}`,
-                  {
-                    duration: 6000,
-                    description: newMessage.content.length > 50 
-                      ? `${newMessage.content.substring(0, 50)}...` 
+                toast.info(`💬 New message from ${userName}`, {
+                  duration: 6000,
+                  description:
+                    newMessage.content.length > 50
+                      ? `${newMessage.content.substring(0, 50)}...`
                       : newMessage.content,
-                    action: {
-                      label: 'View',
-                      onClick: () => {
-                        console.log("Toast action clicked");
-                        const conversation = currentConversations.find(conv => conv.id === newMessage.conversation_id);
-                        if (conversation) {
-                          selectConversation(conversation);
-                        }
+                  action: {
+                    label: "View",
+                    onClick: () => {
+                      console.log("Toast action clicked");
+                      const conversation = currentConversations.find(
+                        (conv) => conv.id === newMessage.conversation_id
+                      );
+                      if (conversation) {
+                        selectConversation(conversation);
                       }
-                    }
-                  }
-                );
+                    },
+                  },
+                });
               } else {
-                console.log("Not showing toast - user is viewing this conversation");
+                console.log(
+                  "Not showing toast - user is viewing this conversation"
+                );
               }
             }
 
             // Update messages if viewing the conversation
-            if (selectedConversationRef.current && 
-                newMessage.conversation_id === selectedConversationRef.current.id) {
-              setMessages(prev => [...prev, newMessage]);
+            if (
+              selectedConversationRef.current &&
+              newMessage.conversation_id === selectedConversationRef.current.id
+            ) {
+              setMessages((prev) => [...prev, newMessage]);
+
+              if (newMessage.message_type === "user" && !newMessage.is_read) {
+                markAdminMessagesAsReadAction(
+                  newMessage.conversation_id,
+                  user,
+                  userRole
+                );
+
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.message_type === "user"
+                      ? { ...msg, is_read: true }
+                      : msg
+                  )
+                );
+              }
             }
 
             loadConversations();
@@ -507,7 +388,13 @@ export const useAdminChat = () => {
       supabase.removeChannel(channel);
       supabase.removeChannel(presenceChannel);
     };
-  }, [user, userRole, selectConversation, loadConversations, loadConversationUsers]);
+  }, [
+    user,
+    userRole,
+    selectConversation,
+    loadConversations,
+    loadConversationUsers,
+  ]);
 
   return {
     conversations,
