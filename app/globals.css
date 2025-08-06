@@ -392,6 +392,13 @@
   object-fit: cover;
 }
 
+#chat-bubble,
+#chat-window {
+  view-transition-name: chat;
+}
+
+
+
 /* picture animation end */
 
 /* .gallery-body{

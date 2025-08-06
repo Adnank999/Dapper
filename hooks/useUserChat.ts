@@ -10,6 +10,7 @@ import {
   type Conversation,
 } from "@/utils/supabase/chats/chat";
 import { useUser } from "@/app/context/UserContext";
+import { useRouter } from "next/navigation";
 
 interface AdminPresence {
   user_id: string;
@@ -57,39 +58,6 @@ export const useUserChat = () => {
   const supabase = createClient();
   const presenceChannelRef = useRef<any>(null);
   const messageChannelRef = useRef<any>(null);
-
-  // Initialize conversation when chat opens
-  // const initializeConversation = useCallback(async () => {
-  //   if (!user) return;
-
-  //   setIsLoading(true);
-  //   try {
-  //     const result = await getOrCreateConversation(user);
-  //     if (result.error) {
-  //       toast.error(result.error);
-  //       return;
-  //     }
-
-  //     setConversation(result.data);
-
-  //     // Load messages
-  //     const messagesResult = await getMessages(result.data.id);
-  //     if (messagesResult.error) {
-  //       toast.error(messagesResult.error);
-  //       return;
-  //     }
-
-  //     setMessages(messagesResult.data);
-
-  //     // Mark admin messages as read
-  //     await markMessagesAsRead(result.data.id, user, userRole);
-  //   } catch (error) {
-  //     console.error('Failed to initialize chat:', error);
-  //     toast.error('Failed to initialize chat');
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }, [user, userRole]);
 
   const initializeConversation = useCallback(async () => {
     if (!user) return;
@@ -409,15 +377,28 @@ export const useUserChat = () => {
 
   // Open chat handler with enhanced initialization
   const openChat = useCallback(async () => {
-    setIsOpen(true);
+    // if (document.startViewTransition) {
+    //   document.startViewTransition(() => {
+    //     setIsOpen(true);
+    //   });
+    // } else {
+      setIsOpen(true);
+    // }
+
     if (!conversation) {
       await initializeConversation();
     }
-  }, [conversation, initializeConversation]);
+  }, [conversation, initializeConversation, user]);
 
   // Close chat handler with cleanup
   const closeChat = useCallback(() => {
+  //    if (document.startViewTransition) {
+  //   document.startViewTransition(() => {
+  //     setIsOpen(false);
+  //   });
+  // } else {
     setIsOpen(false);
+  // }
     // Keep connections alive for notifications
   }, []);
 
