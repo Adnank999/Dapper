@@ -397,6 +397,74 @@
   view-transition-name: chat;
 }
 
+.neon-border-one {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px) drop-shadow(0 0 12px var(--color-type-1));
+  z-index: -1;
+  inset: 0;
+}
+
+.neon-border-one::before {
+  content: "";
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: var(--anim-width);
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--color-type-1),
+    var(--color-type-1),
+    transparent,
+    transparent
+  );
+}
+
+.neon-border-two {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px) drop-shadow(0 0 12px var(--color-type-2));
+  z-index: -1;
+  inset: 0;
+}
+
+.neon-border-two::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  overflow: hidden;
+  width: var(--anim-width);
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent,
+    transparent,
+    var(--color-type-2),
+    var(--color-type-2)
+  );
+}
+
+/* You'll need to define the animate-neon-border animation in your CSS */
+@keyframes neon-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-neon-border {
+  animation: neon-border var(--neon-border-duration) linear infinite;
+}
+
 
 
 /* picture animation end */

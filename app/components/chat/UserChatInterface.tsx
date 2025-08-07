@@ -17,6 +17,7 @@ import { useUserChat } from "@/hooks/useUserChat";
 import { useUser } from "@/app/context/UserContext";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import NeonBorder from "../NeonBorder";
 
 const UserChatInterface: React.FC = () => {
   const {
@@ -84,7 +85,6 @@ const UserChatInterface: React.FC = () => {
     <>
       {/* Chat Bubble */}
       <div
-        
         className={cn(
           "fixed bottom-6 right-6 z-50",
           isOpen
@@ -114,7 +114,6 @@ const UserChatInterface: React.FC = () => {
       </div>
 
       <div
-        
         className={cn(
           `fixed bottom-6 right-6 w-[80vw] max-w-[350px]
       h-[80vh] sm:h-[70vh] md:h-[600px] flex flex-col rounded-2xl z-50 overflow-hidden
@@ -284,21 +283,24 @@ const UserChatInterface: React.FC = () => {
           )}
 
           <div className="flex space-x-2">
-            <Input
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={
-                adminOnlineStatus
-                  ? "Type your message..."
-                  : "Leave a message..."
-              }
-              disabled={isSending}
-              className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-300 focus:border-white/40"
-              style={{
-                backdropFilter: "blur(10px)",
-              }}
-            />
+            <NeonBorder animation-type="full">
+              <input
+                value={newMessage}
+                onChange={(e) => setNewMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder={
+                  adminOnlineStatus
+                    ? "Type your message..."
+                    : "Leave a message..."
+                }
+                disabled={isSending}
+                className="size-full rounded-lg px-4 text-sm bg-background"
+                style={{
+                  backdropFilter: "blur(10px)",
+                }}
+              />
+            </NeonBorder>
+
             <Button
               onClick={handleSendMessage}
               disabled={!newMessage.trim() || isSending}

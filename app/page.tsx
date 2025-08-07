@@ -21,20 +21,15 @@ const LazyHeroSection = dynamic(
   }
 );
 
-
 export default async function Home() {
   return (
     <>
       <div className="overflow-x-hidden overflow-y-hidden">
         <div className="min-h-screen flex items-center justify-center">
-          {/* <div className="max-w-4xl w-full mx-auto flex flex-col items-center justify-center"> */}
-            {/* <LazyHeroSection /> */}
-          {/* </div> */}
+          
+            <LazyHeroSection />
+          
         </div>
-
-  
-
-
 
         {/* <div className="p-4 h-screen">
          
