@@ -535,6 +535,35 @@ img {
   }
 } */
 
+/* intro.module.css */
+@keyframes slideUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide all animated elements initially */
+.animateTextGroup,
+.animateSlideUpDelay {
+  opacity: 0;
+}
+
+/* Both text and name appear together from bottom */
+.animateTextGroup {
+  animation: slideUpFromBottom 1s ease-out 0.2s forwards;
+}
+
+.animateSlideUpDelay {
+  animation: slideUpFromBottom 1s ease-out 0.2s forwards; /* Same delay as text */
+}
+
+
+
 html {
   scroll-behavior: smooth;
 }

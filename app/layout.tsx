@@ -16,6 +16,7 @@ import { Toaster } from "sonner";
 import ChatWrapper from "./components/ChatWrapper";
 import { getUser } from "@/lib/user";
 import UserChatInterface from "./components/chat/UserChatInterface";
+import Preloader from "./components/Preloader";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +28,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-   const { user, role } = await getUser();
+  const { user, role } = await getUser();
   return (
     <ViewTransitions>
       <html lang="en">
@@ -41,17 +42,17 @@ export default async function RootLayout({
         </Head>
         <body className="bg-red-600">
           <SmoothScrollingWrapper>
-            <MenuProvider>
-              {/* <LayoutWrapper> */}
-              <UserProvider user={user} role={role}>
-                {children}
-                 <UserChatInterface />
-                <Toaster position="top-right" />
-              </UserProvider>
+            <LayoutWrapper>
+              <MenuProvider>
+                <UserProvider user={user} role={role}>
+                  {children}
+                  <UserChatInterface />
+                  <Toaster position="top-right" />
+                </UserProvider>
 
-              {/* </LayoutWrapper> */}
-              {/* <Navbar /> */}
-            </MenuProvider>
+                {/* <Navbar /> */}
+              </MenuProvider>
+            </LayoutWrapper>
           </SmoothScrollingWrapper>
         </body>
       </html>

@@ -60,7 +60,7 @@ const Scene = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: scrollContainerRef.current,
-        start: "top top",
+        start: "top top+=300",
         end: "bottom bottom",
         scrub: true,
         // markers: true,
@@ -80,7 +80,7 @@ const Scene = () => {
       onComplete: () => {
         setTimeout(() => {
           setShowScrollReveal(true);
-        }, 200); // 1000ms = 1 second delay
+        }, 100); // 1000ms = 1 second delay
       },
     });
 
@@ -148,7 +148,7 @@ const Scene = () => {
           left: 0,
 
           width: "100vw",
-          height: "100vh",
+       
           zIndex: 0,
           pointerEvents: "none", // see below!
           display: "flex",

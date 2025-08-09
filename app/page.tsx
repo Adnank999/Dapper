@@ -25,6 +25,7 @@ export default async function Home() {
   return (
     <>
       <div className="overflow-x-hidden overflow-y-hidden">
+       
         <div className="min-h-screen flex items-center justify-center">
           
             <LazyHeroSection />

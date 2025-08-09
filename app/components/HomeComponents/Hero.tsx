@@ -38,8 +38,8 @@ export default function Hero() {
         componentName="Scene"
         className=""
         importFunction={() => import("./3dmodels/Scene")}
-        rootMargin="200px 0px"
-        minScrollY={230}
+        rootMargin="800px 0px" // Much larger margin to trigger earlier
+        minScrollY={100}
       />
     </div>
   );
