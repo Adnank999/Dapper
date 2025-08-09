@@ -27,7 +27,7 @@ const Model = ({
 }) => {
   const group = useRef<Group>(null);
   const { nodes, materials, animations, scene } = useGLTF(
-    "/model/spiderman_2099.glb"
+    "/model/spiderman_2099-transformed.glb"
   );
   // console.log("nodes", nodes);
   // console.log("materials", materials);
