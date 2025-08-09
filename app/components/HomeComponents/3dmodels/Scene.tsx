@@ -15,7 +15,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Loader = () => {
   const { progress } = useProgress();
-  return <Html center className="hidden">{progress.toFixed(1)} % loaded</Html>;
+  return (
+    <Html center className="hidden">
+      {progress.toFixed(1)} % loaded
+    </Html>
+  );
 };
 
 const Scene = () => {
@@ -24,7 +28,7 @@ const Scene = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const lenis = useLenis();
   const [isVisible, setIsVisible] = useState(false);
-  
+
   console.log("isVisible", isVisible);
   const [showScrollReveal, setShowScrollReveal] = useState(false);
   const [animationCompleted, setAnimationCompleted] = useState(false);
@@ -60,12 +64,14 @@ const Scene = () => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: scrollContainerRef.current,
-        start: "top top+=100",
+        start: "top top",
         end: "bottom bottom",
         scrub: true,
-        // markers: true,
+        markers: true,
         onEnter: () => {
-          setIsVisible(true);
+          setTimeout(() => {
+            setIsVisible(true);
+          }, 100);
         },
         // onLeave: () => {
         //   setIsVisible(false);
@@ -90,8 +96,7 @@ const Scene = () => {
       { opacity: 1, duration: 0.3, ease: "power2.out" } // Fade in
     )
       .to(canvasRef.current, { opacity: 1, duration: 0.4 }) // Hold
-      .to({}, { duration: 0.3 }); 
-
+      .to({}, { duration: 0.3 });
 
     tl.to(canvasRef.current, {
       opacity: 0,
@@ -122,17 +127,15 @@ const Scene = () => {
       }}
       // className="bg-red-200"
     >
-      
       <Canvas
         ref={canvasRef}
         frameloop="demand"
-        gl={{ 
+        gl={{
           powerPreference: "high-performance",
           alpha: false,
           stencil: false,
-          antialias: true
+          antialias: true,
         }}
-
         camera={{
           position: [
             -6.782809400330284, 2.3973643603409034, 1.4024392340644003,
@@ -140,7 +143,6 @@ const Scene = () => {
           // fov: 35,
           fov: isMobile ? 45 : 35,
         }}
-        
         dpr={[1, 1.5]}
         style={{
           position: "fixed",
@@ -148,7 +150,7 @@ const Scene = () => {
           left: 0,
 
           width: "100vw",
-       
+
           zIndex: 0,
           pointerEvents: "none", // see below!
           display: "flex",
@@ -215,7 +217,6 @@ const Scene = () => {
             baseRotation={0}
             blurStrength={10}
             textClassName="font-mustang"
-          
           >
             With Great Power Comes Great Responsibility
           </ScrollReveal>
@@ -226,6 +227,3 @@ const Scene = () => {
 };
 
 export default Scene;
-
-
-

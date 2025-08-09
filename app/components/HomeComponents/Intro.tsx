@@ -265,7 +265,7 @@ const Intro: React.FC = () => {
               start: `top+=${index * 20} top+=50`,
               end: `top+=${index * 20} top`,
               scrub: 1,
-              markers: true,
+              markers: false,
             }
           });
         }
