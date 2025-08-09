@@ -2,65 +2,84 @@
 import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-// Remove Lenis import from here
+import { useLenis } from "lenis/react";
+
 gsap.registerPlugin(ScrollTrigger);
+
 const GradientSection = () => {
+  const lenis = useLenis();
+
   useEffect(() => {
-    // Register GSAP ScrollTrigger plugin
+    // Integrate Lenis with ScrollTrigger
+    if (lenis) {
+      // Connect Lenis scroll events to ScrollTrigger
+      lenis.on("scroll", ScrollTrigger.update);
 
-    // 👈 Remove all Lenis initialization code
+      // Since you're controlling RAF in the wrapper, we don't need to add ticker here
+      // Just ensure ScrollTrigger refreshes properly
+      ScrollTrigger.refresh();
+    }
 
-    // Animating each word separately with fromTo
-    const words = document.querySelectorAll(".popup");
+    // Add a small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      // Animating each word separately
+      const words = document.querySelectorAll(".popup");
 
-    words.forEach((word, index) => {
-      const isCool = word.textContent === "Cool";
-      const animationConfig = {
-        opacity: 0,
-        scale: isCool ? 0 : 0,
-        y: 50,
-      };
+      words.forEach((word, index) => {
+        const isCool = word.textContent?.trim() === "Cool";
 
-      const animationProps = {
-        opacity: 1,
-        scale: isCool ? 1.4 : 1,
-        y: 0,
-        duration: 0.2,
-        ease: "power2.out",
-        stagger: {
-          amount: 0.8,
-          from: "start",
-        },
-        scrollTrigger: {
-          trigger: word,
-          start: "top 75%",
-          end: "top 30%",
-          scrub: true,
-          // markers: true, // Enable for debugging
-          onComplete: () => {
-            if (isCool) {
-              gsap.fromTo(
-                word,
-                { scale: 1.4 },
-                {
-                  scale: 1,
-                  duration: 0.5,
-                  ease: "bounce.inOut",
-                }
-              );
-            }
+        // Initial state
+        gsap.set(word, {
+          opacity: 0,
+          scale: 0,
+          y: 50,
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: word,
+            start: "top 85%",
+            end: "top 15%",
+            scrub: 1.2,
+            // markers: true, // Enable for debugging
+            refreshPriority: -1,
+            invalidateOnRefresh: true,
           },
-        },
-      };
+        });
 
-      gsap.fromTo(word, animationConfig, animationProps);
-    });
+        // Main animation
+        tl.to(word, {
+          opacity: 1,
+          scale: isCool ? 1.4 : 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+        });
 
-    // Cleanup function - only kill ScrollTriggers
+        // Special bounce effect for "Cool" - separate ScrollTrigger
+        if (isCool) {
+          tl.to(
+            word,
+            {
+              scale: 1.2,
+              duration: 0.4,
+              ease: "back.out(1.2)", // Gentler than bounce
+            },
+            "+=0.1"
+          );
+        }
+      });
+    }, 100);
+
+    // Cleanup function
     return () => {
+      clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (lenis) {
+        lenis.off("scroll", ScrollTrigger.update);
+      }
     };
-  }, []);
+  }, [lenis]);
 
   return (
     <div
