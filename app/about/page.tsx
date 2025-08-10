@@ -9,6 +9,7 @@ import { TimelineDemo } from "../components/aboutComponents/TimelineDemo";
 import LoginButton from "../components/LoginLogoutButton";
 import ShuffleText from "../components/ShuffleText";
 import UserGreetText from "../components/UserGreetText";
+import GlowingCardWrapper from "../components/aboutComponents/GlowingCardWrapper";
 
 
 export default async  function About() {
@@ -30,7 +31,7 @@ export default async  function About() {
       {/* <UserGreetText/> */}
    
    
-      
+      {/* <GlowingCardWrapper/> */}
      
       <TimelineDemo/>
     </section>

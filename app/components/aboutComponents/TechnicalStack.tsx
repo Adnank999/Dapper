@@ -13,6 +13,7 @@ import {
   Coins,
   Sparkles,
 } from "lucide-react";
+import GlowingCards, { GlowingCard } from "../glowing-card-cards";
 
 interface Technology {
   name: string;
@@ -342,6 +343,26 @@ const tabColors = {
   web3: "bg-yellow-500",
 };
 
+// Add this helper function
+const getGlowColor = (colorClass: string): string => {
+  const colorMap: { [key: string]: string } = {
+    "text-blue-400": "#0080ff",      // More electric blue
+    "text-green-400": "#00ff80",     // Bright neon green
+    "text-purple-400": "#8000ff",    // Vivid purple
+    "text-orange-400": "#ff6600",    // Bright orange
+    "text-red-400": "#ff3333",       // Vibrant red
+    "text-yellow-400": "#ffdd00",    // Electric yellow
+    "text-pink-400": "#ff1493",      // Hot pink
+    "text-indigo-400": "#4040ff",    // Bright indigo
+    "text-teal-400": "#00ffcc",      // Neon teal
+    "text-cyan-400": "#00ccff",      // Electric cyan
+    // Add more color mappings as needed based on your stat.color values
+  };
+  
+  return colorMap[colorClass] || "#60a5fa"; // Default fallback
+};
+
+
 export default function TechnicalStack() {
   const [activeTab, setActiveTab] = useState("ai-ml");
   const [animatedProgress, setAnimatedProgress] = useState<
@@ -471,7 +492,7 @@ export default function TechnicalStack() {
         </div>
 
         {/* Statistics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <Card key={index} className="bg-gray-900 border-gray-800">
               <CardContent className="p-6 text-center">
@@ -484,7 +505,33 @@ export default function TechnicalStack() {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </div> */}
+
+        <GlowingCards
+          enableGlow={true}
+          glowRadius={25}
+          glowOpacity={0.7}
+          animationDuration={400}
+          gap="1.5rem"
+          responsive={true} // This will use the grid layout
+        >
+          {stats.map((stat, index) => (
+            <GlowingCard
+              key={index}
+              glowColor={getGlowColor(stat.color)}
+              className="bg-gradient-to-r from-[var(--feline-a0)] to-[var(--feline-a10)] border-gray-600 w-full h-full min-h-[120px]" // Add min-height
+            >
+              <div className="p-6 text-center flex flex-col justify-center h-full">
+                <div className={`text-4xl font-bold mb-2 ${stat.color}`}>
+                  {stat.value}
+                </div>
+                <div className="text-gray-400 text-sm font-medium">
+                  {stat.label}
+                </div>
+              </div>
+            </GlowingCard>
+          ))}
+        </GlowingCards>
       </div>
     </div>
   );

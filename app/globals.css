@@ -162,6 +162,13 @@
   --spectacular-a20: oklch(47.8% 0.184 25.6);
   --spectacular-a30: oklch(42.2% 0.16 25.1);
   --spectacular-a40: oklch(36.3% 0.135 24.2);
+  --cyber-a10: oklch(53.6% 0.225 336);
+  --cyber-a20: oklch(44.7% 0.228 304);
+  --cyber-a30: oklch(40.3% 0.215 294);
+  --cyber-a40: oklch(38.2% 0.21 288);
+  --feline-a0: oklab(0% 0 0);
+  --feline-a10: oklab(21.3% 0 0);
+  --feline-a20: oklab(32.1% 0 0);
   --tourmaline-a0: oklch(18.2% 0 none);
   --tourmaline-a10: oklch(21.8% 0 none);
   --font-my-font-regular: MyFontRegular, sans-serif;
@@ -465,8 +472,6 @@
   animation: neon-border var(--neon-border-duration) linear infinite;
 }
 
-
-
 /* picture animation end */
 
 /* .gallery-body{
@@ -561,8 +566,6 @@ img {
 .animateSlideUpDelay {
   animation: slideUpFromBottom 1s ease-out 0.2s forwards; /* Same delay as text */
 }
-
-
 
 html {
   scroll-behavior: smooth;

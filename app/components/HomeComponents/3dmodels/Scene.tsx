@@ -250,6 +250,9 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollReveal from "../ScrollReveal";
 import { extend } from "@react-three/fiber";
 import useIsMobile from "@/hooks/useIsMobile";
+import Model2 from "./Model2";
+import Model3 from "./Model3";
+import Model3Optimized from "@/public/model/Model3Optimized";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -417,7 +420,7 @@ const Scene = () => {
             enabled={false}
             style={{ overflow: "hidden" }}
           >
-            <Model
+            <Model2
               visible={isVisible}
               scrollProgress={scrollProgress}
               animationCompleted={animationCompleted}

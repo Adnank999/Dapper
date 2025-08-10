@@ -1,8 +1,9 @@
 import React from "react";
-import { Timeline } from "./Timeline";
+import  Timeline  from "./Timeline";
 import { IconBrandLaravel } from "@tabler/icons-react";
 import { IconBrandNodejs } from "@tabler/icons-react";
 import { IconBrandNextjs } from "@tabler/icons-react";
+
 
 export function TimelineDemo() {
   const data = [
