@@ -7,6 +7,7 @@ import Terminal from "./Terminal";
 import TerminalComponent from "./TerminalComponent";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useUser } from "../context/UserContext";
+import GlowingKeyboard from "./HomeComponents/GlowingKeyboard";
 
 gsap.registerPlugin(ScrollTrigger);
 // Characters to use during randomization
@@ -82,45 +83,10 @@ const randomChar = () =>
 
 const ShuffleText: React.FC = () => {
   const textRef = useRef<HTMLDivElement | null>(null);
- 
+  
+  
 
-  //   useEffect(() => {
-  //   // Apply Splitting
-  //   const results = Splitting({ target: textRef.current, by: "chars" });
-  //   const chars = results[0].chars; // Array of characters
 
-  //   const MAX_ITERATIONS = 15;
-
-  //   // GSAP fx6-like Animation
-  //   chars.forEach((char, index) => {
-  //     let iteration = 0;
-
-  //     // Save the original text content
-  //     const originalText = char.textContent || "";
-  //     char.dataset.original = originalText;
-
-  //     const randomize = () => {
-  //       if (iteration < MAX_ITERATIONS) {
-  //         // Replace the content with random characters
-  //         char.textContent = randomChar();
-
-  //         // Assign random colors
-  //         char.style.color = ["#2b4539", "#61dca3", "#61b3dc"][
-  //           Math.floor(Math.random() * 3)
-  //         ];
-
-  //         iteration++;
-  //         setTimeout(randomize, gsap.utils.random(30, 110)); // Recursive randomization
-  //       } else {
-  //         // Restore the original text and style
-  //         char.textContent = char.dataset.original;
-  //         char.style.color = ""; // Reset color
-  //       }
-  //     };
-
-  //     setTimeout(() => randomize(), index * 1); // Stagger start time
-  //   });
-  // }, [textRef]);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -249,7 +215,9 @@ const ShuffleText: React.FC = () => {
         <dd>Best User Experience Design, Webby Awards 2021</dd> */}
       </div>
 
-      <TerminalComponent textRef={textRef} />
+      {/* <TerminalComponent textRef={textRef} /> */}
+
+       <GlowingKeyboard/>
     </div>
   );
 };

@@ -8,12 +8,12 @@ export default async function project({ params }) {
   const projectId = params.id;
 
   return (
-    <section id="to" className="w-full mt-24 mx-auto max-w-5xl">
-      {/* <ProjectShowcaseById projectDetails={projectDetails}/> */}
-      <div id="original-image" className="gallery-body">
-        <Suspense fallback={<>loading...</>}>
+    <section className="w-full mt-24 mx-auto max-w-5xl">
+      
+      <div >  {/*id="original-image"  className="gallery-body" */}
+        {/* <Suspense fallback={<></>}> */}
           <ProjectWrapper projectId={projectId} />
-        </Suspense>
+        {/* </Suspense> */}
       </div>
     </section>
   );
@@ -23,5 +23,6 @@ async function ProjectWrapper({ projectId }: any) {
 
   const projectDetails = await getById(projectId);
 
-  return <Gallery projectDetails={projectDetails} />;
+  // return <Gallery projectDetails={projectDetails} />;
+  return <ProjectShowcaseById projectDetails={projectDetails}/>
 }

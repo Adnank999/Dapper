@@ -4,8 +4,10 @@ import { Box, Lock, Search, Settings, Sparkles } from "lucide-react";
 import { GlowingEffect } from "./glowing-effect";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import React from "react";
 
-export function GlowingEffectDemo() {
+const GlowingEffectDemo = function GlowingEffect() {
+  console.log("glowing effect rendered")
   return (
     <ul className="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4">
   {/* Top-left */}
@@ -61,6 +63,8 @@ export function GlowingEffectDemo() {
 
   );
 }
+
+export default React.memo(GlowingEffectDemo)
 
 interface GridItemProps {
   area: string;

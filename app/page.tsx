@@ -1,46 +1,36 @@
-'use cache'
-import Image from "next/image";
-import SplashCursor from "./components/SplashCursor";
+"use cache";
+
 import TextWithParticles from "./components/TextWithParticles";
 
 import NavHeroContainer from "./components/NavHeroContainer";
-import Transition from "./components/Transition";
-import GradientSection from "./components/GradientSection";
-import ShuffleText from "./components/ShuffleText";
-import CurvedNavbar from "./components/CurvedNavbar";
 
 import { GlowingEffectDemo } from "./components/HomeComponents/glowing-effectDemo";
-import Scene from "./components/HomeComponents/3dmodels/Scene";
-import ScrollReveal from "./components/HomeComponents/ScrollReveal";
+
 import TransitionButton from "./components/HomeComponents/TransitionButton";
-import RainingLetters from "./components/aboutComponents/RainingLetters";
+
 import SvgIcon from "./components/aboutComponents/SvgIcon";
 import Preloader from "./components/Preloader";
-import LayoutWrapper from "./components/LayoutWrapper";
-import GradientModelWrapper from "./components/HomeComponents/GradientModelWrapper";
+import dynamic from "next/dynamic";
+import GradientSection from "./components/GradientSection";
+import GlowingKeyboard from "./components/HomeComponents/GlowingKeyboard";
 
-// export const revalidate = 60;
-// export const dynamic = 'force-static';
+const LazyHeroSection = dynamic(
+  () => import("./components/HomeComponents/Hero"),
+  {
+    loading: () => <>Preparing</>,
+  }
+);
+
 export default async function Home() {
-
   return (
     <>
       <div className="overflow-x-hidden overflow-y-hidden">
+       
         <div className="min-h-screen flex items-center justify-center">
-          <div className="max-w-4xl w-full mx-auto flex flex-col items-center justify-center">
-            <div className="w-full">
-              <NavHeroContainer />
-
-              <TextWithParticles />
-
-              <div className="max-w-4xl mx-auto">
-                <GlowingEffectDemo />
-              </div>
-            </div>
-          </div>
+          
+            <LazyHeroSection />
+          
         </div>
-
-        <GradientModelWrapper/>
 
         {/* <div className="p-4 h-screen">
          
@@ -51,11 +41,7 @@ export default async function Home() {
             becomes more integrated into the music industry.
           </TransitionButton>
         </div> */}
-
-     
       </div>
     </>
-
-   
   );
 }

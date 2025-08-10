@@ -9,16 +9,17 @@ import { TimelineDemo } from "../components/aboutComponents/TimelineDemo";
 import LoginButton from "../components/LoginLogoutButton";
 import ShuffleText from "../components/ShuffleText";
 import UserGreetText from "../components/UserGreetText";
+import GlowingCardWrapper from "../components/aboutComponents/GlowingCardWrapper";
 
 
 export default async  function About() {
 
   return (
     <section >
-      {/* <div className="relative z-10 bg-background">
+      <div className="relative z-10 bg-background">
         <RainingLetters />
-        </div> */}
-      <div className="mx-auto max-w-6xl h-[100vh] mb-24 relative">
+        </div>
+      <div className="mx-auto max-w-6xl h-[200vh] mb-24 relative">
         <ShuffleText />
       </div>
 
@@ -30,9 +31,9 @@ export default async  function About() {
       {/* <UserGreetText/> */}
    
    
-      
+      {/* <GlowingCardWrapper/> */}
      
-      {/* <TimelineDemo/> */}
+      <TimelineDemo/>
     </section>
   );
 }

@@ -109,7 +109,7 @@ export const CurvedNavbar = () => {
                     handleNavigationTransition(href);
                   }}
                   passHref
-                  prefetch={true}
+                  
                 >
                   {name}
                 </Link>

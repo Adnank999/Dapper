@@ -27,7 +27,7 @@ const Model = ({
 }) => {
   const group = useRef<Group>(null);
   const { nodes, materials, animations, scene } = useGLTF(
-    "/model/spiderman_2099.glb"
+    "/model/spiderman_2099-transformed.glb"
   );
   // console.log("nodes", nodes);
   // console.log("materials", materials);
@@ -116,9 +116,9 @@ const Model = ({
       {/* position={[-1, -1, 0]} */}
       {/* mobile position={[0, -1, 0]} */}
     
-      <group ref={group} position={position}>
+      {visible && <group ref={group} position={position}>
         <primitive object={scene} />
-      </group>
+      </group>}
 
   
       
@@ -128,3 +128,5 @@ const Model = ({
 };
 
 export default Model;
+
+

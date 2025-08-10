@@ -148,6 +148,7 @@
   box-sizing: border-box;
 } */
 @theme {
+  --angle: 45deg;
   --background: rgb(6, 0, 16);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -156,6 +157,20 @@
   --luxury-a0: oklch(0% 0 none);
   --luxury-a10: oklch(25.2% 0 none);
   --luxury-a20: oklch(32.1% 0 none);
+  --spectacular-a0: oklch(58.8% 0.228 26.4);
+  --spectacular-a10: oklch(53.4% 0.206 26);
+  --spectacular-a20: oklch(47.8% 0.184 25.6);
+  --spectacular-a30: oklch(42.2% 0.16 25.1);
+  --spectacular-a40: oklch(36.3% 0.135 24.2);
+  --cyber-a10: oklch(53.6% 0.225 336);
+  --cyber-a20: oklch(44.7% 0.228 304);
+  --cyber-a30: oklch(40.3% 0.215 294);
+  --cyber-a40: oklch(38.2% 0.21 288);
+  --feline-a0: oklab(0% 0 0);
+  --feline-a10: oklab(21.3% 0 0);
+  --feline-a20: oklab(32.1% 0 0);
+  --tourmaline-a0: oklch(18.2% 0 none);
+  --tourmaline-a10: oklch(21.8% 0 none);
   --font-my-font-regular: MyFontRegular, sans-serif;
   --font-my-font-medium: MyFontMedium, sans-serif;
   --font-my-font-bold: MyFontBold, sans-serif;
@@ -208,7 +223,6 @@
       var(--luxury-a20)
     );
   }
-
 }
 
 /* Define animations for the view transition */
@@ -303,9 +317,38 @@
   }
 }
 
+/* Animation Keyframes */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* Intro Component Styles */
+/* Only the keyframe animation */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(150px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.animate-slide-up-fade {
+  animation: slideUpFade 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
 
+.animate-slide-up-fade-delay {
+  animation: slideUpFade 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
 
 ::view-transition-old(root) {
   animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-out;
@@ -315,58 +358,123 @@
   animation: 0.4s cubic-bezier(0.87, 0, 0.13, 1) both blur-in;
 }
 
-
 /* picture animation start */
 @view-transition {
-    navigation: auto;
+  navigation: auto;
 }
 
-
-
-
-
- ::view-transition-group(*) {
-    animation-duration: 0.5s;
-} 
+::view-transition-group(*) {
+  animation-duration: 0.5s;
+}
 
 /* #thumbnail-image,#original-image {
    
    view-transition-name: picture;
 } */
 
-#thumbnail-image,#original-image {
-   
-   view-transition-name: picture;
+#thumbnail-image,
+#original-image {
+  view-transition-name: picture;
 }
 
 ::view-transition-old(picture),
 ::view-transition-new(picture) {
-    animation: none;
-    animation-duration: 0s !important;
-    mix-blend-mode: normal;
-    height: 100%;
-    overflow: clip;
-    /* border-radius: 2rem; */
+  animation: none;
+  animation-duration: 0s !important;
+  mix-blend-mode: normal;
+  height: 100%;
+  overflow: clip;
+  /* border-radius: 2rem; */
 }
 
-
 #to::view-transition-new(picture) {
-    object-fit: cover;
-
+  object-fit: cover;
 }
 
 #from::view-transition-new(picture) {
-    object-fit: contain;
-    
+  object-fit: contain;
 }
 
 #from::view-transition-old(picture) {
-    object-fit: cover;
+  object-fit: cover;
+}
+
+#chat-bubble,
+#chat-window {
+  view-transition-name: chat;
+}
+
+.neon-border-one {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px) drop-shadow(0 0 12px var(--color-type-1));
+  z-index: -1;
+  inset: 0;
+}
+
+.neon-border-one::before {
+  content: "";
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: var(--anim-width);
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--color-type-1),
+    var(--color-type-1),
+    transparent,
+    transparent
+  );
+}
+
+.neon-border-two {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px) drop-shadow(0 0 12px var(--color-type-2));
+  z-index: -1;
+  inset: 0;
+}
+
+.neon-border-two::before {
+  content: "";
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  overflow: hidden;
+  width: var(--anim-width);
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent,
+    transparent,
+    var(--color-type-2),
+    var(--color-type-2)
+  );
+}
+
+/* You'll need to define the animate-neon-border animation in your CSS */
+@keyframes neon-border {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-neon-border {
+  animation: neon-border var(--neon-border-duration) linear infinite;
 }
 
 /* picture animation end */
 
-.gallery-body{
+/* .gallery-body{
   display: grid;
   place-content: center;
   min-height: 100dvh;
@@ -430,10 +538,34 @@ img {
     animation-duration: 0.5s;
     animation-timing-function: var(--ease-5);
   }
+} */
+
+/* intro.module.css */
+@keyframes slideUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Hide all animated elements initially */
+.animateTextGroup,
+.animateSlideUpDelay {
+  opacity: 0;
+}
 
+/* Both text and name appear together from bottom */
+.animateTextGroup {
+  animation: slideUpFromBottom 1s ease-out 0.2s forwards;
+}
 
+.animateSlideUpDelay {
+  animation: slideUpFromBottom 1s ease-out 0.2s forwards; /* Same delay as text */
+}
 
 html {
   scroll-behavior: smooth;

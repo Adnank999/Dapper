@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 import { getAllProjects } from "@/utils/supabase/projects/show";
 import ProjectShowcase from "../components/projectComponents/ProjectShowcase";
 import { AllProjects } from "@/types/projects/AllProject";
-
+import Loader from "./loader"
 export default async function projects() {
   const allProjects : AllProjects = await getAllProjects();
   
@@ -15,7 +15,7 @@ export default async function projects() {
     <section className="w-full mt-24 mx-auto max-w-5xl">
       {/* <h1>Projects will show here</h1> */}
         <CreateProjectButton/>
-        <Suspense fallback={<>loading...</>}>
+        <Suspense fallback={<Loader/>}>
          <ProjectShowcase getAllProjects={allProjects}/>
         </Suspense>
        
