@@ -54,7 +54,7 @@ export const GlowingCard: React.FC<GlowingCardProps> = ({
   return (
     <div
       className={cn(
-        "relative flex-1 min-w-[14rem] p-6 rounded-2xl text-black dark:text-white",
+        "relative flex-1 p-6 rounded-2xl text-black dark:text-white",
         "bg-background border ",
         "transition-all duration-400 ease-out",
         className
@@ -138,7 +138,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
 
   return (
     <div
-      className={cn("relative w-full", className)}
+      className={cn("relative w-full ", className)}
       style={containerStyle}
     >
       <div
@@ -151,7 +151,7 @@ export const GlowingCards: React.FC<GlowingCardsProps> = ({
       >
         <div
           className={cn(
-            "flex items-center justify-center flex-wrap gap-[var(--gap)]",
+            "flex items-center justify-center  flex-wrap gap-[var(--gap)]",
             responsive && "flex-col sm:flex-row "
           )}
         >

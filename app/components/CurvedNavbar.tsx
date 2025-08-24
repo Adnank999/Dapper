@@ -23,9 +23,8 @@ const navLinks = [
 
 export const CurvedNavbar = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenuContext();
-  const router = useRouter();
+  const router = useTransitionRouter();
   const navbarRef = useRef<HTMLElement | null>(null);
-
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
@@ -37,11 +36,8 @@ export const CurvedNavbar = () => {
     const navbar = navbarRef.current;
     if (!navbar) return;
 
-
-
     const onScroll = () => {
       const currentScroll = window.scrollY;
-      
 
       if (currentScroll > lastScroll.current) {
         // Scroll Down
@@ -68,19 +64,6 @@ export const CurvedNavbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const pathname = usePathname();
- 
-  const handleNavigationTransition = (url: string) => {
-    if (!document.startViewTransition) {
-      router.push("/");
-      return;
-    }
-
-    document.startViewTransition(() => {
-      router.push(url);
-    });
-  };
-
   return (
     <div className="relative z-[50] w-full">
       {/* Navbar container with LoginButton aligned right */}
@@ -98,21 +81,10 @@ export const CurvedNavbar = () => {
               <li
                 key={name}
                 className=" relative font-my-font-bold tracking-wide text-lg rounded-full px-5 py-1 transition duration-300 hover:border-b hover:border-b-blue-400 hover:shadow-[0_4px_10px_2px_rgba(59,130,246,0.5)]"
+                onClick={() => router.push(href)}
               >
-                <Link
-                  id="navLinks"
-                  href={href}
-                  // prefetch={active ? null : false}
-                  // onMouseEnter={() => setActive(true)}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigationTransition(href);
-                  }}
-                  passHref
-                  
-                >
-                  {name}
-                </Link>
+                {name}
+
                 <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px hover:bg-linear-to-r from-transparent via-blue-500 to-transparent h-px" />
               </li>
             ))}

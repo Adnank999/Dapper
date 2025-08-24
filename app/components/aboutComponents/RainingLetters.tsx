@@ -39,7 +39,7 @@
 //     const length = Math.max(oldText.length, newText.length)
 //     const promise = new Promise<void>((resolve) => this.resolve = resolve)
 //     this.queue = []
-    
+
 //     for (let i = 0; i < length; i++) {
 //       const from = oldText[i] || ''
 //       const to = newText[i] || ''
@@ -47,7 +47,7 @@
 //       const end = start + Math.floor(Math.random() * 40)
 //       this.queue.push({ from, to, start, end })
 //     }
-    
+
 //     cancelAnimationFrame(this.frameRequest)
 //     this.frame = 0
 //     this.update()
@@ -57,7 +57,7 @@
 //   update() {
 //     let output = ''
 //     let complete = 0
-    
+
 //     for (let i = 0, n = this.queue.length; i < n; i++) {
 //       let { from, to, start, end, char } = this.queue[i]
 //       if (this.frame >= end) {
@@ -73,7 +73,7 @@
 //         output += from
 //       }
 //     }
-    
+
 //     this.el.innerHTML = output
 //     if (complete === this.queue.length) {
 //       this.resolve()
@@ -99,15 +99,15 @@
 //   useEffect(() => {
 //     if (mounted && scramblerRef.current) {
 //       const phrases = [
-        
+
 //         'The Best Technologies',
 //         'aren\’t built with code.' ,
 //         'They’re built with',
 //         'Empathy and Soul',
 //         'Adnan,'
-       
+
 //       ]
-      
+
 //       let counter = 0
 //       const next = () => {
 //         if (scramblerRef.current) {
@@ -123,7 +123,7 @@
 //   }, [mounted])
 
 //   return (
-//     <h1 
+//     <h1
 //       ref={elementRef}
 //       className="text-white !font-clyra text-center text-8xl  font-bold tracking-wider justify-center"
 //       // style={{ fontFamily: 'monospace' }}
@@ -177,7 +177,7 @@
 //     let animationFrameId: number
 
 //     const updatePositions = () => {
-//       setCharacters(prevChars => 
+//       setCharacters(prevChars =>
 //         prevChars.map(char => ({
 //           ...char,
 //           y: char.y + char.speed,
@@ -196,7 +196,7 @@
 //     animationFrameId = requestAnimationFrame(updatePositions)
 //     return () => cancelAnimationFrame(animationFrameId)
 //   }, [])
-  
+
 //   return (
 //     <div className="relative w-full h-screen bg-black overflow-hidden">
 //       {/* Title */}
@@ -217,8 +217,8 @@
 //             left: `${char.x}%`,
 //             top: `${char.y}%`,
 //             transform: `translate(-50%, -50%) ${activeIndices.has(index) ? 'scale(1.25)' : 'scale(1)'}`,
-//             textShadow: activeIndices.has(index) 
-//               ? '0 0 8px rgba(255,255,255,0.8), 0 0 12px rgba(255,255,255,0.4)' 
+//             textShadow: activeIndices.has(index)
+//               ? '0 0 8px rgba(255,255,255,0.8), 0 0 12px rgba(255,255,255,0.4)'
 //               : 'none',
 //             opacity: activeIndices.has(index) ? 1 : 0.4,
 //             transition: 'color 0.1s, transform 0.1s, text-shadow 0.1s',
@@ -242,75 +242,160 @@
 
 // export default RainingLetters
 
+"use client";
 
-"use client"
+import React, { useEffect, useRef, useState, memo } from "react";
+import ScrambledTitle from "./ScrambleTittle";
+import useIsMobile from "@/hooks/useIsMobile";
 
-import React, { useEffect, useRef, useState, memo } from "react"
-import ScrambledTitle from "./ScrambleTittle"
-
-const MemoizedScrambledTitle = memo(ScrambledTitle)
+const MemoizedScrambledTitle = memo(ScrambledTitle);
 
 const RainingLetters: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const charElements = useRef<HTMLElement[]>([])
-  const allChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?"
-  const charCount = 300
+  const containerRef = useRef<HTMLDivElement>(null);
+  const charElements = useRef<HTMLElement[]>([]);
 
-  console.log("Raing letter rendering")
+  const allChars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+  const charCount = 300;
+
+  const isMobile = useIsMobile();
+
+  console.log("Raing letter rendering");
+  // useEffect(() => {
+  //   const container = containerRef.current
+  //   if (!container) return
+
+  //   const elements: HTMLElement[] = []
+
+  //   for (let i = 0; i < charCount; i++) {
+  //     const span = document.createElement("span")
+  //     span.textContent = allChars[Math.floor(Math.random() * allChars.length)]
+  //     span.className = "absolute text-slate-600 font-light text-xs"
+  //     span.style.left = `${Math.random() * 100}%`
+  //     span.style.top = `${Math.random() * 100}%`
+  //     span.style.transform = "translate(-50%, -50%)"
+  //     container.appendChild(span)
+  //     elements.push(span)
+  //   }
+
+  //   charElements.current = elements
+
+  //   let animationFrameId: number
+  //   const speeds = elements.map(() => 0.05 + Math.random() * 0.3)
+
+  //   const animate = () => {
+  //     elements.forEach((el, i) => {
+  //       let top = parseFloat(el.style.top || "0")
+  //       top += speeds[i]
+  //       if (top >= 100) {
+  //         top = -5
+  //         el.textContent = allChars[Math.floor(Math.random() * allChars.length)]
+  //         el.style.left = `${Math.random() * 100}%`
+  //       }
+  //       el.style.top = `${top}%`
+
+  //       // Flicker effect
+  //       if (Math.random() < 0.03) {
+  //         el.className = "absolute text-[#00ff00] text-base font-bold animate-pulse"
+  //       } else {
+  //         el.className = "absolute text-slate-600 font-light text-xs md:text-lg lg:text-xl"
+  //       }
+  //     })
+
+  //     animationFrameId = requestAnimationFrame(animate)
+  //   }
+
+  //   animate()
+
+  //   return () => {
+  //     cancelAnimationFrame(animationFrameId)
+  //     elements.forEach(el => container.removeChild(el))
+  //   }
+  // }, [])
+
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+    const container = containerRef.current;
+    if (!container) return;
 
-    const elements: HTMLElement[] = []
+    const elements: HTMLElement[] = [];
 
     for (let i = 0; i < charCount; i++) {
-      const span = document.createElement("span")
-      span.textContent = allChars[Math.floor(Math.random() * allChars.length)]
-      span.className = "absolute text-slate-600 font-light text-xl"
-      span.style.left = `${Math.random() * 100}%`
-      span.style.top = `${Math.random() * 100}%`
-      span.style.transform = "translate(-50%, -50%)"
-      container.appendChild(span)
-      elements.push(span)
+      const span = document.createElement("span");
+      span.textContent = allChars[Math.floor(Math.random() * allChars.length)];
+      span.className = "absolute text-slate-600 font-light text-xs";
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.top = `${Math.random() * 100}%`;
+      span.style.transform = "translate(-50%, -50%)";
+      container.appendChild(span);
+      elements.push(span);
     }
 
-    charElements.current = elements
+    charElements.current = elements;
 
-    let animationFrameId: number
-    const speeds = elements.map(() => 0.05 + Math.random() * 0.3)
+    let animationFrameId: number;
+    const speeds = elements.map(() => 0.05 + Math.random() * 0.3);
+    const greenTimers = elements.map(() => ({
+      isGreen: false,
+      timer: 0,
+      duration: 0,
+    }));
 
     const animate = () => {
       elements.forEach((el, i) => {
-        let top = parseFloat(el.style.top || "0")
-        top += speeds[i]
+        let top = parseFloat(el.style.top || "0");
+        top += speeds[i];
         if (top >= 100) {
-          top = -5
-          el.textContent = allChars[Math.floor(Math.random() * allChars.length)]
-          el.style.left = `${Math.random() * 100}%`
+          top = -5;
+          el.textContent =
+            allChars[Math.floor(Math.random() * allChars.length)];
+          el.style.left = `${Math.random() * 100}%`;
+          greenTimers[i].isGreen = false;
+          greenTimers[i].timer = 0;
         }
-        el.style.top = `${top}%`
+        el.style.top = `${top}%`;
 
-        // Flicker effect
-        if (Math.random() < 0.03) {
-          el.className = "absolute text-[#00ff00] text-base font-bold animate-pulse"
+        // Green duration control
+        if (!greenTimers[i].isGreen) {
+          if (isMobile ? Math.random() < 0.009 : Math.random() < 0.03) {
+            greenTimers[i].isGreen = true;
+            greenTimers[i].timer = 0;
+            greenTimers[i].duration = isMobile
+              ? 5 + Math.random() * 5
+              : 10 + Math.random() * 10;
+          }
         } else {
-          el.className = "absolute text-slate-600 font-light text-xl"
+          greenTimers[i].timer++;
+          if (greenTimers[i].timer >= greenTimers[i].duration) {
+            greenTimers[i].isGreen = false;
+            greenTimers[i].timer = 0;
+          }
         }
-      })
 
-      animationFrameId = requestAnimationFrame(animate)
-    }
+        if (greenTimers[i].isGreen) {
+          el.className =
+            "absolute text-[#00ff00] text-[10px] md:text-sm  font-bold animate-pulse";
+        } else {
+          el.className =
+            "absolute text-slate-600 font-light text-[10px] md:text-sm ";
+        }
+      });
 
-    animate()
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
 
     return () => {
-      cancelAnimationFrame(animationFrameId)
-      elements.forEach(el => container.removeChild(el))
-    }
-  }, [])
+      cancelAnimationFrame(animationFrameId);
+      elements.forEach((el) => container.removeChild(el));
+    };
+  }, []);
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden" ref={containerRef}>
+    <div
+      className="relative w-full h-screen bg-black overflow-hidden"
+      ref={containerRef}
+    >
       {/* Title */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
         <MemoizedScrambledTitle />
@@ -323,7 +408,7 @@ const RainingLetters: React.FC = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default RainingLetters
+export default RainingLetters;

@@ -202,7 +202,7 @@ const Intro: React.FC = () => {
     textGroupRef.current = textGroupSpan;
 
     // Create animated character spans
-    const textContent = "Hi, I am ";
+    const textContent = " Hi, I am ";
     
     textContent.split('').forEach((char, index) => {
       const span = document.createElement('span');
@@ -262,7 +262,7 @@ const Intro: React.FC = () => {
             ease: "power2.inOut",
             scrollTrigger: {
               trigger: containerRef.current,
-              start: `top+=${index * 20} top+=50`,
+              start: `top+=${index * 20} top`,
               end: `top+=${index * 20} top`,
               scrub: 1,
               markers: false,

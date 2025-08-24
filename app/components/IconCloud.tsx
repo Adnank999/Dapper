@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback, ReactNode } from "react";
 import { cn } from "@/lib/utils"; // Adjust import path as needed
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 export interface SphereIcon {
   x: number;
@@ -13,7 +14,7 @@ export interface SphereIcon {
 }
 
 export interface TechIcon {
-  icon: string ;
+  icon: string | StaticImport;
   name: string;
 }
 
@@ -102,15 +103,16 @@ const IconCloud: React.FC<IconCloudProps> = ({ className, techIcons = [] }) => {
 
     for (let i = 0; i < count; i++) {
       const y = i * offset - 1 + offset / 2;
+      // const y = i * (offset * 1.1) - 1 + (offset / 2);
       const r = Math.sqrt(1 - y * y);
       const phi = i * increment;
       const x = Math.cos(phi) * r;
       const z = Math.sin(phi) * r;
 
       newPositions.push({
-        x: x * 100,
-        y: y * 100,
-        z: z * 100,
+        x: x * 130,
+        y: y * 130,
+        z: z * 130,
         scale: 1,
         opacity: 1,
         id: i,
@@ -143,7 +145,7 @@ const IconCloud: React.FC<IconCloudProps> = ({ className, techIcons = [] }) => {
       const screenX = canvas.width / 2 + rotatedX;
       const screenY = canvas.height / 2 + rotatedY;
 
-      const scale = (rotatedZ + 200) / 300;
+      const scale = ((rotatedZ + 200) / 300) * 0.8;
       const radius = 20 * scale;
       const dx = x - screenX;
       const dy = y - screenY;
@@ -263,7 +265,7 @@ const IconCloud: React.FC<IconCloudProps> = ({ className, techIcons = [] }) => {
         ctx.globalAlpha = opacity;
 
         if (imageCanvasesRef.current[index] && imagesLoadedRef.current[index]) {
-          ctx.drawImage(imageCanvasesRef.current[index], -20, -20, 40, 40);
+          ctx.drawImage(imageCanvasesRef.current[index], -18, -18, 36, 36);
         }
         ctx.restore();
       });
@@ -283,9 +285,9 @@ const IconCloud: React.FC<IconCloudProps> = ({ className, techIcons = [] }) => {
   return (
     <canvas
       ref={canvasRef}
-      width="300"
+      // width="300"
       height="300"
-      className={cn('rounded-lg', className)}
+      className={cn('w-full', className)}
       role="img"
       aria-label="Interactive 3D Tech Icons Cloud"
       onMouseDown={handleMouseDown}
