@@ -38,43 +38,43 @@ const tabsData: TabData[] = [
     technologies: [
       {
         name: "Python",
-        projects: 50,
-        proficiency: 95,
+        projects: 2,
+        proficiency: 70,
         description: "Primary language for AI/ML development",
         color: "bg-blue-500",
       },
       {
         name: "TensorFlow",
-        projects: 25,
-        proficiency: 90,
+        projects: 1,
+        proficiency: 60,
         description: "Deep learning framework",
         color: "bg-orange-500",
       },
       {
         name: "PyTorch",
-        projects: 20,
-        proficiency: 88,
+        projects: 2,
+        proficiency: 75,
         description: "Research-focused ML framework",
         color: "bg-red-500",
       },
       {
         name: "Hugging Face",
-        projects: 30,
-        proficiency: 92,
+        projects: 3,
+        proficiency: 70,
         description: "NLP and transformer models",
         color: "bg-yellow-500",
       },
-      {
-        name: "LangChain",
-        projects: 15,
-        proficiency: 85,
-        description: "LLM application framework",
-        color: "bg-green-500",
-      },
+      // {
+      //   name: "LangChain",
+      //   projects: 15,
+      //   proficiency: 85,
+      //   description: "LLM application framework",
+      //   color: "bg-green-500",
+      // },
       {
         name: "OpenAI API",
-        projects: 35,
-        proficiency: 90,
+        projects: 2,
+        proficiency: 80,
         description: "GPT integration and fine-tuning",
         color: "bg-purple-500",
       },
@@ -87,42 +87,42 @@ const tabsData: TabData[] = [
     technologies: [
       {
         name: "React",
-        projects: 45,
-        proficiency: 95,
+        projects: 8,
+        proficiency: 80,
         description: "Modern UI library for web applications",
         color: "bg-blue-500",
       },
       {
         name: "Next.js",
-        projects: 35,
+        projects: 10,
         proficiency: 92,
         description: "Full-stack React framework",
         color: "bg-gray-800",
       },
       {
         name: "TypeScript",
-        projects: 40,
-        proficiency: 90,
+        projects: 10,
+        proficiency: 80,
         description: "Type-safe JavaScript development",
         color: "bg-blue-600",
       },
       {
         name: "Tailwind CSS",
-        projects: 38,
-        proficiency: 88,
+        projects: 10,
+        proficiency: 80,
         description: "Utility-first CSS framework",
         color: "bg-teal-500",
       },
       {
         name: "Vue.js",
-        projects: 20,
-        proficiency: 82,
+        projects: 2,
+        proficiency: 70,
         description: "Progressive JavaScript framework",
         color: "bg-green-500",
       },
       {
         name: "Svelte",
-        projects: 12,
+        projects: 1,
         proficiency: 78,
         description: "Compile-time optimized framework",
         color: "bg-orange-500",
@@ -136,42 +136,42 @@ const tabsData: TabData[] = [
     technologies: [
       {
         name: "Node.js",
-        projects: 42,
-        proficiency: 93,
+        projects: 5,
+        proficiency: 80,
         description: "JavaScript runtime for server-side development",
         color: "bg-green-600",
       },
       {
         name: "Express.js",
-        projects: 35,
-        proficiency: 90,
+        projects: 5,
+        proficiency: 80,
         description: "Fast web framework for Node.js",
         color: "bg-gray-600",
       },
       {
         name: "PostgreSQL",
-        projects: 28,
-        proficiency: 87,
+        projects: 2,
+        proficiency: 80,
         description: "Advanced relational database",
         color: "bg-blue-700",
       },
       {
         name: "MongoDB",
-        projects: 25,
-        proficiency: 85,
+        projects: 2,
+        proficiency: 80,
         description: "NoSQL document database",
         color: "bg-green-700",
       },
       {
         name: "GraphQL",
-        projects: 18,
-        proficiency: 82,
+        projects: 1,
+        proficiency: 70,
         description: "Query language for APIs",
         color: "bg-pink-500",
       },
       {
         name: "Redis",
-        projects: 22,
+        projects: 2,
         proficiency: 80,
         description: "In-memory data structure store",
         color: "bg-red-600",
@@ -185,46 +185,46 @@ const tabsData: TabData[] = [
     technologies: [
       {
         name: "AWS",
-        projects: 32,
-        proficiency: 88,
+        projects: 5,
+        proficiency: 85,
         description: "Amazon Web Services cloud platform",
         color: "bg-orange-600",
       },
       {
         name: "Docker",
-        projects: 38,
-        proficiency: 90,
+        projects: 1,
+        proficiency: 70,
         description: "Containerization platform",
         color: "bg-blue-600",
       },
       {
         name: "Kubernetes",
-        projects: 15,
-        proficiency: 75,
+        projects: 0,
+        proficiency: 60,
         description: "Container orchestration system",
         color: "bg-blue-700",
       },
       {
         name: "Vercel",
-        projects: 25,
+        projects: 10,
         proficiency: 92,
         description: "Frontend deployment platform",
         color: "bg-black",
       },
       {
         name: "GitHub Actions",
-        projects: 30,
+        projects: 3,
         proficiency: 85,
         description: "CI/CD automation platform",
         color: "bg-gray-800",
       },
-      {
-        name: "Terraform",
-        projects: 12,
-        proficiency: 78,
-        description: "Infrastructure as code tool",
-        color: "bg-purple-600",
-      },
+      // {
+      //   name: "Terraform",
+      //   projects: 12,
+      //   proficiency: 78,
+      //   description: "Infrastructure as code tool",
+      //   color: "bg-purple-600",
+      // },
     ],
   },
   {
@@ -242,89 +242,89 @@ const tabsData: TabData[] = [
       {
         name: "Git",
         projects: 50,
-        proficiency: 93,
+        proficiency: 80,
         description: "Version control system",
         color: "bg-orange-600",
       },
       {
         name: "Figma",
-        projects: 28,
-        proficiency: 85,
+        projects: 2,
+        proficiency: 60,
         description: "UI/UX design and prototyping",
         color: "bg-purple-500",
       },
       {
         name: "Postman",
-        projects: 35,
-        proficiency: 88,
+        projects: 25,
+        proficiency: 80,
         description: "API development and testing",
         color: "bg-orange-500",
       },
       {
         name: "Webpack",
-        projects: 22,
+        projects: 6,
         proficiency: 80,
         description: "Module bundler for JavaScript",
         color: "bg-blue-500",
       },
       {
         name: "ESLint",
-        projects: 45,
-        proficiency: 87,
+        projects: 5,
+        proficiency: 80,
         description: "JavaScript linting utility",
         color: "bg-purple-600",
       },
     ],
   },
-  {
-    id: "web3",
-    label: "Web3 & Blockchain",
-    icon: <Coins className="w-4 h-4" />,
-    technologies: [
-      {
-        name: "Solidity",
-        projects: 15,
-        proficiency: 82,
-        description: "Smart contract programming language",
-        color: "bg-gray-700",
-      },
-      {
-        name: "Ethereum",
-        projects: 18,
-        proficiency: 85,
-        description: "Decentralized blockchain platform",
-        color: "bg-blue-600",
-      },
-      {
-        name: "Web3.js",
-        projects: 12,
-        proficiency: 78,
-        description: "Ethereum JavaScript API",
-        color: "bg-orange-500",
-      },
-      {
-        name: "Hardhat",
-        projects: 10,
-        proficiency: 75,
-        description: "Ethereum development environment",
-        color: "bg-yellow-600",
-      },
-      {
-        name: "IPFS",
-        projects: 8,
-        proficiency: 70,
-        description: "Distributed file storage system",
-        color: "bg-teal-600",
-      },
-      {
-        name: "MetaMask",
-        projects: 15,
-        proficiency: 80,
-        description: "Crypto wallet integration",
-        color: "bg-orange-600",
-      },
-    ],
-  },
+  // {
+  //   id: "web3",
+  //   label: "Web3 & Blockchain",
+  //   icon: <Coins className="w-4 h-4" />,
+  //   technologies: [
+  //     {
+  //       name: "Solidity",
+  //       projects: 15,
+  //       proficiency: 82,
+  //       description: "Smart contract programming language",
+  //       color: "bg-gray-700",
+  //     },
+  //     {
+  //       name: "Ethereum",
+  //       projects: 18,
+  //       proficiency: 85,
+  //       description: "Decentralized blockchain platform",
+  //       color: "bg-blue-600",
+  //     },
+  //     {
+  //       name: "Web3.js",
+  //       projects: 12,
+  //       proficiency: 78,
+  //       description: "Ethereum JavaScript API",
+  //       color: "bg-orange-500",
+  //     },
+  //     {
+  //       name: "Hardhat",
+  //       projects: 10,
+  //       proficiency: 75,
+  //       description: "Ethereum development environment",
+  //       color: "bg-yellow-600",
+  //     },
+  //     {
+  //       name: "IPFS",
+  //       projects: 8,
+  //       proficiency: 70,
+  //       description: "Distributed file storage system",
+  //       color: "bg-teal-600",
+  //     },
+  //     {
+  //       name: "MetaMask",
+  //       projects: 15,
+  //       proficiency: 80,
+  //       description: "Crypto wallet integration",
+  //       color: "bg-orange-600",
+  //     },
+  //   ],
+  // },
 ];
 
 const stats = [
@@ -402,7 +402,7 @@ export default function TechnicalStack() {
   }, [activeTab, currentTab]);
 
   return (
-    <div className="min-h-screen bg-background text-white p-6">
+    <div className="min-h-screen bg-background text-white p-12 pt-24">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -491,23 +491,8 @@ export default function TechnicalStack() {
           ))}
         </div>
 
-        {/* Statistics */}
-        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <Card key={index} className="bg-gray-900 border-gray-800">
-              <CardContent className="p-6 text-center">
-                <div className={`text-4xl font-bold mb-2 ${stat.color}`}>
-                  {stat.value}
-                </div>
-                <div className="text-gray-400 text-sm font-medium">
-                  {stat.label}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div> */}
 
-        <GlowingCards
+        <GlowingCards      
           enableGlow={true}
           glowRadius={25}
           glowOpacity={0.7}
@@ -519,7 +504,7 @@ export default function TechnicalStack() {
             <GlowingCard
               key={index}
               glowColor={getGlowColor(stat.color)}
-              className="bg-gradient-to-r from-[var(--feline-a0)] to-[var(--feline-a10)] border-gray-600 w-full h-full min-h-[120px]" // Add min-height
+              className="bg-transparent border-gray-600 w-full h-full min-h-[120px]" // Add min-height
             >
               <div className="p-6 text-center flex flex-col justify-center h-full">
                 <div className={`text-4xl font-bold mb-2 ${stat.color}`}>

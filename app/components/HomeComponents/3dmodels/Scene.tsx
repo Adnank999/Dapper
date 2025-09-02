@@ -455,7 +455,7 @@ const Scene = () => {
       {showScrollReveal && (
         <div
           ref={scrollRevealRef}
-          className="flex items-start justify-center w-full lg:w-96  px-5 text-center lg:px-0 h-48 absolute bottom-[5%] lg:bottom-[10%] left-0 lg:left-auto lg:right-24"
+          className="flex items-start justify-center w-full lg:w-96  px-5 text-center lg:px-0 h-72 absolute bottom-[5%] lg:bottom-[10%] left-0 lg:left-auto lg:right-24"
         >
           <ScrollReveal
             scrollContainerRef={scrollContainerRef as RefObject<HTMLElement>}
@@ -463,9 +463,9 @@ const Scene = () => {
             enableBlur={true}
             baseRotation={0}
             blurStrength={10}
-            textClassName="font-mustang"
+            textClassName="tracking-tight"
           >
-            With Great Power Comes Great Responsibility
+            Code your vision into existence,Where code becomes magic 🪄🐦‍🔥💥
           </ScrollReveal>
         </div>
       )}

@@ -323,7 +323,7 @@ export default function MobileMenu() {
 
   return (
     <>
-      <LoginButton />
+   
       {/* Mobile Hamburger Button */}
       <div className="md:hidden fixed top-4 right-4 z-50">
         <button

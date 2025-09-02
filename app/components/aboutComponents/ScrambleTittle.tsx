@@ -116,9 +116,9 @@ const ScrambledTitle: React.FC = () => {
   return (
     <h1
       ref={elementRef}
-      className="text-white !font-clyra text-center text-8xl font-bold tracking-wider justify-center"
+      className="text-white !font-clyra text-center text-4xl md:text-5xl lg:text-8xl font-bold tracking-wider justify-center"
     >
-      ZaxzzzzzazzzzzZZZ
+      ZaxzzaZZZ
     </h1>
   );
 };

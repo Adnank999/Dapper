@@ -5,66 +5,73 @@ import { GlowingEffect } from "./glowing-effect";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import React from "react";
+import IconCloud from "../IconCloud";
 
 const GlowingEffectDemo = function GlowingEffect() {
-  console.log("glowing effect rendered")
+  console.log("glowing effect rendered");
   return (
     <ul className="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4">
-  {/* Top-left */}
-  <GridItem
-    area=""
-    icon={<Box className="h-4 w-4 text-white dark:text-neutral-400" />}
-    title="Client-First Approach"
-    description="Building trust through transparent communication and collaboration."
-  />
+      {/* Top-left */}
+      <GridItem
+        area=""
+        icon={<Box className="h-4 w-4 text-white dark:text-neutral-400" />}
+        title="Client-First Approach"
+        description="Building trust through transparent communication and collaboration."
+      />
 
-  {/* Center - Modern Tech Stack, spans 2 rows */}
-  <GridItem
-    area="md:row-span-2"
-    icon={<Lock className="h-4 w-4 text-white dark:text-neutral-400" />}
-    title="Modern Tech Stack"
-    description="Technologies and tools I use to build innovative solutions"
-    techIcons={[
-      { icon: "/icons/React.svg", name: "React" },
-      { icon: "/icons/Javascript.svg", name: "Javascript" },
-      { icon: "/icons/TypeScript.svg", name: "TypeScript" },
-      { icon: "/icons/nextjs.svg", name: "Next.js" },
-      { icon: "/icons/Python.svg", name: "Python" },
-      { icon: "/icons/FastAPI.svg", name: "FastAPI" },
-      { icon: "/icons/Nodejs.svg", name: "Node.js" },
-      { icon: "/icons/Framer.svg", name: "Framer" },
-    ]}
-  />
+      {/* Center - Modern Tech Stack, spans 2 rows */}
+      <GridItem
+        
+        area="md:row-span-2"
+        icon={<Lock className="h-4 w-4 text-white dark:text-neutral-400" />}
+        title="Modern Tech Stack"
+        description="Technologies and tools I use to build innovative solutions"
+        techIcons={[
+          { icon: "/icons/React.svg", name: "React" },
+          { icon: "/icons/Javascript.svg", name: "Javascript" },
+          { icon: "/icons/TypeScript.svg", name: "TypeScript" },
+          { icon: "/icons/nextjs.svg", name: "Next.js" },
+          // { icon: "/icons/FastAPI.svg", name: "FastAPI" },
+          // { icon: "/icons/Nodejs.svg", name: "Node.js" },
+          { icon: "/icons/Nuxt.svg", name: "Nuxt" },
+          { icon: "/icons/Php.svg", name: "PHP" },
+          { icon: "/icons/Spring.svg", name: "Spring" },
+          { icon: "/icons/Svelte.svg", name: "Svelte" },
+          { icon: "/icons/Python.svg", name: "Python" },
+          { icon: "/icons/Laravel.svg", name: "Laravel" },
+          { icon: "/icons/Vue.svg", name: "Vue.js" },
+          
+        ]}
+      />
 
-  {/* Top-right */}
-  <GridItem
-    area=""
-    icon={<Sparkles className="h-4 w-4 text-white dark:text-neutral-400" />}
-    title="AI-Powered Solutions"
-    description="Specializing in intelligent automation and LLM integrations."
-  />
+      {/* Top-right */}
+      <GridItem
+        area=""
+        icon={<Sparkles className="h-4 w-4 text-white dark:text-neutral-400" />}
+        title="AI-Powered Solutions"
+        description="Specializing in intelligent automation and LLM integrations."
+      />
 
-  {/* Bottom-left */}
-  <GridItem
-    area=""
-    icon={<Settings className="h-4 w-4 text-white dark:text-neutral-400" />}
-    title="Global Flexibility"
-    description="Available across time zones for seamless worldwide collaboration."
-  />
+      {/* Bottom-left */}
+      <GridItem
+        area=""
+        icon={<Settings className="h-4 w-4 text-white dark:text-neutral-400" />}
+        title="Global Flexibility"
+        description="Available across time zones for seamless worldwide collaboration."
+      />
 
-  {/* Bottom-right */}
-  <GridItem
-    area=""
-    icon={<Search className="h-4 w-4 text-white dark:text-neutral-400" />}
-    title="Ready to Collaborate"
-    description="Let's create something amazing together"
-  />
-</ul>
-
+      {/* Bottom-right */}
+      <GridItem
+        area=""
+        icon={<Search className="h-4 w-4 text-white dark:text-neutral-400" />}
+        title="Ready to Collaborate"
+        description="Let's create something amazing together"
+      />
+    </ul>
   );
-}
+};
 
-export default React.memo(GlowingEffectDemo)
+export default React.memo(GlowingEffectDemo);
 
 interface GridItemProps {
   area: string;
@@ -76,6 +83,7 @@ interface GridItemProps {
   title: string;
   description: React.ReactNode;
 }
+
 
 const GridItem = ({
   area,
@@ -125,7 +133,10 @@ const GridItem = ({
                       </p>
                     </div>
                   ))}
+                 
               </div>
+
+               {/* {techIcons && <div className="mt-6 w-full "><IconCloud techIcons={techIcons}/></div>} */}
             </div>
           </div>
         </div>

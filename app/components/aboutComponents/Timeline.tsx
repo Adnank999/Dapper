@@ -189,7 +189,7 @@ const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           Changelog from my journey
         </h2>
         <p className="text-white/50 dark:text-neutral-300 text-sm md:text-base max-w-sm">
-          I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s
+          I&apos;ve been working currently on Bzm graphics for the past 2 years. Here&apos;s
           a timeline of my journey.
         </p>
       </div>

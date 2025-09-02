@@ -208,7 +208,7 @@ export default function GlowingKeyboard() {
   const bottomRow = ["Z", "X", "C", "V", "B", "N", "M"]
 
   return (
-    <div className="pt-10 bg-transparent min-h-screen flex flex-col items-start justify-center">
+    <div className="bg-transparent flex flex-col items-start justify-center">
       <div className="mb-8 w-full max-w-2xl">
         {/* <div 
           className="border border-white/20 rounded-lg p-4 min-h-[120px]"
@@ -490,9 +490,6 @@ export default function GlowingKeyboard() {
         </div>
       </div>
 
-      <div className="mt-6 text-white/60 text-sm text-center">
-        Use your physical keyboard or click any key to see the colorful glow effect
-      </div>
     </div>
   )
 }
