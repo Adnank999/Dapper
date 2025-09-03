@@ -367,27 +367,27 @@
   animation-duration: 0.5s;
 }
 
-/* #thumbnail-image,#original-image {
-   
-   view-transition-name: picture;
-} */
 
-#thumbnail-image,
+/* #thumbnail-image,
 #original-image {
   view-transition-name: picture;
-}
+} */
 
-::view-transition-old(picture),
+
+
+
+/* ::view-transition-old(picture),
 ::view-transition-new(picture) {
   animation: none;
   animation-duration: 0s !important;
   mix-blend-mode: normal;
+  opacity: 0.5;
   height: 100%;
   overflow: clip;
-  /* border-radius: 2rem; */
-}
+   object-fit: contain;
+}  */
 
-#to::view-transition-new(picture) {
+/* #to::view-transition-new(picture) {
   object-fit: cover;
 }
 
@@ -397,7 +397,7 @@
 
 #from::view-transition-old(picture) {
   object-fit: cover;
-}
+} */
 
 #chat-bubble,
 #chat-window {

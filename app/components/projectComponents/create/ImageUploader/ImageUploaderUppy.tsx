@@ -149,7 +149,7 @@ const ImageUploaderUppy = ({ onUploaded }: ImageUploadProps) => {
 
     const uppy = new Uppy({
       restrictions: {
-        maxNumberOfFiles: 5,
+        maxNumberOfFiles: 10,
         allowedFileTypes: ["image/*"],
       },
       autoProceed: true,
@@ -161,7 +161,7 @@ const ImageUploaderUppy = ({ onUploaded }: ImageUploadProps) => {
     });
 
     uppy.use(ThumbnailGenerator, {
-      thumbnailWidth: 300,
+      thumbnailWidth: 500,
     });
 
     uppy.on("file-added", (file) => {

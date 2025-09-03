@@ -11,6 +11,7 @@ export async function createProject(formData: any) {
     description: formData.description,
     seo_title: formData.seo_title,
     seo_description: formData.seo_description,
+    background: formData.background,
     tech_name: formData.tech_name, // Assuming this is a string
     bullet_point: formData.bullet_point, // Already an array
     image_url: formData.image_url, // This should match the state
@@ -25,6 +26,7 @@ export async function createProject(formData: any) {
         description: data.description,
         seo_title: data.seo_title,
         seo_description: data.seo_description,
+        background: data.background
       },
     ])
     .select();
