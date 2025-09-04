@@ -16,7 +16,7 @@ export default function Hero() {
 
       <LazyWrapper
         componentName="TextWithParticles"
-        importFunction={() => import("../HomeComponents/Intro")}
+        importFunction={() => import("../HomeComponents/Intro2")}
         rootMargin="0px"
       />
 
@@ -38,6 +38,14 @@ export default function Hero() {
         componentName="Scene"
         className=""
         importFunction={() => import("./3dmodels/Scene")}
+        // rootMargin="100px 0px" 
+        minScrollY={50}
+      />
+
+       <LazyWrapper
+        componentName="Testimonial"
+        className=""
+        importFunction={() => import("./Testimonial")}
         // rootMargin="100px 0px" 
         minScrollY={50}
       />

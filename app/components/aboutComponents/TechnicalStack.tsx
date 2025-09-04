@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import GlowingCards, { GlowingCard } from "../glowing-card-cards";
+import { AnimatedNumber } from "../AnimatedNumber";
 
 interface Technology {
   name: string;
@@ -328,10 +329,10 @@ const tabsData: TabData[] = [
 ];
 
 const stats = [
-  { value: "30+", label: "Technologies", color: "text-blue-400" },
-  { value: "50+", label: "Total Projects", color: "text-purple-400" },
-  { value: "4+", label: "Years Experience", color: "text-green-400" },
-  { value: "8+", label: "Certifications", color: "text-red-400" },
+  { value: 30, label: "Technologies", color: "text-blue-400" },
+  { value: 50, label: "Total Projects", color: "text-purple-400" },
+  { value: 4, label: "Years Experience", color: "text-green-400" },
+  { value: 8, label: "Certifications", color: "text-red-400" },
 ];
 
 const tabColors = {
@@ -346,22 +347,21 @@ const tabColors = {
 // Add this helper function
 const getGlowColor = (colorClass: string): string => {
   const colorMap: { [key: string]: string } = {
-    "text-blue-400": "#0080ff",      // More electric blue
-    "text-green-400": "#00ff80",     // Bright neon green
-    "text-purple-400": "#8000ff",    // Vivid purple
-    "text-orange-400": "#ff6600",    // Bright orange
-    "text-red-400": "#ff3333",       // Vibrant red
-    "text-yellow-400": "#ffdd00",    // Electric yellow
-    "text-pink-400": "#ff1493",      // Hot pink
-    "text-indigo-400": "#4040ff",    // Bright indigo
-    "text-teal-400": "#00ffcc",      // Neon teal
-    "text-cyan-400": "#00ccff",      // Electric cyan
+    "text-blue-400": "#0080ff", // More electric blue
+    "text-green-400": "#00ff80", // Bright neon green
+    "text-purple-400": "#8000ff", // Vivid purple
+    "text-orange-400": "#ff6600", // Bright orange
+    "text-red-400": "#ff3333", // Vibrant red
+    "text-yellow-400": "#ffdd00", // Electric yellow
+    "text-pink-400": "#ff1493", // Hot pink
+    "text-indigo-400": "#4040ff", // Bright indigo
+    "text-teal-400": "#00ffcc", // Neon teal
+    "text-cyan-400": "#00ccff", // Electric cyan
     // Add more color mappings as needed based on your stat.color values
   };
-  
+
   return colorMap[colorClass] || "#60a5fa"; // Default fallback
 };
-
 
 export default function TechnicalStack() {
   const [activeTab, setActiveTab] = useState("ai-ml");
@@ -491,8 +491,7 @@ export default function TechnicalStack() {
           ))}
         </div>
 
-
-        <GlowingCards      
+        <GlowingCards
           enableGlow={true}
           glowRadius={25}
           glowOpacity={0.7}
@@ -508,8 +507,10 @@ export default function TechnicalStack() {
             >
               <div className="p-6 text-center flex flex-col justify-center h-full">
                 <div className={`text-4xl font-bold mb-2 ${stat.color}`}>
-                  {stat.value}
+                  <AnimatedNumber value={stat.value} />
+                  <span className="text-white">+</span>
                 </div>
+
                 <div className="text-gray-400 text-sm font-medium">
                   {stat.label}
                 </div>

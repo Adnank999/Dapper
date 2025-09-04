@@ -1,15 +1,14 @@
-'use client'
-import React, { useEffect, useRef, useMemo, ReactNode, RefObject } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ComicText } from "../ComicText";
 import useIsMobile from "@/hooks/useIsMobile";
-
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollRevealProps {
-  children: ReactNode;
-  scrollContainerRef?: RefObject<HTMLDivElement | HTMLElement>;
+  children: string;
+  scrollContainerRef?: React.RefObject<HTMLElement>;
   enableBlur?: boolean;
   baseOpacity?: number;
   baseRotation?: number;
@@ -18,7 +17,6 @@ interface ScrollRevealProps {
   textClassName?: string;
   rotationEnd?: string;
   wordAnimationEnd?: string;
- 
 }
 
 const ScrollReveal: React.FC<ScrollRevealProps> = ({
@@ -33,7 +31,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   rotationEnd = "bottom bottom",
   wordAnimationEnd = "bottom bottom",
 }) => {
-  const containerRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLElement | null>(null);
   const isMobile = useIsMobile();
   const scrubValue = isMobile ? 1.5 : 0.5;
 
@@ -49,19 +47,13 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     });
   }, [children]);
 
-  
-
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
-    // const scroller =
-    //   scrollContainerRef && scrollContainerRef.current
-    //     ? scrollContainerRef.current
-    //     : document.body;
-
     const scroller = document.body;
-    
+
+    // GSAP ScrollTrigger for rotation animation
     gsap.fromTo(
       el,
       { transformOrigin: "0% 50%", rotate: baseRotation },
@@ -80,6 +72,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
     const wordElements = el.querySelectorAll<HTMLElement>(".word");
 
+    // GSAP ScrollTrigger for word opacity animation
     gsap.fromTo(
       wordElements,
       { opacity: baseOpacity, willChange: "opacity" },
@@ -97,6 +90,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
       }
     );
 
+    // GSAP ScrollTrigger for blur animation
     if (enableBlur) {
       gsap.fromTo(
         wordElements,
@@ -130,9 +124,12 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   ]);
 
   return (
-    <h2 ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
-      <p className={`scroll-reveal-text ${textClassName}`}>{splitText}</p>
-    </h2>
+    <div ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
+      {/* Replace <p> with <div> */}
+      <div className={`scroll-reveal-text ${textClassName}`}>
+        <ComicText fontSize={2} >{splitText}</ComicText>
+      </div>
+    </div>
   );
 };
 

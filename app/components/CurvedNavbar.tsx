@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 const navLinks = [
   { name: "HOME", href: "/" },
   { name: "ABOUT", href: "/about" },
-  { name: "PROJECTS", href: "/projects" },
+  { name: "WORK", href: "/projects" },
   { name: "CONTACT", href: "/contact" },
 ];
 

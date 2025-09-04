@@ -11,7 +11,7 @@ import {
   FolderOpen,
   FileText,
   MessageSquare,
-  Link,
+  // Link,
   User,
   Linkedin,
   Github,
@@ -21,45 +21,50 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import LoginButton from "./LoginLogoutButton";
+import Link from "next/link";
 
 const navLinks = [
   {
+    id:1,
     name: "Home",
     icon: Home,
     description: "Welcome to my forever work-in-progress!",
-    href: "#",
+    href: "/",
   },
   {
-    name: "Projects",
+     id:2,
+    name: "Work",
     icon: FolderOpen,
     description: "Showcase of my projects",
-    href: "#",
+    href: "/projects",
   },
+  // {
+  //   name: "Blog",
+  //   icon: FileText,
+  //   description: "Thoughts, mental models, and tutorials",
+  //   href: "#",
+  //   badge: "Current",
+  // },
+  // {
+  //   name: "Guestbook",
+  //   icon: MessageSquare,
+  //   description: "Leave a message for me",
+  //   href: "#",
+  // },
+  // {
+  //   name: "Links",
+  //   icon: Link,
+  //   description: "All my links are here",
+  //   href: "#",
+  // },
   {
-    name: "Blog",
-    icon: FileText,
-    description: "Thoughts, mental models, and tutorials",
-    href: "#",
-    badge: "Current",
-  },
-  {
-    name: "Guestbook",
-    icon: MessageSquare,
-    description: "Leave a message for me",
-    href: "#",
-  },
-  {
-    name: "Links",
-    icon: Link,
-    description: "All my links are here",
-    href: "#",
-  },
-  {
+     id:3,
     name: "About",
     icon: User,
     description: "Learn more about me!",
-    href: "#",
+    href: "/about",
   },
+   
 ];
 
 const socialLinks = [
@@ -340,7 +345,7 @@ export default function MobileMenu() {
       {/* Mobile Menu Overlay */}
       <div
         ref={menuContainerRef}
-        className="fixed px-4 inset-0 bg-transparent/60 backdrop-blur-lg transition-transform duration-300 z-40 flex flex-col will-change-transform"
+        className="fixed px-4 inset-0 bg-slate-950/40 backdrop-blur-lg transition-transform duration-300 z-40 flex flex-col will-change-transform"
         onKeyDown={handleKeyDown}
         style={{
           transform: "translateX(100%)",
@@ -392,17 +397,17 @@ export default function MobileMenu() {
                 const IconComponent = link.icon;
                 return (
                   <div
-                    key={link.name}
+                    key={link.id}
                     data-animate="nav-item"
                     className="will-change-transform"
                   >
-                    <a
+                    <Link
                       href={link.href}
                       onClick={handleNavClick}
-                      className="flex items-start gap-4 p-3 rounded-lg hover:bg-gray-800/50 transition-all duration-300 group cursor-pointer will-change-transform"
-                      onMouseEnter={handleMouseEnter}
-                      onMouseLeave={handleMouseLeave}
-                      style={{ willChange: "transform" }}
+                      className=" flex items-start gap-4 p-3 rounded-lg hover:bg-gray-800/50 transition-all duration-300 group cursor-pointer will-change-transform"
+                      // onMouseEnter={handleMouseEnter}
+                      // onMouseLeave={handleMouseLeave}
+                     
                     >
                       <div className="shrink-0 mt-1">
                         <IconComponent
@@ -415,17 +420,17 @@ export default function MobileMenu() {
                           <h3 className="!font-my-font-bold uppercase tracking-wider text-4xl text-white font-medium group-hover:text-blue-400 transition-colors">
                             {link.name}
                           </h3>
-                          {link.badge && (
+                          {/* {link.badge && (
                             <span className="px-2 py-0.5 bg-blue-600 text-white text-xs rounded-full font-medium">
                               {link.badge}
                             </span>
-                          )}
+                          )} */}
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed">
                           {link.description}
                         </p>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 );
               })}
