@@ -49,7 +49,7 @@ export function SlidingLogo({
   onItemClick,
   enableSpillEffect = false,
   animationSteps = 8,
-  showControls = true,
+  showControls = false,
 }: SlidingLogoMarqueeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoPlay);

@@ -13,6 +13,8 @@ import {
 const ProjectShowcaseById = ({ projectDetails }) => {
   const projectImages = projectDetails.project_images || [];
 
+  console.log({ projectDetails});
+
   return (
     <div id="to">
       {projectImages.length > 0 ? (
@@ -33,7 +35,9 @@ const ProjectShowcaseById = ({ projectDetails }) => {
                             index + 1
                           }`}
                           fill
-                          className="object-cover rounded-lg" // ✅ object-cover with fill
+      
+                          
+                          className="object-contain rounded-lg" // ✅ object-cover with fill
                         />
                       </div>
                     </CardContent>

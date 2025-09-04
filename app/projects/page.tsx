@@ -10,6 +10,7 @@ import Loader from "./loader";
 import { getUser } from "@/lib/user";
 export default async function projects() {
   const allProjects: AllProjects = await getAllProjects();
+  
   const { user, role } = await getUser();
 
   return (

@@ -7,6 +7,7 @@ export interface Projects {
   description: Description[]
   seo_title: string
   seo_description: SeoDescription[]
+  background: string
   project_tech_stack: ProjectTechStack[]
   project_images: ProjectImage[]
   project_bullet_points: ProjectBulletPoint[]

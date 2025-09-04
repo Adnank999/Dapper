@@ -25,7 +25,7 @@ export default async function About() {
         <TechnicalStack />
         
       </div>
-      {/* <ContributionsData/> */}
+      <ContributionsData/>
       {/* <UserGreetText/> */}
 
       {/* <GlowingCardWrapper/> */}
